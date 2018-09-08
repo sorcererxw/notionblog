@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.sorcererxw.com/2016/11/25/android-cardify/</loc>
+    
+    <lastmod>2018-09-08T21:44:00.599Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/</loc>
     
     <lastmod>2018-09-08T21:36:41.527Z</lastmod>
@@ -40,13 +47,6 @@
     <loc>http://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/</loc>
     
     <lastmod>2018-09-08T05:57:46.217Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.sorcererxw.com/2016/11/25/android-cardify/</loc>
-    
-    <lastmod>2018-09-08T05:57:37.365Z</lastmod>
     
   </url>
   
