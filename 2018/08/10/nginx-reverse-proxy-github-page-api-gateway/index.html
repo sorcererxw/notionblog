@@ -8,7 +8,7 @@
 <p>这个时候, 如果你访问 example.com 应该是可以访问了, 也能够在前端直接访问 api 接口.<br>原理就是, 虽然是直接将前端流量转发到 example.github.io, 但是通过当前地址栏当中的域名, gh 会显示为对应的前端页面.</p>
 <h2 id="配置-Https-跳转"><a href="#配置-Https-跳转" class="headerlink" title="配置 Https 跳转"></a>配置 Https 跳转</h2><p>最方便的办法就是直接使用 letsencrypt 的 certbot 进行配置<br>根据 <a href="https://certbot.eff.org/" target="_blank" rel="noopener">https://certbot.eff.org/</a> 来进行安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">certbot --nginx</span><br></pre></td></tr></table></figure></p>
 <p>记得选上 redirect https 即可.<br>当然, 如果有条件购买证书, 更加推荐使用.</p>
-</div></article></div></main><footer><div class="paginator"><a href="/2018/08/09/deploy-github-pags/" class="next">NEXT</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'sorcererxwblog';
+</div></article></div></main><footer><div class="paginator"><a href="/2018/08/09/deploy-github-pags/" class="next">下一篇</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'sorcererxwblog';
 var disqus_identifier = '2018/08/10/nginx-reverse-proxy-github-page-api-gateway/';
 var disqus_title = 'nginx 反向代理配置 Github Page 的 api 网关';
 var disqus_url = 'http://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/';
