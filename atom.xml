@@ -2,12 +2,12 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>SorcererXW&#39;s Blog</title>
   
-  
+  <subtitle>Tech, Life &amp; Thought</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://blog.sorcererxw.com/"/>
+  <link href="https://blog.sorcererxw.com/"/>
   <updated>2018-09-10T10:12:09.341Z</updated>
-  <id>http://blog.sorcererxw.com/</id>
+  <id>https://blog.sorcererxw.com/</id>
   
   <author>
     <name>SorcererXW</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>又双叒叕迁移博客</title>
-    <link href="http://blog.sorcererxw.com/2018/09/09/migrate-blog-again/"/>
-    <id>http://blog.sorcererxw.com/2018/09/09/migrate-blog-again/</id>
+    <link href="https://blog.sorcererxw.com/2018/09/09/migrate-blog-again/"/>
+    <id>https://blog.sorcererxw.com/2018/09/09/migrate-blog-again/</id>
     <published>2018-09-09T00:00:00.000Z</published>
     <updated>2018-09-10T10:12:09.341Z</updated>
     
@@ -37,8 +37,8 @@
   
   <entry>
     <title>nginx 反向代理配置 Github Page 的 api 网关</title>
-    <link href="http://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/"/>
-    <id>http://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/</id>
+    <link href="https://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/"/>
+    <id>https://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/</id>
     <published>2018-08-10T00:12:47.000Z</published>
     <updated>2018-09-08T21:33:19.122Z</updated>
     
@@ -56,8 +56,8 @@
   
   <entry>
     <title>记一次 GitHub Pages 部署</title>
-    <link href="http://blog.sorcererxw.com/2018/08/09/deploy-github-pags/"/>
-    <id>http://blog.sorcererxw.com/2018/08/09/deploy-github-pags/</id>
+    <link href="https://blog.sorcererxw.com/2018/08/09/deploy-github-pags/"/>
+    <id>https://blog.sorcererxw.com/2018/08/09/deploy-github-pags/</id>
     <published>2018-08-09T00:12:47.000Z</published>
     <updated>2018-09-08T06:10:32.760Z</updated>
     
@@ -74,8 +74,8 @@
   
   <entry>
     <title>Android「卡片中的列表」的实现探索</title>
-    <link href="http://blog.sorcererxw.com/2016/11/25/android-cardify/"/>
-    <id>http://blog.sorcererxw.com/2016/11/25/android-cardify/</id>
+    <link href="https://blog.sorcererxw.com/2016/11/25/android-cardify/"/>
+    <id>https://blog.sorcererxw.com/2016/11/25/android-cardify/</id>
     <published>2016-11-25T00:12:47.000Z</published>
     <updated>2018-09-08T21:44:00.599Z</updated>
     
@@ -93,8 +93,8 @@
   
   <entry>
     <title>RxActivityResult 原理浅析</title>
-    <link href="http://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/"/>
-    <id>http://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/</id>
+    <link href="https://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/"/>
+    <id>https://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/</id>
     <published>2016-11-16T00:12:47.000Z</published>
     <updated>2018-09-08T21:36:41.527Z</updated>
     
@@ -114,8 +114,8 @@
   
   <entry>
     <title>RecyclerView 当中 item 无法 match 解决方案</title>
-    <link href="http://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/"/>
-    <id>http://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/</id>
+    <link href="https://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/"/>
+    <id>https://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/</id>
     <published>2015-12-29T00:12:47.000Z</published>
     <updated>2018-09-08T05:57:48.212Z</updated>
     
@@ -135,8 +135,8 @@
   
   <entry>
     <title>Root Android Without Recovery &amp; Replace Kingroot</title>
-    <link href="http://blog.sorcererxw.com/2015/12/21/root-android-without-recovery-replace-kingroot/"/>
-    <id>http://blog.sorcererxw.com/2015/12/21/root-android-without-recovery-replace-kingroot/</id>
+    <link href="https://blog.sorcererxw.com/2015/12/21/root-android-without-recovery-replace-kingroot/"/>
+    <id>https://blog.sorcererxw.com/2015/12/21/root-android-without-recovery-replace-kingroot/</id>
     <published>2015-12-21T00:12:47.000Z</published>
     <updated>2018-09-08T05:57:47.239Z</updated>
     
@@ -157,8 +157,8 @@
   
   <entry>
     <title>Xposed 开发指南 (翻译)</title>
-    <link href="http://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/"/>
-    <id>http://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/</id>
+    <link href="https://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/"/>
+    <id>https://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/</id>
     <published>2015-09-13T00:12:47.000Z</published>
     <updated>2018-09-08T05:57:46.217Z</updated>
     
