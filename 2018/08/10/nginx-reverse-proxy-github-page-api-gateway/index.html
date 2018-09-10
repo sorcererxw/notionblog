@@ -9,7 +9,7 @@
     <meta name="description" content="将 web app 部署在 Github Pages (以下简称 gp) 非常方便优雅, 但是会面临一个问题, 就是访问接口的跨域问题. 解决思路通常, 我们直接将域名解析到 nginx 服务器, 再通过 nginx 反向代理, 将前端的 api 路径代理到 api 服务器上.另一方面, 如果将项目部署在 gp 上面, 我们就需要将域名直接解析到 gp 服务器上.这么一来, 两者就发生了冲突, 需">
 <meta property="og:type" content="article">
 <meta property="og:title" content="nginx 反向代理配置 Github Page 的 api 网关">
-<meta property="og:url" content="https://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/index.html">
+<meta property="og:url" content="http://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/index.html">
 <meta property="og:site_name" content="SorcererXW&#39;s Blog">
 <meta property="og:description" content="将 web app 部署在 Github Pages (以下简称 gp) 非常方便优雅, 但是会面临一个问题, 就是访问接口的跨域问题. 解决思路通常, 我们直接将域名解析到 nginx 服务器, 再通过 nginx 反向代理, 将前端的 api 路径代理到 api 服务器上.另一方面, 如果将项目部署在 gp 上面, 我们就需要将域名直接解析到 gp 服务器上.这么一来, 两者就发生了冲突, 需">
 <meta property="og:locale" content="default">
@@ -88,16 +88,16 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/&text=nginx 反向代理配置 Github Page 的 api 网关"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/&title=nginx 反向代理配置 Github Page 的 api 网关"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/&is_video=false&description=nginx 反向代理配置 Github Page 的 api 网关"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=nginx 反向代理配置 Github Page 的 api 网关&body=Check out this article: https://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/&title=nginx 反向代理配置 Github Page 的 api 网关"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/&title=nginx 反向代理配置 Github Page 的 api 网关"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/&title=nginx 反向代理配置 Github Page 的 api 网关"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/&title=nginx 反向代理配置 Github Page 的 api 网关"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/&name=nginx 反向代理配置 Github Page 的 api 网关&description=&lt;p&gt;将 web app 部署在 Github Pages (以下简称 gp) 非常方便优雅, 但是会面临一个问题, 就是&lt;strong&gt;访问接口的跨域问题&lt;/strong&gt;.&lt;/p&gt;
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/&text=nginx 反向代理配置 Github Page 的 api 网关"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/&title=nginx 反向代理配置 Github Page 的 api 网关"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/&is_video=false&description=nginx 反向代理配置 Github Page 的 api 网关"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=nginx 反向代理配置 Github Page 的 api 网关&body=Check out this article: http://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/&title=nginx 反向代理配置 Github Page 的 api 网关"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/&title=nginx 反向代理配置 Github Page 的 api 网关"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/&title=nginx 反向代理配置 Github Page 的 api 网关"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/&title=nginx 反向代理配置 Github Page 的 api 网关"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/&name=nginx 反向代理配置 Github Page 的 api 网关&description=&lt;p&gt;将 web app 部署在 Github Pages (以下简称 gp) 非常方便优雅, 但是会面临一个问题, 就是&lt;strong&gt;访问接口的跨域问题&lt;/strong&gt;.&lt;/p&gt;
 &lt;h1 id=&#34;解决思路&#34;&gt;&lt;a href=&#34;#解决思路&#34; class=&#34;headerlink&#34; title=&#34;解决思路&#34;&gt;&lt;/a&gt;解决思路&lt;/h1&gt;&lt;p&gt;通常, 我们直接将域名解析到 nginx 服务器, 再通过 nginx 反向代理, 将前端的 api 路径代理到 api 服务器上.&lt;br&gt;另一方面, 如果将项目部署在 gp 上面, 我们就需要将域名直接解析到 gp 服务器上.&lt;br&gt;这么一来, 两者就发生了冲突, 需要进行一些额外的配置.&lt;br&gt;那么, 我们索性将域名直接解析给 nginx, 然后通过 nginx 来将前端代理到 gp, api 代理到后端. 不过这么一来, 就没有遵循 gp 的配置规则, 无法启用 gp 的 enforce https 的功能, 不过这个跳转环节可以直接放在 nginx 上实现.&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
@@ -182,16 +182,16 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/&text=nginx 反向代理配置 Github Page 的 api 网关"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/&title=nginx 反向代理配置 Github Page 的 api 网关"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/&is_video=false&description=nginx 反向代理配置 Github Page 的 api 网关"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=nginx 反向代理配置 Github Page 的 api 网关&body=Check out this article: https://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/&title=nginx 反向代理配置 Github Page 的 api 网关"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/&title=nginx 反向代理配置 Github Page 的 api 网关"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/&title=nginx 反向代理配置 Github Page 的 api 网关"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/&title=nginx 反向代理配置 Github Page 的 api 网关"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/&name=nginx 反向代理配置 Github Page 的 api 网关&description=&lt;p&gt;将 web app 部署在 Github Pages (以下简称 gp) 非常方便优雅, 但是会面临一个问题, 就是&lt;strong&gt;访问接口的跨域问题&lt;/strong&gt;.&lt;/p&gt;
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/&text=nginx 反向代理配置 Github Page 的 api 网关"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/&title=nginx 反向代理配置 Github Page 的 api 网关"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/&is_video=false&description=nginx 反向代理配置 Github Page 的 api 网关"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=nginx 反向代理配置 Github Page 的 api 网关&body=Check out this article: http://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/&title=nginx 反向代理配置 Github Page 的 api 网关"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/&title=nginx 反向代理配置 Github Page 的 api 网关"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/&title=nginx 反向代理配置 Github Page 的 api 网关"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/&title=nginx 反向代理配置 Github Page 的 api 网关"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/&name=nginx 反向代理配置 Github Page 的 api 网关&description=&lt;p&gt;将 web app 部署在 Github Pages (以下简称 gp) 非常方便优雅, 但是会面临一个问题, 就是&lt;strong&gt;访问接口的跨域问题&lt;/strong&gt;.&lt;/p&gt;
 &lt;h1 id=&#34;解决思路&#34;&gt;&lt;a href=&#34;#解决思路&#34; class=&#34;headerlink&#34; title=&#34;解决思路&#34;&gt;&lt;/a&gt;解决思路&lt;/h1&gt;&lt;p&gt;通常, 我们直接将域名解析到 nginx 服务器, 再通过 nginx 反向代理, 将前端的 api 路径代理到 api 服务器上.&lt;br&gt;另一方面, 如果将项目部署在 gp 上面, 我们就需要将域名直接解析到 gp 服务器上.&lt;br&gt;这么一来, 两者就发生了冲突, 需要进行一些额外的配置.&lt;br&gt;那么, 我们索性将域名直接解析给 nginx, 然后通过 nginx 来将前端代理到 gp, api 代理到后端. 不过这么一来, 就没有遵循 gp 的配置规则, 无法启用 gp 的 enforce https 的功能, 不过这个跳转环节可以直接放在 nginx 上实现.&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 

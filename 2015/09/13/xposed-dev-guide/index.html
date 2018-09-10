@@ -9,7 +9,7 @@
     <meta name="description" content="声明: 原创, 翻译自rovo89的官方Development tutorial已全部翻译, 待修改 | 最后修改于: 2015年9月16日水平有限, 仅供参考.  好了…你应该是想要学习如何创建一个全新的Xposed模块吧? 阅读这篇指南(或者说是”扩展教程”)来学习吧. 这篇文章包含但不限于”教程”, 还包括关于这件事背后的思考. 这样子的思考 会让你认识到你创造的东西的价值, 并且理解你在">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Xposed 开发指南 (翻译)">
-<meta property="og:url" content="https://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/index.html">
+<meta property="og:url" content="http://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/index.html">
 <meta property="og:site_name" content="SorcererXW&#39;s Blog">
 <meta property="og:description" content="声明: 原创, 翻译自rovo89的官方Development tutorial已全部翻译, 待修改 | 最后修改于: 2015年9月16日水平有限, 仅供参考.  好了…你应该是想要学习如何创建一个全新的Xposed模块吧? 阅读这篇指南(或者说是”扩展教程”)来学习吧. 这篇文章包含但不限于”教程”, 还包括关于这件事背后的思考. 这样子的思考 会让你认识到你创造的东西的价值, 并且理解你在">
 <meta property="og:locale" content="default">
@@ -84,16 +84,16 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/&text=Xposed 开发指南 (翻译)"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/&title=Xposed 开发指南 (翻译)"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/&is_video=false&description=Xposed 开发指南 (翻译)"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Xposed 开发指南 (翻译)&body=Check out this article: https://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/&title=Xposed 开发指南 (翻译)"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/&title=Xposed 开发指南 (翻译)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/&title=Xposed 开发指南 (翻译)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/&title=Xposed 开发指南 (翻译)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/&name=Xposed 开发指南 (翻译)&description=&lt;blockquote&gt;
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/&text=Xposed 开发指南 (翻译)"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/&title=Xposed 开发指南 (翻译)"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/&is_video=false&description=Xposed 开发指南 (翻译)"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Xposed 开发指南 (翻译)&body=Check out this article: http://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/&title=Xposed 开发指南 (翻译)"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/&title=Xposed 开发指南 (翻译)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/&title=Xposed 开发指南 (翻译)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/&title=Xposed 开发指南 (翻译)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/&name=Xposed 开发指南 (翻译)&description=&lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;声明&lt;/strong&gt;: 原创, 翻译自rovo89的官方&lt;a href=&#34;https://github.com/rovo89/XposedBridge/wiki/Development-tutorial&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Development tutorial&lt;/a&gt;&lt;br&gt;已全部翻译, 待修改 | 最后修改于: 2015年9月16日&lt;br&gt;水平有限, 仅供参考.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;好了…你应该是想要学习如何创建一个全新的Xposed模块吧? 阅读这篇指南(或者说是”扩展教程”)来学习吧. 这篇文章包含但不限于”教程”, 还包括关于这件事背后的思考. 这样子的思考 会让你认识到你创造的东西的价值, 并且理解你在干什么和为什么要这么干. 如果你觉得文章太长了, 读不下, 你可以只看最后的源代码部分&lt;code&gt;Making the project an Xposed module&lt;/code&gt;. 但是你如果读完了整篇文章你会获得更好的理解. 你会省下到时候回头来读的时间, 因为你如果读完了整篇文章, 你就没必要去亲自去理解每个细节.&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
@@ -209,16 +209,16 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/&text=Xposed 开发指南 (翻译)"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/&title=Xposed 开发指南 (翻译)"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/&is_video=false&description=Xposed 开发指南 (翻译)"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Xposed 开发指南 (翻译)&body=Check out this article: https://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/&title=Xposed 开发指南 (翻译)"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/&title=Xposed 开发指南 (翻译)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/&title=Xposed 开发指南 (翻译)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/&title=Xposed 开发指南 (翻译)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/&name=Xposed 开发指南 (翻译)&description=&lt;blockquote&gt;
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/&text=Xposed 开发指南 (翻译)"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/&title=Xposed 开发指南 (翻译)"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/&is_video=false&description=Xposed 开发指南 (翻译)"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Xposed 开发指南 (翻译)&body=Check out this article: http://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/&title=Xposed 开发指南 (翻译)"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/&title=Xposed 开发指南 (翻译)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/&title=Xposed 开发指南 (翻译)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/&title=Xposed 开发指南 (翻译)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/&name=Xposed 开发指南 (翻译)&description=&lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;声明&lt;/strong&gt;: 原创, 翻译自rovo89的官方&lt;a href=&#34;https://github.com/rovo89/XposedBridge/wiki/Development-tutorial&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Development tutorial&lt;/a&gt;&lt;br&gt;已全部翻译, 待修改 | 最后修改于: 2015年9月16日&lt;br&gt;水平有限, 仅供参考.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;好了…你应该是想要学习如何创建一个全新的Xposed模块吧? 阅读这篇指南(或者说是”扩展教程”)来学习吧. 这篇文章包含但不限于”教程”, 还包括关于这件事背后的思考. 这样子的思考 会让你认识到你创造的东西的价值, 并且理解你在干什么和为什么要这么干. 如果你觉得文章太长了, 读不下, 你可以只看最后的源代码部分&lt;code&gt;Making the project an Xposed module&lt;/code&gt;. 但是你如果读完了整篇文章你会获得更好的理解. 你会省下到时候回头来读的时间, 因为你如果读完了整篇文章, 你就没必要去亲自去理解每个细节.&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>

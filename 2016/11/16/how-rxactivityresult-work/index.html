@@ -9,7 +9,7 @@
     <meta name="description" content="因为刚学RxJava不久, 一直在使用一些基于RxJava的第三方扩展库, 觉得非常神奇, 特别是一些库能够直接代理Activity进行数据处理, 但是因为懒, 一直也没了解其中的原理. 不过最近使用RxActivityResult, 发现有些小地方用得不是特别顺心, 提了issues, 作者也没给个满意的答复, 索性fork了一遍, clone下来试着自己改一下, 顺便读一遍源码.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RxActivityResult 原理浅析">
-<meta property="og:url" content="https://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/index.html">
+<meta property="og:url" content="http://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/index.html">
 <meta property="og:site_name" content="SorcererXW&#39;s Blog">
 <meta property="og:description" content="因为刚学RxJava不久, 一直在使用一些基于RxJava的第三方扩展库, 觉得非常神奇, 特别是一些库能够直接代理Activity进行数据处理, 但是因为懒, 一直也没了解其中的原理. 不过最近使用RxActivityResult, 发现有些小地方用得不是特别顺心, 提了issues, 作者也没给个满意的答复, 索性fork了一遍, clone下来试着自己改一下, 顺便读一遍源码.">
 <meta property="og:locale" content="default">
@@ -88,16 +88,16 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/&text=RxActivityResult 原理浅析"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/&title=RxActivityResult 原理浅析"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/&is_video=false&description=RxActivityResult 原理浅析"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=RxActivityResult 原理浅析&body=Check out this article: https://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/&title=RxActivityResult 原理浅析"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/&title=RxActivityResult 原理浅析"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/&title=RxActivityResult 原理浅析"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/&title=RxActivityResult 原理浅析"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/&name=RxActivityResult 原理浅析&description=&lt;blockquote&gt;
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/&text=RxActivityResult 原理浅析"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/&title=RxActivityResult 原理浅析"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/&is_video=false&description=RxActivityResult 原理浅析"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=RxActivityResult 原理浅析&body=Check out this article: http://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/&title=RxActivityResult 原理浅析"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/&title=RxActivityResult 原理浅析"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/&title=RxActivityResult 原理浅析"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/&title=RxActivityResult 原理浅析"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/&name=RxActivityResult 原理浅析&description=&lt;blockquote&gt;
 &lt;p&gt;因为刚学RxJava不久, 一直在使用一些基于RxJava的第三方扩展库, 觉得非常神奇, 特别是一些库能够直接代理Activity进行数据处理, 但是因为懒, 一直也没了解其中的原理.&lt;/p&gt;
 &lt;p&gt;不过最近使用&lt;a href=&#34;https://github.com/VictorAlbertos/RxActivityResult&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;RxActivityResult&lt;/a&gt;, 发现有些小地方用得不是特别顺心, 提了issues, 作者也没给个满意的答复, 索性fork了一遍, clone下来试着自己改一下, 顺便读一遍源码.&lt;/p&gt;
 &lt;/blockquote&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
@@ -192,16 +192,16 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/&text=RxActivityResult 原理浅析"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/&title=RxActivityResult 原理浅析"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/&is_video=false&description=RxActivityResult 原理浅析"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=RxActivityResult 原理浅析&body=Check out this article: https://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/&title=RxActivityResult 原理浅析"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/&title=RxActivityResult 原理浅析"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/&title=RxActivityResult 原理浅析"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/&title=RxActivityResult 原理浅析"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/&name=RxActivityResult 原理浅析&description=&lt;blockquote&gt;
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/&text=RxActivityResult 原理浅析"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/&title=RxActivityResult 原理浅析"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/&is_video=false&description=RxActivityResult 原理浅析"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=RxActivityResult 原理浅析&body=Check out this article: http://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/&title=RxActivityResult 原理浅析"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/&title=RxActivityResult 原理浅析"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/&title=RxActivityResult 原理浅析"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/&title=RxActivityResult 原理浅析"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/&name=RxActivityResult 原理浅析&description=&lt;blockquote&gt;
 &lt;p&gt;因为刚学RxJava不久, 一直在使用一些基于RxJava的第三方扩展库, 觉得非常神奇, 特别是一些库能够直接代理Activity进行数据处理, 但是因为懒, 一直也没了解其中的原理.&lt;/p&gt;
 &lt;p&gt;不过最近使用&lt;a href=&#34;https://github.com/VictorAlbertos/RxActivityResult&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;RxActivityResult&lt;/a&gt;, 发现有些小地方用得不是特别顺心, 提了issues, 作者也没给个满意的答复, 索性fork了一遍, clone下来试着自己改一下, 顺便读一遍源码.&lt;/p&gt;
 &lt;/blockquote&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>

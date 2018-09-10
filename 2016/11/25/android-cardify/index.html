@@ -9,7 +9,7 @@
     <meta name="description" content="需求作为一个”MD癌”患者, 在自己开发的过程中怎么会不在意一些炫酷Material Design呢? Material Design中最具代表性的一个设计元素要属Card. 所以我也非常喜欢将每一样元素放在一个又一个Card里面来呈现. 对于独立的元素, 这么做很好, 但是对于列表这样子的有大量元素的控件, 如果每一个普通列表项都用一个独立的Card包裹会稍显凌乱, 而且一定程度上违背Mater">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android「卡片中的列表」的实现探索">
-<meta property="og:url" content="https://blog.sorcererxw.com/2016/11/25/android-cardify/index.html">
+<meta property="og:url" content="http://blog.sorcererxw.com/2016/11/25/android-cardify/index.html">
 <meta property="og:site_name" content="SorcererXW&#39;s Blog">
 <meta property="og:description" content="需求作为一个”MD癌”患者, 在自己开发的过程中怎么会不在意一些炫酷Material Design呢? Material Design中最具代表性的一个设计元素要属Card. 所以我也非常喜欢将每一样元素放在一个又一个Card里面来呈现. 对于独立的元素, 这么做很好, 但是对于列表这样子的有大量元素的控件, 如果每一个普通列表项都用一个独立的Card包裹会稍显凌乱, 而且一定程度上违背Mater">
 <meta property="og:locale" content="default">
@@ -98,16 +98,16 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.sorcererxw.com/2016/11/25/android-cardify/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://blog.sorcererxw.com/2016/11/25/android-cardify/&text=Android「卡片中的列表」的实现探索"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.sorcererxw.com/2016/11/25/android-cardify/&title=Android「卡片中的列表」的实现探索"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.sorcererxw.com/2016/11/25/android-cardify/&is_video=false&description=Android「卡片中的列表」的实现探索"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Android「卡片中的列表」的实现探索&body=Check out this article: https://blog.sorcererxw.com/2016/11/25/android-cardify/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.sorcererxw.com/2016/11/25/android-cardify/&title=Android「卡片中的列表」的实现探索"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.sorcererxw.com/2016/11/25/android-cardify/&title=Android「卡片中的列表」的实现探索"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.sorcererxw.com/2016/11/25/android-cardify/&title=Android「卡片中的列表」的实现探索"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://blog.sorcererxw.com/2016/11/25/android-cardify/&title=Android「卡片中的列表」的实现探索"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.sorcererxw.com/2016/11/25/android-cardify/&name=Android「卡片中的列表」的实现探索&description=&lt;h1 id=&#34;需求&#34;&gt;&lt;a href=&#34;#需求&#34; class=&#34;headerlink&#34; title=&#34;需求&#34;&gt;&lt;/a&gt;需求&lt;/h1&gt;&lt;p&gt;作为一个”MD癌”患者, 在自己开发的过程中怎么会不在意一些炫酷Material Design呢?&lt;/p&gt;
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.sorcererxw.com/2016/11/25/android-cardify/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://blog.sorcererxw.com/2016/11/25/android-cardify/&text=Android「卡片中的列表」的实现探索"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.sorcererxw.com/2016/11/25/android-cardify/&title=Android「卡片中的列表」的实现探索"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.sorcererxw.com/2016/11/25/android-cardify/&is_video=false&description=Android「卡片中的列表」的实现探索"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Android「卡片中的列表」的实现探索&body=Check out this article: http://blog.sorcererxw.com/2016/11/25/android-cardify/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.sorcererxw.com/2016/11/25/android-cardify/&title=Android「卡片中的列表」的实现探索"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.sorcererxw.com/2016/11/25/android-cardify/&title=Android「卡片中的列表」的实现探索"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.sorcererxw.com/2016/11/25/android-cardify/&title=Android「卡片中的列表」的实现探索"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://blog.sorcererxw.com/2016/11/25/android-cardify/&title=Android「卡片中的列表」的实现探索"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.sorcererxw.com/2016/11/25/android-cardify/&name=Android「卡片中的列表」的实现探索&description=&lt;h1 id=&#34;需求&#34;&gt;&lt;a href=&#34;#需求&#34; class=&#34;headerlink&#34; title=&#34;需求&#34;&gt;&lt;/a&gt;需求&lt;/h1&gt;&lt;p&gt;作为一个”MD癌”患者, 在自己开发的过程中怎么会不在意一些炫酷Material Design呢?&lt;/p&gt;
 &lt;p&gt;Material Design中最具代表性的一个设计元素要属Card. 所以我也非常喜欢将每一样元素放在一个又一个Card里面来呈现. 对于独立的元素, 这么做很好, 但是对于列表这样子的有大量元素的控件, 如果每一个普通列表项都用一个独立的Card包裹会稍显凌乱, 而且一定程度上违背Material Design初衷(用不同层级的元素来进行交互, 而不是单纯的呈现数据), 所以就会考虑把整个列表放到一个独立的Card中.&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
@@ -232,16 +232,16 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.sorcererxw.com/2016/11/25/android-cardify/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://blog.sorcererxw.com/2016/11/25/android-cardify/&text=Android「卡片中的列表」的实现探索"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.sorcererxw.com/2016/11/25/android-cardify/&title=Android「卡片中的列表」的实现探索"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.sorcererxw.com/2016/11/25/android-cardify/&is_video=false&description=Android「卡片中的列表」的实现探索"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Android「卡片中的列表」的实现探索&body=Check out this article: https://blog.sorcererxw.com/2016/11/25/android-cardify/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.sorcererxw.com/2016/11/25/android-cardify/&title=Android「卡片中的列表」的实现探索"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.sorcererxw.com/2016/11/25/android-cardify/&title=Android「卡片中的列表」的实现探索"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.sorcererxw.com/2016/11/25/android-cardify/&title=Android「卡片中的列表」的实现探索"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://blog.sorcererxw.com/2016/11/25/android-cardify/&title=Android「卡片中的列表」的实现探索"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.sorcererxw.com/2016/11/25/android-cardify/&name=Android「卡片中的列表」的实现探索&description=&lt;h1 id=&#34;需求&#34;&gt;&lt;a href=&#34;#需求&#34; class=&#34;headerlink&#34; title=&#34;需求&#34;&gt;&lt;/a&gt;需求&lt;/h1&gt;&lt;p&gt;作为一个”MD癌”患者, 在自己开发的过程中怎么会不在意一些炫酷Material Design呢?&lt;/p&gt;
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.sorcererxw.com/2016/11/25/android-cardify/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://blog.sorcererxw.com/2016/11/25/android-cardify/&text=Android「卡片中的列表」的实现探索"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.sorcererxw.com/2016/11/25/android-cardify/&title=Android「卡片中的列表」的实现探索"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.sorcererxw.com/2016/11/25/android-cardify/&is_video=false&description=Android「卡片中的列表」的实现探索"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Android「卡片中的列表」的实现探索&body=Check out this article: http://blog.sorcererxw.com/2016/11/25/android-cardify/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.sorcererxw.com/2016/11/25/android-cardify/&title=Android「卡片中的列表」的实现探索"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.sorcererxw.com/2016/11/25/android-cardify/&title=Android「卡片中的列表」的实现探索"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.sorcererxw.com/2016/11/25/android-cardify/&title=Android「卡片中的列表」的实现探索"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://blog.sorcererxw.com/2016/11/25/android-cardify/&title=Android「卡片中的列表」的实现探索"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.sorcererxw.com/2016/11/25/android-cardify/&name=Android「卡片中的列表」的实现探索&description=&lt;h1 id=&#34;需求&#34;&gt;&lt;a href=&#34;#需求&#34; class=&#34;headerlink&#34; title=&#34;需求&#34;&gt;&lt;/a&gt;需求&lt;/h1&gt;&lt;p&gt;作为一个”MD癌”患者, 在自己开发的过程中怎么会不在意一些炫酷Material Design呢?&lt;/p&gt;
 &lt;p&gt;Material Design中最具代表性的一个设计元素要属Card. 所以我也非常喜欢将每一样元素放在一个又一个Card里面来呈现. 对于独立的元素, 这么做很好, 但是对于列表这样子的有大量元素的控件, 如果每一个普通列表项都用一个独立的Card包裹会稍显凌乱, 而且一定程度上违背Material Design初衷(用不同层级的元素来进行交互, 而不是单纯的呈现数据), 所以就会考虑把整个列表放到一个独立的Card中.&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 

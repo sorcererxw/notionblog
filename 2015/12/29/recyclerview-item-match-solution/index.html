@@ -9,7 +9,7 @@
     <meta name="description" content="方案直接上解决方案, 后面作解释在Adapter当中进行inflat的时候为view添加parent view如下12345678910111213141516171819202122pulic class MyAdapter extend RecyclerView.Adapter&amp;lt;MyAdapter.ViewHolder&amp;gt; &amp;#123;    private Context mCon">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RecyclerView 当中 item 无法 match 解决方案">
-<meta property="og:url" content="https://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/index.html">
+<meta property="og:url" content="http://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/index.html">
 <meta property="og:site_name" content="SorcererXW&#39;s Blog">
 <meta property="og:description" content="方案直接上解决方案, 后面作解释在Adapter当中进行inflat的时候为view添加parent view如下12345678910111213141516171819202122pulic class MyAdapter extend RecyclerView.Adapter&amp;lt;MyAdapter.ViewHolder&amp;gt; &amp;#123;    private Context mCon">
 <meta property="og:locale" content="default">
@@ -86,16 +86,16 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/&text=RecyclerView 当中 item 无法 match 解决方案"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/&title=RecyclerView 当中 item 无法 match 解决方案"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/&is_video=false&description=RecyclerView 当中 item 无法 match 解决方案"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=RecyclerView 当中 item 无法 match 解决方案&body=Check out this article: https://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/&title=RecyclerView 当中 item 无法 match 解决方案"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/&title=RecyclerView 当中 item 无法 match 解决方案"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/&title=RecyclerView 当中 item 无法 match 解决方案"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/&title=RecyclerView 当中 item 无法 match 解决方案"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/&name=RecyclerView 当中 item 无法 match 解决方案&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/&text=RecyclerView 当中 item 无法 match 解决方案"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/&title=RecyclerView 当中 item 无法 match 解决方案"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/&is_video=false&description=RecyclerView 当中 item 无法 match 解决方案"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=RecyclerView 当中 item 无法 match 解决方案&body=Check out this article: http://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/&title=RecyclerView 当中 item 无法 match 解决方案"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/&title=RecyclerView 当中 item 无法 match 解决方案"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/&title=RecyclerView 当中 item 无法 match 解决方案"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/&title=RecyclerView 当中 item 无法 match 解决方案"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/&name=RecyclerView 当中 item 无法 match 解决方案&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -172,16 +172,16 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/&text=RecyclerView 当中 item 无法 match 解决方案"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/&title=RecyclerView 当中 item 无法 match 解决方案"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/&is_video=false&description=RecyclerView 当中 item 无法 match 解决方案"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=RecyclerView 当中 item 无法 match 解决方案&body=Check out this article: https://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/&title=RecyclerView 当中 item 无法 match 解决方案"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/&title=RecyclerView 当中 item 无法 match 解决方案"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/&title=RecyclerView 当中 item 无法 match 解决方案"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/&title=RecyclerView 当中 item 无法 match 解决方案"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/&name=RecyclerView 当中 item 无法 match 解决方案&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/&text=RecyclerView 当中 item 无法 match 解决方案"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/&title=RecyclerView 当中 item 无法 match 解决方案"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/&is_video=false&description=RecyclerView 当中 item 无法 match 解决方案"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=RecyclerView 当中 item 无法 match 解决方案&body=Check out this article: http://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/&title=RecyclerView 当中 item 无法 match 解决方案"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/&title=RecyclerView 当中 item 无法 match 解决方案"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/&title=RecyclerView 当中 item 无法 match 解决方案"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/&title=RecyclerView 当中 item 无法 match 解决方案"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/&name=RecyclerView 当中 item 无法 match 解决方案&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
