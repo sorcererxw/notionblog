@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/</loc>
+    
+    <lastmod>2018-09-11T09:51:16.863Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.sorcererxw.com/2018/08/09/deploy-github-pags/</loc>
+    
+    <lastmod>2018-09-10T11:57:11.134Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.sorcererxw.com/2018/09/09/migrate-blog-again/</loc>
     
     <lastmod>2018-09-10T11:08:54.340Z</lastmod>
@@ -30,13 +44,6 @@
   </url>
   
   <url>
-    <loc>http://blog.sorcererxw.com/2018/08/09/deploy-github-pags/</loc>
-    
-    <lastmod>2018-09-08T06:10:32.760Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://blog.sorcererxw.com/2015/12/29/recyclerview-item-match-solution/</loc>
     
     <lastmod>2018-09-08T05:57:48.212Z</lastmod>
@@ -47,13 +54,6 @@
     <loc>http://blog.sorcererxw.com/2015/12/21/root-android-without-recovery-replace-kingroot/</loc>
     
     <lastmod>2018-09-08T05:57:47.239Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/</loc>
-    
-    <lastmod>2018-09-08T05:57:46.217Z</lastmod>
     
   </url>
   
