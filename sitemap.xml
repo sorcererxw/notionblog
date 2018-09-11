@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.sorcererxw.com/2018/09/09/migrate-blog-again/</loc>
+    
+    <lastmod>2018-09-11T14:15:10.741Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.sorcererxw.com/2015/09/13/xposed-dev-guide/</loc>
     
     <lastmod>2018-09-11T09:51:16.863Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>http://blog.sorcererxw.com/2018/08/09/deploy-github-pags/</loc>
     
     <lastmod>2018-09-10T11:57:11.134Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.sorcererxw.com/2018/09/09/migrate-blog-again/</loc>
-    
-    <lastmod>2018-09-10T11:08:54.340Z</lastmod>
     
   </url>
   
