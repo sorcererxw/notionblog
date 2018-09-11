@@ -795,7 +795,7 @@ body {
   padding-right: 2rem;
   max-width: 20em;
   max-height: calc(95vh - 7rem);
-  text-align: right;
+  text-align: left;
 }
 #header-post #toc a:hover {
   color: #d480aa;
@@ -810,8 +810,9 @@ body {
   content: "#";
 }
 #header-post #toc .toc-level-2 {
+  padding-left: 0.1rem;
   color: #c9cacc;
-  font-size: 0.8rem;
+  font-size: 0.6rem;
 }
 #header-post #toc .toc-level-2:before {
   color: #2bbc8a;
@@ -819,7 +820,7 @@ body {
 }
 #header-post #toc .toc-level-3 {
   color: #666;
-  font-size: 0.7rem;
+  font-size: 0.5rem;
 }
 #header-post #toc .toc-level-4 {
   color: #525252;
