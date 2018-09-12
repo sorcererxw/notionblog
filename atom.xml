@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.sorcererxw.com/"/>
-  <updated>2018-09-11T14:15:10.741Z</updated>
+  <updated>2018-09-11T14:18:23.359Z</updated>
   <id>http://blog.sorcererxw.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://blog.sorcererxw.com/2018/09/09/migrate-blog-again/"/>
     <id>http://blog.sorcererxw.com/2018/09/09/migrate-blog-again/</id>
     <published>2018-09-09T00:00:00.000Z</published>
-    <updated>2018-09-11T14:15:10.741Z</updated>
+    <updated>2018-09-11T14:18:23.359Z</updated>
     
     <content type="html"><![CDATA[<p>一个月前把 blog 迁移到了自建的 wordpress 上, 开始非常喜欢, 毕竟图形化的面板, 快捷安装插件和主题, 太方便了. 但是经历了几次 mysql 数据库停止后就后悔了, 依赖于外部数据库, 一旦发生问题, 网站就无法访问了, 太不省心了.</p><p>这是试试, 那个试试, 兜兜转转最后还是回到了起点, 捡起了 hexo, 还是静态博客省心呀!</p><a id="more"></a><p><img src="http://i0.hdslb.com/bfs/archive/33456db59952d1468fd6e44c38df71bf1400fa26.jpg" alt="img"></p>]]></content>
     
