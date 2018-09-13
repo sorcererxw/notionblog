@@ -1404,6 +1404,15 @@ article .content .caption {
 .highlight .code .strong {
   font-weight: bold;
 }
+code {
+  margin: 0px 5px;
+  font-family: "mononoki", hack, "Source Sans Pro", consolas, monospace, -apple-system, "Noto Sans", "Helvetica Neue", Helvetica, "Nimbus Sans L", Arial, "Liberation Sans", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Source Han Sans SC", "Source Han Sans CN", "Microsoft YaHei", "Wenquanyi Micro Hei", "WenQuanYi Zen Hei", "ST Heiti", SimHei, "WenQuanYi Zen Hei Sharp", sans-serif;
+  background-color: #efefef;
+  padding: 2px 5px;
+  font-size: 95%;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
 pre {
   overflow-x: auto;
   padding: 10px 15px;
@@ -1419,14 +1428,6 @@ pre code {
   display: block;
   padding: 0;
   border: none;
-}
-code {
-  font-family: "mononoki", hack, "Source Sans Pro", consolas, monospace, -apple-system, "Noto Sans", "Helvetica Neue", Helvetica, "Nimbus Sans L", Arial, "Liberation Sans", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Source Han Sans SC", "Source Han Sans CN", "Microsoft YaHei", "Wenquanyi Micro Hei", "WenQuanYi Zen Hei", "ST Heiti", SimHei, "WenQuanYi Zen Hei Sharp", sans-serif;
-  background-color: #efefef;
-  padding: 2px 5px;
-  font-size: 95%;
-  border-radius: 4px;
-  -webkit-border-radius: 4px;
 }
 .highlight {
   overflow-x: auto;
