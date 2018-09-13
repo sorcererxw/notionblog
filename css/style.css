@@ -416,14 +416,14 @@
   width: 100%;
   border-collapse: collapse;
   text-align: left;
-  font-size: 12px;
+  font-size: -1.2rem;
 }
 .content th {
   padding: 8px;
   border-bottom: 1px dashed $color-code-border;
   color: #383838;
   font-weight: bold;
-  font-size: 13px;
+  font-size: -0.2rem;
 }
 .content td {
   padding: 9px 8px 0;
@@ -452,8 +452,8 @@ body {
   color: #383838;
   font-display: swap;
   font-weight: 400;
-  font-size: 14px;
-  font-family: "Menlo", "Meslo LG", monospace;
+  font-size: 0.8rem;
+  font-family: -apple-system, "Noto Sans", "Helvetica Neue", Helvetica, "Nimbus Sans L", Arial, "Liberation Sans", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Source Han Sans SC", "Source Han Sans CN", "Microsoft YaHei", "Wenquanyi Micro Hei", "WenQuanYi Zen Hei", "ST Heiti", SimHei, "WenQuanYi Zen Hei Sharp", sans-serif;
   line-height: 1.725;
   text-rendering: geometricPrecision;
   -moz-osx-font-smoothing: grayscale;
@@ -568,7 +568,7 @@ body {
   letter-spacing: 0.01em;
   font-weight: 700;
   font-style: normal;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   line-height: 2rem;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
@@ -591,9 +591,9 @@ body {
 #header #nav {
   color: #212121;
   letter-spacing: 0.01em;
-  font-weight: 200;
   font-style: normal;
   font-size: 0.8rem;
+  margin-top: 8px;
 }
 #header #nav ul {
   margin: 0;
@@ -734,7 +734,6 @@ body {
 #header-post #nav {
   color: #212121;
   letter-spacing: 0.01em;
-  font-weight: 200;
   font-style: normal;
   font-size: 0.8rem;
 }
@@ -1412,7 +1411,7 @@ pre {
   border: 1px dotted #666;
   border-radius: 4px;
   font-size: 13px;
-  font-family: "Menlo", "Meslo LG", monospace;
+  font-family: "mononoki", hack, "Source Sans Pro", consolas, monospace, -apple-system, "Noto Sans", "Helvetica Neue", Helvetica, "Nimbus Sans L", Arial, "Liberation Sans", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Source Han Sans SC", "Source Han Sans CN", "Microsoft YaHei", "Wenquanyi Micro Hei", "WenQuanYi Zen Hei", "ST Heiti", SimHei, "WenQuanYi Zen Hei Sharp", sans-serif;
   line-height: 22px;
   -webkit-border-radius: 4px;
 }
@@ -1433,7 +1432,7 @@ code {
   padding: 10px 15px;
   border-radius: 4px;
   background: #fafafa;
-  font-family: "Menlo", "Meslo LG", monospace;
+  font-family: "mononoki", hack, "Source Sans Pro", consolas, monospace, -apple-system, "Noto Sans", "Helvetica Neue", Helvetica, "Nimbus Sans L", Arial, "Liberation Sans", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Source Han Sans SC", "Source Han Sans CN", "Microsoft YaHei", "Wenquanyi Micro Hei", "WenQuanYi Zen Hei", "ST Heiti", SimHei, "WenQuanYi Zen Hei Sharp", sans-serif;
   -webkit-border-radius: 4px;
 }
 .highlight figcaption {
