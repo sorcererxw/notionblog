@@ -834,6 +834,9 @@ body {
 #header-post #toc .toc-number {
   display: none;
 }
+#header-post #toc .toc-child {
+  padding-inline-start: 1rem;
+}
 @media screen and (max-width: 500px) {
   #header-post {
     display: none;
