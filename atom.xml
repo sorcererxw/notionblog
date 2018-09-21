@@ -62,28 +62,6 @@
   </entry>
   
   <entry>
-    <title>再一次薅 Google Cloud 羊毛</title>
-    <link href="http://blog.sorcererxw.com/2018/08/19/google-cloud-300-again/"/>
-    <id>http://blog.sorcererxw.com/2018/08/19/google-cloud-300-again/</id>
-    <published>2018-08-19T00:12:47.000Z</published>
-    <updated>2018-09-20T13:37:50.172Z</updated>
-    
-    <content type="html"><![CDATA[<p>相信很多朋友都使用过 Google Cloud 的 $300 的新用户礼金, 但是时间只有 1 年, 一年过后, 就不得不开始付费使用. 这里有个</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;相信很多朋友都使用过 Google Cloud 的 $300 的新用户礼金, 但是时间只有 1 年, 一年过后, 就不得不开始付费使用. 这里有个&lt;/p&gt;
-
-      
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
     <title>nginx 反向代理配置 Github Page 的 api 网关</title>
     <link href="http://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/"/>
     <id>http://blog.sorcererxw.com/2018/08/10/nginx-reverse-proxy-github-page-api-gateway/</id>
