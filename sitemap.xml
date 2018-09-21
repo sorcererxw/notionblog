@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/</loc>
+    
+    <lastmod>2018-09-21T05:01:13.153Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.sorcererxw.com/2018/08/19/google-cloud-300-again/</loc>
+    
+    <lastmod>2018-09-20T13:37:50.172Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.sorcererxw.com/2018/09/12/zjucst-router-config/</loc>
     
     <lastmod>2018-09-19T04:19:51.206Z</lastmod>
@@ -47,13 +61,6 @@
     <loc>http://blog.sorcererxw.com/2016/11/25/android-cardify/</loc>
     
     <lastmod>2018-09-08T21:44:00.599Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.sorcererxw.com/2016/11/16/how-rxactivityresult-work/</loc>
-    
-    <lastmod>2018-09-08T21:36:41.527Z</lastmod>
     
   </url>
   
