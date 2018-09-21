@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="SorcererXW&#39;s Blog">
 <meta property="og:description" content="刚入学, 发现校园网是使用 srun 3000 进行认证, 可以使用客户端或或者网页认证. 可是无论是客户端还是网页, 登录之后都有一个不能关闭的窗口, 一旦关闭就断开网络, 虽然可以丢到一个新建的桌面, 眼不见心不烦, 这是不能忍的. 幸好, 把本科期间的路由器带来了, 我的路由器是华硕的 P1900, 刷了原版梅林系统, 不过下面的操作, 对于 OpenWRT 也是一样的. 失败: 使用Lin">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-09-19T04:19:51.206Z">
+<meta property="og:updated_time" content="2018-09-21T23:51:26.755Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浙大软院路由器配置指南">
 <meta name="twitter:description" content="刚入学, 发现校园网是使用 srun 3000 进行认证, 可以使用客户端或或者网页认证. 可是无论是客户端还是网页, 登录之后都有一个不能关闭的窗口, 一旦关闭就断开网络, 虽然可以丢到一个新建的桌面, 眼不见心不烦, 这是不能忍的. 幸好, 把本科期间的路由器带来了, 我的路由器是华硕的 P1900, 刷了原版梅林系统, 不过下面的操作, 对于 OpenWRT 也是一样的. 失败: 使用Lin">
@@ -97,7 +97,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#失败-使用Linux客户端"><span class="toc-number">1.</span> <span class="toc-text">失败: 使用Linux客户端</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#模拟登陆"><span class="toc-number">2.</span> <span class="toc-text">模拟登陆</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一键脚本"><span class="toc-number">2.1.</span> <span class="toc-text">一键脚本</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#定时任务"><span class="toc-number">3.</span> <span class="toc-text">定时任务</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#失败-使用Linux客户端"><span class="toc-number">1.</span> <span class="toc-text">失败: 使用Linux客户端</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#模拟登陆"><span class="toc-number">2.</span> <span class="toc-text">模拟登陆</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一键脚本"><span class="toc-number">2.1.</span> <span class="toc-text">一键脚本</span></a></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -153,12 +153,6 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chmod +x auth.sh</span><br><span class="line">touch state.txt</span><br><span class="line">touch users.txt</span><br></pre></td></tr></table></figure>
 <p>配置好了</p>
 <p>运行<code>./auth.sh</code> 就可以登录, <code>./auth.sh logout</code> 就可以注销</p>
-<h1 id="定时任务"><a href="#定时任务" class="headerlink" title="定时任务"></a>定时任务</h1><p>经过一段时间的测试, 发现每天早上7点钟, 网络连接就会被断开, 猜测是服务器断开了所有会话, 所以需要启用定时任务来重新连接.</p>
-<p>使用<code>crontab</code>命令进行定时重新登录, 不过重新登录的时间点上, 不建议直接选择7点整, 因为可能造成冲突, 我这里选择在7:10时进行更新.</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">crontab -e &#123;username&#125;</span><br></pre></td></tr></table></figure>
-<p>然后写入</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">10 7 * * * /jffs/srunauth/auth.sh &gt;/dev/null 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
-<p>保存退出</p>
 
   </div>
 </article>
@@ -187,7 +181,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#失败-使用Linux客户端"><span class="toc-number">1.</span> <span class="toc-text">失败: 使用Linux客户端</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#模拟登陆"><span class="toc-number">2.</span> <span class="toc-text">模拟登陆</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一键脚本"><span class="toc-number">2.1.</span> <span class="toc-text">一键脚本</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#定时任务"><span class="toc-number">3.</span> <span class="toc-text">定时任务</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#失败-使用Linux客户端"><span class="toc-number">1.</span> <span class="toc-text">失败: 使用Linux客户端</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#模拟登陆"><span class="toc-number">2.</span> <span class="toc-text">模拟登陆</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一键脚本"><span class="toc-number">2.1.</span> <span class="toc-text">一键脚本</span></a></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
