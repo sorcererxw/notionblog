@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.sorcererxw.com/2018/09/24/sql-antipatterns-jaywalking/</loc>
+    
+    <lastmod>2018-09-25T01:47:35.869Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.sorcererxw.com/2018/09/12/zjucst-router-config/</loc>
     
     <lastmod>2018-09-21T23:51:26.755Z</lastmod>

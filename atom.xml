@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.sorcererxw.com/"/>
-  <updated>2018-09-21T23:51:26.755Z</updated>
+  <updated>2018-09-25T01:47:35.869Z</updated>
   <id>http://blog.sorcererxw.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SQL 反模式-多值存储 (横穿马路)</title>
+    <link href="http://blog.sorcererxw.com/2018/09/24/sql-antipatterns-jaywalking/"/>
+    <id>http://blog.sorcererxw.com/2018/09/24/sql-antipatterns-jaywalking/</id>
+    <published>2018-09-24T15:20:00.000Z</published>
+    <updated>2018-09-25T01:47:35.869Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="反模式"><a href="#反模式" class="headerlink" title="反模式"></a>反模式</h1><p>在存储一对多, 或者多对多的时候, 将相对应的项目使用数组的方式存储</p><table><thead><tr><th>id</th><th>name</th><th>friends</th></tr></thead><tbody><tr><td>1</td><td>Bob</td><td>2,3</td></tr><tr><td>2</td><td>Jack</td><td>1,5</td></tr><tr><td>3</td><td>Nina</td><td>1</td></tr><tr><td>4</td><td>Tina</td><td>5</td></tr><tr><td>5</td><td>Tom</td><td>4,2</td></tr></tbody></table><h1 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h1><ol><li>用一列来存储, 无法保证极端情况下长度永远足够</li><li>如果要查找其中一个项目, 需要使用regex进行匹配, 不同数据库的regex的语法存在区别, 使sql语句的兼容性变差</li><li>无法进行索引</li><li>难以直接使用聚合函数, 如<code>SUM()</code>,<code>AVG()</code>,<code>COUNT()</code></li><li>如果想在一项里面删去一个值, 需要先取出, 再修改, 最后写回, 无法直接通过<code>update</code>或者<code>delete</code>进行更新</li><li>因为填入数组, 需要指定字符串的类型, 难以约束内部数据的类型, 可能会出现<code>[1,2,3,banana]</code>的情况</li><li>无法保证分隔符 (如<code>,</code>) 永远不会出现在内部一项数据里面, 列表中的某些条目可能会包含分隔符</li></ol><h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>使用交叉表的形式进行存储, 相当于枚举所有的联系</p><p>上文的表就会变成</p><table><thead><tr><th>id</th><th>name</th></tr></thead><tbody><tr><td>1</td><td>Bob</td></tr><tr><td>2</td><td>Jack</td></tr><tr><td>3</td><td>Nina</td></tr><tr><td>4</td><td>Tina</td></tr><tr><td>5</td><td>Tom</td></tr></tbody></table><table><thead><tr><th>friend_left</th><th>friend_b</th></tr></thead><tbody><tr><td>1</td><td>2</td></tr><tr><td>1</td><td>3</td></tr><tr><td>2</td><td>1</td></tr><tr><td>2</td><td>5</td></tr><tr><td>3</td><td>1</td></tr><tr><td>4</td><td>5</td></tr><tr><td>5</td><td>4</td></tr><tr><td>5</td><td>2</td></tr></tbody></table><p>通过另外一张表来表示用户之间的关系, 将数据和关系分离, 这样一来就可以非常容易地对关系进行管理</p><p>这种作法其实就是遵循<code>数据库规范化第四范式</code>, 消除多值依赖</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;反模式&quot;&gt;&lt;a href=&quot;#反模式&quot; class=&quot;headerlink&quot; title=&quot;反模式&quot;&gt;&lt;/a&gt;反模式&lt;/h1&gt;&lt;p&gt;在存储一对多, 或者多对多的时候, 将相对应的项目使用数组的方式存储&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;id
+      
+    
+    </summary>
+    
+    
+      <category term="数据库" scheme="http://blog.sorcererxw.com/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+  </entry>
   
   <entry>
     <title>浙大软院路由器配置指南</title>
