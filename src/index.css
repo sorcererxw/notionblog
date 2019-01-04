@@ -1,0 +1,14 @@
+body {
+    margin: 0;
+    padding: 0;
+    color: rgb(55, 53, 47);
+    font-family: Helvetica, Tahoma, Arial, "source han sans", STXihei, "华文细黑", Heiti, "黑体", sans-serif;
+}
+
+code {
+    font-family: Source Code Pro, Consolas, Liberation Mono, Menlo, Courier, monospace;
+}
+
+a {
+    color: inherit;
+}
