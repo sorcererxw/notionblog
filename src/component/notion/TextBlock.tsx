@@ -1,27 +1,6 @@
 import * as React from 'react'
-import styled from "styled-components";
 import {IRecordValue} from "../../api/notion";
-
-const Bold = styled.strong`
-`;
-
-const Italic = styled.i`
-`;
-
-const Highlight = styled.code`
-  background:#d7d9db;
-  line-height: normal;
-  font-size: 0.95em;
-  padding: 0 0.4em;
-  border-radius: 3px; 
-`;
-
-const Link = styled.a`
-  color: inherit;
-`;
-
-const Deleted = styled.del`
-`;
+import StyleText from "../StyleText";
 
 interface IProps {
     value: IRecordValue
@@ -49,24 +28,35 @@ class TextBlock extends React.Component<IProps, IState> {
                 const value = it[0];
                 const textProperties = it[1];
 
-                let element = <span>{value}</span>;
+                let bold = false;
+                let italic = false;
+                let highlight = false;
+                let deleted = false;
+                let link = null;
 
                 if (textProperties !== undefined) {
                     for (const p of textProperties) {
                         if (p[0] === 'b') {
-                            element = <Bold>{element}</Bold>
+                            bold = true;
                         } else if (p[0] === 'i') {
-                            element = <Italic>{element}</Italic>
+                            italic = true;
                         } else if (p[0] === 'c') {
-                            element = <Highlight>{element}</Highlight>
+                            highlight = true;
                         } else if (p[0] === 'a') {
-                            element = <Link href={p[1]}>{element}</Link>
+                            link = p[1];
                         } else if (p[0] === 's') {
-                            element = <Deleted>{element}</Deleted>
+                            deleted = true;
                         }
                     }
                 }
-                return <span key={idx}>{element}</span>
+                return <StyleText
+                    key={idx}
+                    bold={bold}
+                    deleted={deleted}
+                    highlight={highlight}
+                    italic={italic}
+                    link={link}
+                    text={value}/>
             })
         }</p>
     }

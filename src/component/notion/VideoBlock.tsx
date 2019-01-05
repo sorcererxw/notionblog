@@ -1,6 +1,15 @@
 import * as React from 'react'
 import YouTube from 'react-youtube';
+import styled from "styled-components";
 import {IRecordValue} from "../../api/notion";
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+`;
 
 interface IProps {
     value: IRecordValue
@@ -26,9 +35,11 @@ class VideoBlock extends React.Component<IProps, IState> {
                 height: (format.block_width * format.block_aspect_ratio).toString(),
                 width: format.block_width.toString(),
             };
-            return <YouTube
-                opts={option}
-                videoId={this.getYoutubeId(format.display_source)}/>
+            return <Container>
+                <YouTube
+                    opts={option}
+                    videoId={this.getYoutubeId(format.display_source)}/>
+            </Container>
         }
         return <div/>
     }

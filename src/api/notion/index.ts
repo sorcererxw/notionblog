@@ -29,6 +29,7 @@ export interface IRecordValue {
             display_source: string
         }
         properties?: {
+            caption: any[],
             language: string[],
             title: any[],
             source: string[]
