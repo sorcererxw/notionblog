@@ -1,7 +1,7 @@
 import * as React from 'react'
 import styled from "styled-components";
 import {IRecordValue} from "../../api/notion";
-import StyleText from "../StyleText";
+import FigureCaptionNode from "./FigureCaptionNode";
 
 const Container = styled.div`
   width: 100%;
@@ -16,12 +16,6 @@ const Image = styled.img`
   height: ${props => props.height};
   width: ${props => props.width};
   max-width: 100%;
-`;
-
-const Caption = styled.figcaption`
-  line-height: 1.4;
-  opacity: 0.68;
-  font-size: 0.8em;
 `;
 
 interface IProps {
@@ -54,52 +48,12 @@ class ImageBlock extends React.Component<IProps, IState> {
         }
 
         if (properties !== undefined && properties.caption !== undefined) {
-            captionNode = <Caption>
-                {
-                    properties.caption.map((it, idx) => this.renderCaption(it, idx))
-                }
-            </Caption>
+            captionNode = <FigureCaptionNode caption={properties.caption}/>
         }
         return <Container>
             {imageNode}
             {captionNode}
         </Container>
-    }
-
-    private renderCaption = (caption: {}, idx: number): React.ReactNode => {
-        const value = caption[0];
-        const textProperties = caption[1];
-
-        let bold = false;
-        let italic = false;
-        let highlight = false;
-        let deleted = false;
-        let link = null;
-
-        if (textProperties !== undefined) {
-            for (const p of textProperties) {
-                if (p[0] === 'b') {
-                    bold = true;
-                } else if (p[0] === 'i') {
-                    italic = true;
-                } else if (p[0] === 'c') {
-                    highlight = true;
-                } else if (p[0] === 'a') {
-                    link = p[1];
-                } else if (p[0] === 's') {
-                    deleted = true;
-                }
-            }
-        }
-
-        return <StyleText
-            key={idx}
-            bold={bold}
-            deleted={deleted}
-            highlight={highlight}
-            italic={italic}
-            link={link}
-            text={value}/>
     }
 }
 

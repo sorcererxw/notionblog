@@ -2,6 +2,7 @@ import * as React from 'react'
 import YouTube from 'react-youtube';
 import styled from "styled-components";
 import {IRecordValue} from "../../api/notion";
+import FigureCaptionNode from "./FigureCaptionNode";
 
 const Container = styled.div`
   display: flex;
@@ -26,29 +27,36 @@ class VideoBlock extends React.Component<IProps, IState> {
 
     public render(): React.ReactNode {
         const format = this.props.value.value.format;
+        const properties = this.props.value.value.properties;
         if (format == null) {
             return null;
         }
+        let videoNode = null;
+        let captionNode = null;
         // language=RegExp
         if (format.display_source.match("^http(s)?://(www.)?youtube.com/.+$")) {
             const option = {
                 height: (format.block_width * format.block_aspect_ratio).toString(),
                 width: format.block_width.toString(),
             };
-            return <Container>
-                <YouTube
-                    opts={option}
-                    videoId={this.getYoutubeId(format.display_source)}/>
-            </Container>
+            videoNode = <YouTube
+                opts={option}
+                videoId={this.getYoutubeId(format.display_source)}/>
         }
-        return <div/>
+        if (properties !== undefined && properties.caption !== undefined) {
+            captionNode = <FigureCaptionNode caption={properties.caption}/>
+        }
+        return <Container>
+            {videoNode}
+            {captionNode}
+        </Container>
     }
 
     private getYoutubeId = (url: string): string => {
         const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
         const match = url.match(regExp);
         return (match && match[7].length === 11) ? match[7] : "";
-    }
+    };
 }
 
 export default VideoBlock
