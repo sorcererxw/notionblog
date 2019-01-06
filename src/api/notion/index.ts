@@ -1,14 +1,14 @@
 import axios, {AxiosPromise} from 'axios'
 
 const client = axios.create({
-    // baseURL: '/api/notion',
-    baseURL: 'https://www.notion.so/api/v3',
+    baseURL: '/api/notion',
+    // baseURL: 'https://www.notion.so/api/v3',
     headers: {
-        'Access-Control-Allow-Origin': '*',
+        // 'Access-Control-Allow-Origin': '*',
         // "Access-Control-Allow-Headers": "Content-Type",
         'Content-Type': 'application/json'
     },
-    timeout: 1000000
+    timeout: 1000
 });
 
 export interface IRecordValue {

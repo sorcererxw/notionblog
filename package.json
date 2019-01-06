@@ -1,5 +1,6 @@
 {
   "name": "sorcererxw-blog",
+  "homepage": "https://sorcererxw.github.io/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -23,9 +24,12 @@
     "@types/react-syntax-highlighter": "^10.1.0",
     "@types/react-youtube": "^7.4.3",
     "@types/styled-components": "^4.1.4",
-    "typescript": "^3.2.2"
+    "typescript": "^3.2.2",
+    "gh-pages": "^2.0.1"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
