@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {IRecordValue} from "../../api/notion";
+import {IRecordValue} from "../../pages/api/notion";
 import TextBlock from "./TextBlock";
 
 interface IProps {

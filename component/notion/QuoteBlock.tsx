@@ -1,6 +1,6 @@
 import * as React from 'react'
 import styled from "styled-components";
-import {IRecordValue} from "../../api/notion";
+import {IRecordValue} from "../../pages/api/notion";
 import TextBlock from "./TextBlock";
 
 const Container = styled.div`

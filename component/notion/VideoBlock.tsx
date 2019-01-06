@@ -1,7 +1,7 @@
 import * as React from 'react'
 import YouTube from 'react-youtube';
 import styled from "styled-components";
-import {IRecordValue} from "../../api/notion";
+import {IRecordValue} from "../../pages/api/notion";
 import FigureCaptionNode from "./FigureCaptionNode";
 
 const Container = styled.div`

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {IRecordValue, loadPageChunk} from "../../api/notion";
+import {IRecordValue, loadPageChunk} from "../../pages/api/notion";
 import BulletedListBlock from "./BulletedListBlock";
 import CodeBlock from "./CodeBlock";
 import CollectionViewBlock from "./CollectionViewBlock";

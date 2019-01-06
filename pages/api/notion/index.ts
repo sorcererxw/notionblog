@@ -1,14 +1,16 @@
 import axios, {AxiosPromise} from 'axios'
+const fetch = require("node-fetch");
 
 const client = axios.create({
-    baseURL: '/api/notion',
-    // baseURL: 'https://www.notion.so/api/v3',
+    baseURL: 'https://www.notion.so/api/v3',
     headers: {
-        // 'Access-Control-Allow-Origin': '*',
-        // "Access-Control-Allow-Headers": "Content-Type",
         'Content-Type': 'application/json'
     },
-    timeout: 1000
+    timeout: 1000 * 60
+    // proxy: {
+    //     host: '127.0.0.1',
+    //     port: 1080
+    // }
 });
 
 export interface IRecordValue {
@@ -59,15 +61,33 @@ export interface IPageChunk {
 
 export function getRecordValues(
     ...blockIds: string[]
-): AxiosPromise<IRecordValues> {
-    return client.post("/getRecordValues", {
+): Promise<IRecordValues> {
+    const data = {
         requests: blockIds.map(blockId => {
             return {
                 id: getFullBlockId(blockId),
                 table: 'block'
             }
         })
-    })
+    };
+    return fetch("https://www.notion.so/api/v3/getRecordValues", {
+        body: JSON.stringify(data),
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {'content-type': 'application/json'},
+        method: 'POST',
+        mode: 'cors',
+        redirect: 'follow',
+        referrer: 'no-referrer',
+    }).then(res => res.json())
+    // return client.post("/getRecordValues", {
+    //     requests: blockIds.map(blockId => {
+    //         return {
+    //             id: getFullBlockId(blockId),
+    //             table: 'block'
+    //         }
+    //     })
+    // })
 }
 
 export function loadPageChunk(

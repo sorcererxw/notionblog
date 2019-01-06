@@ -1,7 +1,7 @@
 import * as moment from 'moment';
 import * as React from 'react'
 import styled from "styled-components";
-import {IRecordValue} from "../../api/notion";
+import {IRecordValue} from "../../pages/api/notion";
 
 const Container = styled.div`
   margin:32px 0;

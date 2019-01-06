@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from "styled-components";
-import {getRecordValues} from "../api/notion";
+import {getRecordValues} from "./api/notion";
 import PageBlock from "../component/notion/PageBlock";
 
 const Content = styled.div`
@@ -30,7 +30,7 @@ interface IState {
     pageCoverPosition: number
 }
 
-export default class PostPage extends React.Component<IProps, IState> {
+export default class Post extends React.Component<IProps, IState> {
     constructor(props: any) {
         super(props);
         this.state = {

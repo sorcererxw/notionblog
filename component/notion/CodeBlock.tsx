@@ -1,7 +1,7 @@
 import * as React from 'react'
 import SyntaxHighlighter, {} from 'react-syntax-highlighter';
 import styled from "styled-components";
-import {IRecordValue} from "../../api/notion";
+import {IRecordValue} from "../../pages/api/notion";
 
 const Container = styled.div`
     margin: 16px 0;
