@@ -4,7 +4,7 @@ date: 2016-11-25 08:12:47
 tags:
 ---
 
-# 需求
+## 需求
 
 作为一个"MD癌"患者, 在自己开发的过程中怎么会不在意一些炫酷Material Design呢?
 
@@ -12,25 +12,25 @@ Material Design中最具代表性的一个设计元素要属Card. 所以我也�
 
 <!--more-->
 
-# 方案1
+## 方案1
 
 [代码](https://github.com/sorcererXW/CardList/tree/master/app/src/main/java/com/sorcererxw/demo/cardlist/planA)
 
 这是最最暴力的方法, 就是直接将一个RecyclerView外面套一个CardView, 这有一个巨大的缺陷就是CardView不会跟随RecyclerView滚动, 而是直接缩小到`min(RecyclerView.height, Screen.height)`了, 所以不推荐这个方案.
 
-## 效果
+### 效果
 
 ![img](http://ofpmelh8h.bkt.clouddn.com/blog/20161125/173503531.png)
 ![img](http://ofpmelh8h.bkt.clouddn.com/blog/20161125/173442223.png)
 
-## 总结
+### 总结
 
 - [x] 不会造成性能影响
 - [ ] 卡片长度和列表长度一致(卡片跟随列表滚动)
 - [x] 卡片视觉效果
 - [x] 实现便捷
 
-# 方案2
+## 方案2
 
 [代码](https://github.com/sorcererXW/CardList/tree/master/app/src/main/java/com/sorcererxw/demo/cardlist/planB)
 
@@ -52,12 +52,12 @@ Material Design中最具代表性的一个设计元素要属Card. 所以我也�
 
 而且, 这样本来一个CardView就可以解决的事情, 被扩大为大量的CardView, 加上每一项的计算, 对性能有不小的影响, 滑动的时候会有, 明显的掉帧.
 
-## 效果
+### 效果
 
 ![img](https://ofpmelh8h.bkt.clouddn.com/blog/20161125/175553993.png)
 ![img](https://ofpmelh8h.bkt.clouddn.com/blog/20161125/175608550.png)
 
-## 总结
+### 总结
 
 - [ ] 不会造成性能影响
 - [x] 卡片长度和列表长度一致(卡片跟随列表滚动)
@@ -65,47 +65,45 @@ Material Design中最具代表性的一个设计元素要属Card. 所以我也�
 - [ ] 实现便捷
   可以说和第一个方案走向了两个极端
 
-# 方案2.1
+## 方案2.1
 
 [代码](https://github.com/sorcererXW/CardList/tree/master/app/src/main/java/com/sorcererxw/demo/cardlist/planC)
 为了解决方案2的卡片无圆角的问题, 我找了一个开源库[Slice](https://github.com/mthli/Slice), 这个库可以不依赖于CardView给View外套上一个Card, 而且这个Card可以选择哪个圆角显示, 哪个不显示, 哪一边有阴影, 哪一边无阴影, 非常实用.
 这个方案具体我也不多说了, 逻辑上和方案2没有本质的区别, 也是实现麻烦, 性能欠缺, 具体可以去看一下代码.
 
-## 效果
+### 效果
 
 ![img](https://ofpmelh8h.bkt.clouddn.com/blog/20161125/181255126.png)
 ![img](https://ofpmelh8h.bkt.clouddn.com/blog/20161125/181315503.png)
 
-## 总结
+### 总结
 
 - [ ] 不会造成性能影响
 - [x] 卡片长度和列表长度一致(卡片跟随列表滚动)
 - [x] 卡片视觉效果
 - [ ] 实现便捷
 
-# 方案3
+## 方案3
 
 [代码](https://github.com/sorcererXW/CardList/tree/master/app/src/main/java/com/sorcererxw/demo/cardlist/planD)
 过了很久, 不经意的看见一个开源应用, 应用内也有卡片列表, 似乎非常完美, 去github上看了一下, 惊讶地发现它居然只是将一个Recyclerview放在一个NestScrollView中, 就可以实现.
 原谅我的无知, 我一直只把NestScrollView当做一个普通的ScrollView, 列表是不能放在其中使用的.
 
-## 效果
+### 效果
 
 ![img](http://ofpmelh8h.bkt.clouddn.com/blog/20161125/184236230.png)
 ![img](http://ofpmelh8h.bkt.clouddn.com/blog/20161125/184253688.png)
 
 但是问题在于, 这种实现方式对于列表来说, 就失去了Recycle机制了, 所有view会一口气全部绘制出来, 相当于一个linerlayout, 所以在小数据的时候问题不大, 如果数据量大的话, 会消耗大量的资源, 同样会照常卡顿
 
-## 总结
+### 总结
 
 - [ ] 不会造成性能影响
 - [x] 卡片长度和列表长度一致(卡片跟随列表滚动)
 - [x] 卡片视觉效果
 - [x] 实现便捷
 
-
-
-# 个人使用经验
+## 个人使用经验
 
 我自己的项目[Sorcery图标包](https://github.com/sorcererXW/SorceryIconPack)中, 我将一组的图标放在同一张卡片中, 同时每一组还有一个header
 
