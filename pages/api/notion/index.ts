@@ -1,17 +1,20 @@
-import axios, {AxiosPromise} from 'axios'
+// import axios, {AxiosPromise} from 'axios'
+
 const fetch = require("node-fetch");
 
-const client = axios.create({
-    baseURL: 'https://www.notion.so/api/v3',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    timeout: 1000 * 60
-    // proxy: {
-    //     host: '127.0.0.1',
-    //     port: 1080
-    // }
-});
+const BASE_URL = "https://www.notion.so/api/v3";
+
+// const client = axios.create({
+//     baseURL: BASE_URL,
+//     headers: {
+//         'Content-Type': 'application/json'
+//     },
+//     timeout: 1000 * 60
+//     // proxy: {
+//     //     host: '127.0.0.1',
+//     //     port: 1080
+//     // }
+// });
 
 export interface IRecordValue {
     value: {
@@ -70,36 +73,48 @@ export function getRecordValues(
             }
         })
     };
-    return fetch("https://www.notion.so/api/v3/getRecordValues", {
+    return fetch(`${BASE_URL}/getRecordValues`, {
         body: JSON.stringify(data),
-        cache: 'no-cache',
-        credentials: 'same-origin',
         headers: {'content-type': 'application/json'},
         method: 'POST',
-        mode: 'cors',
-        redirect: 'follow',
-        referrer: 'no-referrer',
     }).then(res => res.json())
-    // return client.post("/getRecordValues", {
-    //     requests: blockIds.map(blockId => {
-    //         return {
-    //             id: getFullBlockId(blockId),
-    //             table: 'block'
-    //         }
-    //     })
-    // })
 }
 
 export function loadPageChunk(
     pageId: string, count: number, cursor = {stack: []}
-): AxiosPromise<IPageChunk> {
-    return client.post("/loadPageChunk", {
+): Promise<IPageChunk> {
+    const data = {
         "cursor": cursor,
         limit: count,
         pageId: getFullBlockId(pageId),
         verticalColumns: false
-    })
+    };
+    return fetch(`${BASE_URL}/loadPageChunk`, {
+        body: JSON.stringify(data),
+        headers: {'content-type': 'application/json'},
+        method: 'POST',
+    }).then(res => res.json())
 }
+
+export const loadFullPageChunk = async (pageId: string): Promise<IRecordValue[]> => {
+    const limit = 100;
+    const result: IRecordValue[] = [];
+    let cursor = {stack: []};
+    do {
+        const pageChunk = (await Promise.resolve(loadPageChunk(pageId, limit, cursor)));
+        for (const id in pageChunk.recordMap.block) {
+            if (pageChunk.recordMap.block.hasOwnProperty(id)) {
+                const item = pageChunk.recordMap.block[id];
+                if (item.value.alive) {
+                    result.push(item)
+                }
+            }
+        }
+        cursor = pageChunk.cursor;
+    } while (cursor.stack.length > 0);
+    console.log(result);
+    return result
+};
 
 export function getFullBlockId(blockId: string): string {
     if (blockId.match("^[a-zA-Z0-9]+$")) {

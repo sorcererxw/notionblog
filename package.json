@@ -32,8 +32,8 @@
     "babel-plugin-styled-components": "^1.10.0"
   },
   "scripts": {
-    "dev": "next -p 8090",
+    "dev": "node server.js",
     "build": "next build",
-    "start": "next start"
+    "start": "NODE_ENV=production node server.js"
   }
 }
