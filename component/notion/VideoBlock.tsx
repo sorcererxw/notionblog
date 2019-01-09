@@ -1,7 +1,7 @@
 import * as React from 'react'
 import YouTube from 'react-youtube';
 import styled from "styled-components";
-import {IRecordValue} from "../../pages/api/notion";
+import {BlockValue} from "../../api/notion";
 import FigureCaptionNode from "./FigureCaptionNode";
 
 const Container = styled.div`
@@ -13,7 +13,7 @@ const Container = styled.div`
 `;
 
 interface IProps {
-    value: IRecordValue
+    value: BlockValue
 }
 
 interface IState {
@@ -26,8 +26,8 @@ class VideoBlock extends React.Component<IProps, IState> {
     }
 
     public render(): React.ReactNode {
-        const format = this.props.value.value.format;
-        const properties = this.props.value.value.properties;
+        const format = this.props.value.format;
+        const properties = this.props.value.properties;
         if (format == null) {
             return null;
         }

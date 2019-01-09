@@ -17,7 +17,9 @@
     "react-syntax-highlighter": "^10.1.2",
     "prop-types": "^15.6.2",
     "axios": "^0.18.0",
-    "moment": "^2.23.0"
+    "moment": "^2.23.0",
+    "disqus-react": "^1.0.5",
+    "cjkspace": "^0.0.3"
   },
   "devDependencies": {
     "@types/jest": "^23.3.11",
@@ -34,6 +36,7 @@
   "scripts": {
     "dev": "node server.js",
     "build": "next build",
-    "start": "NODE_ENV=production node server.js"
+    "start": "set NODE_ENV=production && node server.js",
+    "gcp-build": "npm run build"
   }
 }

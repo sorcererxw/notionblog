@@ -2,7 +2,7 @@ const {createServer} = require('http')
 const {parse} = require('url')
 const next = require('next')
 
-const port = parseInt(process.env.PORT, 10) || 8092
+const port = parseInt(process.env.PORT, 10) || 3000
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({dev})
 const handle = app.getRequestHandler()
@@ -20,7 +20,10 @@ app.prepare().then(() => {
             handle(req, res, parsedUrl)
         }
     }).listen(port, err => {
-        if (err) throw err
+        if (err) {
+            console.log(err)
+            throw err
+        }
         console.log(`> Ready on http://localhost:${port}`)
     })
 })

@@ -1,26 +1,55 @@
 import * as React from 'react'
 import styled from "styled-components";
-import {IRecordValue} from "../../pages/api/notion";
+import {BlockNode} from "../../api/notion";
+import NotionBlock from "./NotionBlock";
 import TextBlock from "./TextBlock";
 
 const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  align-items: flex-start;
+  width: 100%; 
+  padding-left: 2px; 
 `;
 
-const Ul = styled.ul`
-    padding-left: 1em;
+const Content = styled.div``;
+
+const SymbolContainer = styled.div`
+  display: flex;
+  margin-right: 4px;
+  width: 24px;
+  flex-grow: 0; 
+  flex-shrink: 0;
+  align-items: center; 
+  justify-content: center; 
+  min-height: calc(1.5em);
+  padding-right: 2px;
 `;
 
-interface ITreeNode {
-    value: IRecordValue | null
-    children: ITreeNode[]
-}
+const Symbol = styled.div`
+  width: 6px; 
+  height: 6px; 
+  border-radius: 6px; 
+  background: currentcolor;
+`;
+
+const ListItem = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+const ChildrenContainer = styled.div`
+    max-width: 100%;
+    box-sizing: border-box;
+`;
 
 interface IProps {
-    values: IRecordValue[]
+    value: BlockNode
 }
 
 interface IState {
-    data: ITreeNode[]
 }
 
 class BulletedListBlock extends React.Component<IProps, IState> {
@@ -31,75 +60,33 @@ class BulletedListBlock extends React.Component<IProps, IState> {
         }
     }
 
-    public componentDidMount(): void {
-        this.setState({
-            data: this.toTree(this.props.values)
-        });
-        console.log(this.state.data)
-    }
-
     public render(): React.ReactNode {
-        if (this.state.data.length === 0) {
-            return null;
-        }
         return <Container>
-            <Ul>
-                {this.state.data.map((it) =>
-                    this.renderList(it)
-                )}
-            </Ul>
+            <SymbolContainer><Symbol/></SymbolContainer>
+            <Content>
+                {this.renderItself()}
+                {this.renderChildren()}
+            </Content>
         </Container>
     }
 
-    private renderList = (node: ITreeNode): React.ReactNode => {
-        console.log(node.value);
-        if (node.value == null) {
+    private renderItself(): React.ReactNode {
+        return <ListItem>
+            <TextBlock value={this.props.value}/>
+        </ListItem>
+    }
+
+    private renderChildren(): React.ReactNode {
+        const blockChildren = this.props.value.children;
+        if (blockChildren.length === 0) {
             return null;
         }
-        if (node.value.value.type === 'bulleted_list') {
-            return <li>
-                <div>
-                    <TextBlock value={node.value}/>
-                    <Ul>
-                        {node.children.map((it) => this.renderList(it))}
-                    </Ul>
-                </div>
-            </li>
-        }
-        return <div>
-            <TextBlock value={node.value}/>
-            <Ul>
-                {node.children.map((it) => this.renderList(it))}
-            </Ul>
-        </div>
-    };
-
-    private toTree = (data: IRecordValue[]): ITreeNode[] => {
-        function getNode(id: string): ITreeNode {
-            let v: IRecordValue | null = null;
-            const c: ITreeNode[] = [];
-            for (const item of data) {
-                if (item.value.id === id) {
-                    v = item;
-                } else if (item.value.parent_id === id) {
-                    c.push(getNode(item.value.id))
-                }
+        return <ChildrenContainer>
+            {
+                blockChildren.map((v, k) => <NotionBlock key={k} block={v}/>)
             }
-            return {
-                children: c,
-                value: v
-            }
-        }
-
-        const result: ITreeNode[] = [];
-        const parent = data[0].value.parent_id;
-        for (const item of data) {
-            if (item.value.parent_id === parent) {
-                result.push(getNode(item.value.id))
-            }
-        }
-        return result
-    };
+        </ChildrenContainer>
+    }
 }
 
 export default BulletedListBlock

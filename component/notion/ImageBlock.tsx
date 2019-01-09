@@ -1,6 +1,6 @@
 import * as React from 'react'
 import styled from "styled-components";
-import {IRecordValue} from "../../pages/api/notion";
+import {BlockValue} from "../../api/notion";
 import FigureCaptionNode from "./FigureCaptionNode";
 
 const Container = styled.div`
@@ -19,7 +19,7 @@ const Image = styled.img`
 `;
 
 interface IProps {
-    value: IRecordValue
+    value: BlockValue
 }
 
 interface IState {
@@ -32,8 +32,8 @@ class ImageBlock extends React.Component<IProps, IState> {
     }
 
     public render(): React.ReactNode {
-        const format = this.props.value.value.format;
-        const properties = this.props.value.value.properties;
+        const format = this.props.value.format;
+        const properties = this.props.value.properties;
 
         let imageNode = null;
         let captionNode = null;

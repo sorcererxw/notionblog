@@ -1,7 +1,7 @@
 import * as moment from 'moment';
 import * as React from 'react'
 import styled from "styled-components";
-import {IRecordValue} from "../../pages/api/notion";
+import {BlockValue} from "../../api/notion";
 
 const Container = styled.div`
   margin:32px 0;
@@ -19,7 +19,7 @@ const PubDate = styled.div`
 `;
 
 interface IProps {
-    value: IRecordValue
+    value: BlockValue
 }
 
 interface IState {
@@ -32,11 +32,11 @@ export default class PageHeaderBlock extends React.Component<IProps, IState> {
     }
 
     public render(): React.ReactNode {
-        const properties = this.props.value.value.properties;
+        const properties = this.props.value.properties;
         if (properties === undefined) {
             return null;
         }
-        const pubData = moment(this.props.value.value.created_time).format("YYYY-MM-DD");
+        const pubData = moment(this.props.value.created_time).format("YYYY-MM-DD");
         return <Container>
             <Title>{properties.title}</Title>
             <PubDate>{pubData}</PubDate>

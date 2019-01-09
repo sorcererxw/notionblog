@@ -1,8 +1,8 @@
 import * as React from 'react'
-import {IRecordValue} from "../../pages/api/notion";
+import {BlockValue} from "../../api/notion";
 
 interface IProps {
-    value: IRecordValue
+    value: BlockValue
 }
 
 interface IState {
@@ -15,7 +15,7 @@ class SubHeaderBlock extends React.Component<IProps, IState> {
     }
 
     public render(): React.ReactNode {
-        const properties = this.props.value.value.properties;
+        const properties = this.props.value.properties;
         if (properties === undefined) {
             return null;
         }

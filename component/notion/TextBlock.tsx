@@ -1,9 +1,9 @@
 import * as React from 'react'
-import {IRecordValue} from "../../pages/api/notion";
+import {BlockNode} from "../../api/notion";
 import StyleText from "../StyleText";
 
 interface IProps {
-    value: IRecordValue
+    value: BlockNode
 }
 
 interface IState {
@@ -16,14 +16,12 @@ class TextBlock extends React.Component<IProps, IState> {
     }
 
     public render(): React.ReactNode {
-        const properties = this.props.value.value.properties;
-        if (properties === undefined) {
+        const block = this.props.value;
+        const properties = block.value.properties;
+        if (properties === undefined || properties.title === undefined) {
             return null;
         }
-        if (properties.title === undefined) {
-            return null;
-        }
-        return <p>{
+        return <div>{
             properties.title.map((it, idx) => {
                 const value = it[0];
                 const textProperties = it[1];
@@ -58,7 +56,8 @@ class TextBlock extends React.Component<IProps, IState> {
                     link={link}
                     text={value}/>
             })
-        }</p>
+        }
+        </div>
     }
 }
 

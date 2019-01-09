@@ -1,9 +1,20 @@
 import * as React from 'react'
-import {IRecordValue} from "../../pages/api/notion";
+import styled from "styled-components";
+import {BlockNode} from "../../api/notion";
+import NotionBlock from "./BulletedListBlock";
 import TextBlock from "./TextBlock";
 
+const Container = styled.div`
+`;
+
+const ChildrenContainer = styled.div`
+    max-width: 100%;
+    box-sizing: border-box;
+    padding-right: 16px;
+`;
+
 interface IProps {
-    values: IRecordValue[]
+    value: BlockNode
 }
 
 interface IState {
@@ -16,15 +27,26 @@ class NumberedListBlock extends React.Component<IProps, IState> {
     }
 
     public render(): React.ReactNode {
-        return <ol>
+        return <Container>
+            {this.renderItself()}
+            {this.renderChildren()}
+        </Container>
+    }
+
+    private renderItself(): React.ReactNode {
+        return <span><TextBlock value={this.props.value}/></span>
+    }
+
+    private renderChildren(): React.ReactNode {
+        const blockChildren = this.props.value.children;
+        if (blockChildren.length === 0) {
+            return null;
+        }
+        return <ChildrenContainer>
             {
-                this.props.values.map((it, idx) =>
-                    <li key={idx}>
-                        <TextBlock value={it}/>
-                    </li>
-                )
+                blockChildren.map((v, k) => <NotionBlock key={k} value={v}/>)
             }
-        </ol>
+        </ChildrenContainer>
     }
 }
 

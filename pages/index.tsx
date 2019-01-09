@@ -2,8 +2,10 @@ import * as React from 'react';
 import styled from "styled-components";
 import '../style/index.css';
 import AppLayout from "../component/AppLayout";
-import {getDisplayBlockId, IRecordValue, loadFullPageChunk} from "./api/notion";
+import {getDisplayBlockId, RecordValue, loadFullPageChunk} from "../api/notion";
 import * as moment from 'moment';
+import blogConfig from '../blog.config'
+import MetaHead from "../component/MetaHead";
 
 const Content = styled.div`
   width: 768px;
@@ -25,7 +27,7 @@ const PubDate = styled.span`
 `;
 
 interface IProps {
-    data: IRecordValue[]
+    data: RecordValue[]
 }
 
 interface IState {
@@ -35,11 +37,9 @@ const PostLink = (props: { page: string, title: string }) => (
     <a href={`/post/${props.page}`}> {props.title}</a>
 );
 
-const pageId = "ba8f1c3a528043a995c3149cefff4c18";
-
 class Index extends React.Component<IProps, IState> {
     static async getInitialProps() {
-        const list = await loadFullPageChunk(pageId);
+        const list = await loadFullPageChunk(blogConfig.blog_archive_page_id);
         return {
             data: list.filter((it) => it.value.type === 'page').slice(1)
         }
@@ -48,13 +48,16 @@ class Index extends React.Component<IProps, IState> {
     public render(): React.ReactNode {
 
         return (
-            <AppLayout>
-                <Content>
-                    <Panel>
-                        {this.renderList()}
-                    </Panel>
-                </Content>
-            </AppLayout>
+            <div>
+                <MetaHead/>
+                <AppLayout>
+                    <Content>
+                        <Panel>
+                            {this.renderList()}
+                        </Panel>
+                    </Content>
+                </AppLayout>
+            </div>
         );
     }
 

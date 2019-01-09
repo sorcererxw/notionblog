@@ -1,8 +1,8 @@
 import * as React from 'react'
-import {IRecordValue} from "../../pages/api/notion";
+import {BlockValue} from "../../api/notion";
 
 interface IProps {
-    value: IRecordValue
+    value: BlockValue
 }
 
 interface IState {

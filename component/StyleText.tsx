@@ -8,10 +8,11 @@ const Italic = styled.i`
 `;
 
 const Highlight = styled.code`
-  background:#d7d9db;
+  background: rgba(0,0,0,.05);
   line-height: normal;
   font-size: 0.95em;
-  padding: 0 0.4em;
+  margin: 0 2px;
+  padding: 3px 4px;
   border-radius: 3px; 
 `;
 

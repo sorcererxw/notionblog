@@ -1,13 +1,14 @@
 import * as React from 'react'
 import SyntaxHighlighter, {} from 'react-syntax-highlighter';
 import styled from "styled-components";
-import {IRecordValue} from "../../pages/api/notion";
+import {BlockValue} from "../../api/notion";
 
 const Container = styled.div`
     margin: 16px 0;
     width: 100%;
     background: rgb(242, 241, 238);
     padding: 16px;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
 `;
@@ -31,7 +32,7 @@ const LanguageLabel = styled.code`
 `;
 
 interface IProps {
-    value: IRecordValue
+    value: BlockValue
 }
 
 interface IState {
@@ -44,7 +45,7 @@ class CodeBlock extends React.Component<IProps, IState> {
     }
 
     public render(): React.ReactNode {
-        const properties = this.props.value.value.properties;
+        const properties = this.props.value.properties;
         if (properties === undefined) {
             return null;
         }

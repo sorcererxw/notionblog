@@ -1,6 +1,6 @@
 import * as React from 'react'
 import styled from "styled-components";
-import {IRecordValue} from "../../pages/api/notion";
+import {BlockNode} from "../../api/notion";
 import TextBlock from "./TextBlock";
 
 const Container = styled.div`
@@ -14,7 +14,7 @@ const Quote = styled.blockquote`
 `;
 
 interface IProps {
-    value: IRecordValue
+    value: BlockNode
 }
 
 interface IState {
