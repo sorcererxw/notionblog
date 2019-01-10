@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from "styled-components";
 import AppLayout from "../component/AppLayout";
 import MetaHead from "../component/MetaHead";
-import NotionBlock from "../component/notion/NotionBlock";
+import NotionBlockList from "../component/notion/base/NotionBlockList";
 import PageHeaderBlock from "../component/notion/PageHeaderBlock";
 import {loadFullPageChunk, recordListToTree, BlockNode} from "../api/notion";
 import Disqus from 'disqus-react';
@@ -90,8 +90,7 @@ export default class Post extends React.Component<IProps, IState> {
 
     private renderPage(): React.ReactNode {
         const blockData = this.props.data[0].children;
-        const content = blockData.map((v, k) => <NotionBlock block={v} key={k}/>);
-        return <div>{content}</div>;
+        return <div><NotionBlockList blocks={blockData}/></div>;
     }
 
     private renderComment(): React.ReactNode {

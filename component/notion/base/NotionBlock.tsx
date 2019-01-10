@@ -1,18 +1,19 @@
 import * as React from 'react'
 import styled from "styled-components";
-import {BlockNode} from "../../api/notion";
-import BulletedListBlock from "./list/BulletedListBlock";
-import CodeBlock from "./CodeBlock";
-import CollectionViewBlock from "./CollectionViewBlock";
-import ColumnBlock from "./column/ColumnBlock";
-import ColumnListBlock from "./column/ColumnListBlock";
-import DividerBlock from "./DividerBlock";
-import HeaderBlock from "./header/HeaderBlock";
-import ImageBlock from "./figure/ImageBlock";
-import QuoteBlock from "./QuoteBlock";
-import SubHeaderBlock from "./header/SubHeaderBlock";
-import TextBlock from "./TextBlock";
-import VideoBlock from "./figure/VideoBlock";
+import {BlockNode} from "../../../api/notion";
+import BulletedListBlock from "../list/BulletedListBlock";
+import CodeBlock from "../CodeBlock";
+import CollectionViewBlock from "../CollectionViewBlock";
+import ColumnBlock from "../column/ColumnBlock";
+import ColumnListBlock from "../column/ColumnListBlock";
+import DividerBlock from "../DividerBlock";
+import HeaderBlock from "../header/HeaderBlock";
+import ImageBlock from "../figure/ImageBlock";
+import NumberedListBlock from "../list/NumberedListBlock";
+import QuoteBlock from "../QuoteBlock";
+import SubHeaderBlock from "../header/SubHeaderBlock";
+import TextBlock from "../TextBlock";
+import VideoBlock from "../figure/VideoBlock";
 
 const Container = styled.div`
   width: 100%;
@@ -24,13 +25,18 @@ const Container = styled.div`
 `;
 
 interface IProps {
-    block: BlockNode
+    block: BlockNode,
+    indexOfSameType: number
 }
 
 interface IState {
 }
 
 class NotionBlock extends React.Component<IProps, IState> {
+    static defaultProps = {
+        indexOfSameType: 1
+    };
+
     constructor(props: any) {
         super(props);
     }
@@ -63,7 +69,7 @@ class NotionBlock extends React.Component<IProps, IState> {
         } else if (type === 'bulleted_list') {
             return <BulletedListBlock value={block}/>;
         } else if (type === "numbered_list") {
-            return <BulletedListBlock value={block}/>;
+            return <NumberedListBlock index={this.props.indexOfSameType} value={block}/>;
         } else if (type === "column_list") {
             return <ColumnListBlock block={block}/>
         } else if (type === "column") {
