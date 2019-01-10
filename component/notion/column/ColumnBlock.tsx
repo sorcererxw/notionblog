@@ -1,7 +1,7 @@
 import * as React from 'react'
 import styled from "styled-components";
 import {BlockNode} from "../../../api/notion";
-import NotionBlock from "../NotionBlock";
+import NotionBlockList from "../base/NotionBlockList";
 
 const Container = styled.div`
   width: 100%;
@@ -22,9 +22,7 @@ class ColumnBlock extends React.Component<Props, {}> {
 
     public render(): React.ReactNode {
         return <Container>
-            {
-                this.props.block.children.map((v, k) => <NotionBlock block={v} key={k}/>)
-            }
+            <NotionBlockList blocks={this.props.block.children}/>
         </Container>
     }
 }
