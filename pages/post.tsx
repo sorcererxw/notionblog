@@ -31,7 +31,7 @@ export default class Post extends React.Component<IProps, IState> {
     static async getInitialProps({query}) {
         const pageId = query.block;
         return {
-            data: recordListToTree(await loadFullPageChunk(pageId))[0].children
+            data: recordListToTree(await loadFullPageChunk(pageId))
         }
     }
 
@@ -45,7 +45,6 @@ export default class Post extends React.Component<IProps, IState> {
             <MetaHead title={this.getTitle()}/>
             <AppLayout>
                 <Content>
-
                     {this.renderCover()}
                     {this.renderTitle()}
                     {this.renderPage()}

@@ -1,5 +1,11 @@
 import * as React from 'react'
-import {BlockValue} from "../../api/notion";
+import styled from "styled-components";
+import {BlockValue} from "../../../api/notion";
+
+const Subheader = styled.h3`
+   font-size: 24px;
+   margin: 0;
+`;
 
 interface IProps {
     value: BlockValue
@@ -19,7 +25,7 @@ class SubHeaderBlock extends React.Component<IProps, IState> {
         if (properties === undefined) {
             return null;
         }
-        return <h3>{properties.title}</h3>
+        return <Subheader>{properties.title}</Subheader>
     }
 }
 

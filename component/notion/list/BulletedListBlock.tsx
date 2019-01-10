@@ -1,8 +1,8 @@
 import * as React from 'react'
 import styled from "styled-components";
-import {BlockNode} from "../../api/notion";
-import NotionBlock from "./NotionBlock";
-import TextBlock from "./TextBlock";
+import {BlockNode} from "../../../api/notion";
+import NotionBlock from "../NotionBlock";
+import TextBlock from "../TextBlock";
 
 const Container = styled.div`
   display: flex;
@@ -13,7 +13,10 @@ const Container = styled.div`
   padding-left: 2px; 
 `;
 
-const Content = styled.div``;
+const Content = styled.div`
+  width: 100%;
+  box-sizing: border-box;
+`;
 
 const SymbolContainer = styled.div`
   display: flex;

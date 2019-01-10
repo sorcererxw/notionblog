@@ -1,8 +1,8 @@
 import * as React from 'react'
 import styled from "styled-components";
-import {BlockNode} from "../../api/notion";
+import {BlockNode} from "../../../api/notion";
 import NotionBlock from "./BulletedListBlock";
-import TextBlock from "./TextBlock";
+import TextBlock from "../TextBlock";
 
 const Container = styled.div`
 `;

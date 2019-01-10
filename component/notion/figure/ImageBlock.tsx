@@ -1,7 +1,7 @@
 import * as React from 'react'
 import styled from "styled-components";
-import {BlockValue} from "../../api/notion";
-import FigureCaptionNode from "./FigureCaptionNode";
+import {BlockValue} from "../../../api/notion";
+import FigureCaptionNode from "../FigureCaptionNode";
 
 const Container = styled.div`
   width: 100%;
