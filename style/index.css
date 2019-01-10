@@ -12,3 +12,8 @@ code {
 a {
     color: inherit;
 }
+
+.VideoFrame {
+    width: 100%;
+    max-width: 100%;
+}

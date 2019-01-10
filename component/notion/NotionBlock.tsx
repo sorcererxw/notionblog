@@ -4,6 +4,8 @@ import {BlockNode} from "../../api/notion";
 import BulletedListBlock from "./BulletedListBlock";
 import CodeBlock from "./CodeBlock";
 import CollectionViewBlock from "./CollectionViewBlock";
+import ColumnBlock from "./ColumnBlock";
+import ColumnListBlock from "./ColumnListBlock";
 import DividerBlock from "./DividerBlock";
 import HeaderBlock from "./HeaderBlock";
 import ImageBlock from "./ImageBlock";
@@ -61,6 +63,10 @@ class NotionBlock extends React.Component<IProps, IState> {
             return <BulletedListBlock value={block}/>;
         } else if (type === "numbered_list") {
             return <BulletedListBlock value={block}/>;
+        } else if (type === "column_list") {
+            return <ColumnListBlock block={block}/>
+        } else if (type === "column") {
+            return <ColumnBlock block={block}/>
         }
         return null;
     }

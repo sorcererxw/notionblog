@@ -5,10 +5,12 @@ import {BlockValue} from "../../api/notion";
 import FigureCaptionNode from "./FigureCaptionNode";
 
 const Container = styled.div`
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
+  max-width: 100%;
   justify-content: center;
 `;
 
@@ -41,6 +43,7 @@ class VideoBlock extends React.Component<IProps, IState> {
             };
             videoNode = <YouTube
                 opts={option}
+                className={"VideoFrame"}
                 videoId={this.getYoutubeId(format.display_source)}/>
         }
         if (properties !== undefined && properties.caption !== undefined) {
