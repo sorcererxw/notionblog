@@ -1,20 +1,15 @@
-// import axios, {AxiosPromise} from 'axios'
-
 const fetch = require("node-fetch");
-
 const BASE_URL = "https://www.notion.so/api/v3";
 
-// const client = axios.create({
-//     baseURL: BASE_URL,
-//     headers: {
-//         'Content-Type': 'application/json'
-//     },
-//     timeout: 1000 * 60
-//     // proxy: {
-//     //     host: '127.0.0.1',
-//     //     port: 1080
-//     // }
-// });
+function post<T>(url: string, data: object): Promise<T> {
+    return fetch(`${BASE_URL}${url}`,
+        {
+            body: JSON.stringify(data),
+            headers: {'content-type': 'application/json'},
+            method: 'POST',
+        }
+    ).then(res => res.json())
+}
 
 export interface BlockFormat {
     page_cover: string,
@@ -25,14 +20,16 @@ export interface BlockFormat {
     block_preserve_scale: boolean
     block_width: number,
     block_height: number,
-    display_source: string
+    display_source: string,
+    column_ratio: number
 }
 
 export interface BlockProperties {
     caption: any[],
     language: string[],
     title: any[],
-    source: string[]
+    source: string[],
+    "{JfZ": string[], // publish
 }
 
 export interface BlockValue {
@@ -50,6 +47,7 @@ export interface BlockValue {
 }
 
 export interface RecordValue {
+    role: string,
     value: BlockValue
 }
 
@@ -68,8 +66,23 @@ export interface PageChunk {
     }
 }
 
+export interface Collection {
+    recordMap: {
+        block: {
+            [blockId: string]: RecordValue
+        },
+        collection: {},
+        collection_view: {}
+    }
+    result: {
+        blockIds: string[],
+        total: number,
+        type: string
+    }
+}
+
 export function getRecordValues(
-    ...blockIds: string[]
+    blockIds: string[]
 ): Promise<RecordValues> {
     const data = {
         requests: blockIds.map(blockId => {
@@ -79,11 +92,7 @@ export function getRecordValues(
             }
         })
     };
-    return fetch(`${BASE_URL}/getRecordValues`, {
-        body: JSON.stringify(data),
-        headers: {'content-type': 'application/json'},
-        method: 'POST',
-    }).then(res => res.json())
+    return post<RecordValues>("/getRecordValues", data);
 }
 
 export function loadPageChunk(
@@ -95,11 +104,7 @@ export function loadPageChunk(
         pageId: getFullBlockId(pageId),
         verticalColumns: false
     };
-    return fetch(`${BASE_URL}/loadPageChunk`, {
-        body: JSON.stringify(data),
-        headers: {'content-type': 'application/json'},
-        method: 'POST',
-    }).then(res => res.json())
+    return post<PageChunk>("/loadPageChunk", data)
 }
 
 export const loadFullPageChunk = async (pageId: string): Promise<RecordValue[]> => {
@@ -119,6 +124,17 @@ export const loadFullPageChunk = async (pageId: string): Promise<RecordValue[]> 
         cursor = pageChunk.cursor;
     } while (cursor.stack.length > 0);
     return result
+};
+
+export const loadTable = async (collectionId: string, collectionViewId: string): Promise<Collection> => {
+    const data = {
+        collectionId: collectionId,
+        collectionViewId: collectionViewId,
+        loader: {
+            type: 'table'
+        }
+    };
+    return post<Collection>("/queryCollection", data)
 };
 
 interface DicNode {

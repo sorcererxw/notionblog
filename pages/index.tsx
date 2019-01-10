@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from "styled-components";
 import '../style/index.css';
 import AppLayout from "../component/AppLayout";
-import {getDisplayBlockId, RecordValue, loadFullPageChunk} from "../api/notion";
+import {getDisplayBlockId, Collection, loadTable, BlockValue} from "../api/notion";
 import * as moment from 'moment';
 import blogConfig from '../blog.config'
 import MetaHead from "../component/MetaHead";
@@ -27,7 +27,8 @@ const PubDate = styled.span`
 `;
 
 interface IProps {
-    data: RecordValue[]
+    data: BlockValue[],
+    table: Collection
 }
 
 interface IState {
@@ -39,14 +40,24 @@ const PostLink = (props: { page: string, title: string }) => (
 
 class Index extends React.Component<IProps, IState> {
     static async getInitialProps() {
-        const list = await loadFullPageChunk(blogConfig.blog_archive_page_id);
+        const table = await loadTable(blogConfig.blog_table_id, blogConfig.blog_table_view_id);
+        const data = table.result.blockIds
+            .map(id => table.recordMap.block[id])
+            .filter(it => it.value !== undefined
+                && it.value.properties !== undefined
+                && it.value.properties["{JfZ"] !== undefined
+                && it.value.properties["{JfZ"].length > 0)
+            .map(it=>it.value);
+
         return {
-            data: list.filter((it) => it.value.type === 'page').slice(1)
+            table: table,
+            data: data
         }
     }
 
     public render(): React.ReactNode {
-
+        console.log(this.props.table);
+        console.log(this.props.data);
         return (
             <div>
                 <MetaHead/>
@@ -64,13 +75,13 @@ class Index extends React.Component<IProps, IState> {
 
     private renderList(): React.ReactNode {
         const list = this.props.data.map((it, idx) => {
-            if (it.value.properties === undefined) {
+            if (it.properties === undefined) {
                 return null
             }
-            const date = moment(it.value.created_time).format("YYYY-MM-DD");
+            const date = moment(it.created_time).format("YYYY-MM-DD");
             return <PostItem key={idx}>
                 <PubDate>{date}</PubDate>
-                <PostLink page={getDisplayBlockId(it.value.id)} title={it.value.properties.title[0]}/>
+                <PostLink page={getDisplayBlockId(it.id)} title={it.properties.title[0]}/>
             </PostItem>
         });
 
