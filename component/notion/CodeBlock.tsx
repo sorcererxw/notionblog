@@ -6,6 +6,7 @@ import {BlockValue} from "../../api/notion";
 const Container = styled.div`
     margin: 16px 0;
     width: 100%;
+    max-width: 100%;
     background: rgb(242, 241, 238);
     padding: 16px;
     box-sizing: border-box;
@@ -54,6 +55,9 @@ class CodeBlock extends React.Component<IProps, IState> {
 
         return <Container>
             <SyntaxHighlighter
+                customStyle={{
+                    padding: 4
+                }}
                 PreTag={Pre}
                 CodeTag={Code}
                 children={codeText}/>

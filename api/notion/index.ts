@@ -28,8 +28,7 @@ export interface BlockProperties {
     caption: any[],
     language: string[],
     title: any[],
-    source: string[],
-    "{JfZ": string[], // publish
+    source: string[]
 }
 
 export interface BlockValue {
@@ -43,7 +42,8 @@ export interface BlockValue {
     last_edited_time: number,
     parent_id: string,
     parent_table: string,
-    alive: boolean
+    alive: boolean,
+    query: object
 }
 
 export interface RecordValue {
@@ -55,25 +55,27 @@ export interface RecordValues {
     results: RecordValue[]
 }
 
+export interface RecordMap {
+    block: {
+        [blockId: string]: RecordValue
+    },
+    collection: {
+        [blockId: string]: RecordValue
+    },
+    collection_view: {
+        [blockId: string]: RecordValue
+    }
+}
+
 export interface PageChunk {
     cursor: {
         stack: []
     }
-    recordMap: {
-        block: {
-            [blockId: string]: RecordValue
-        }
-    }
+    recordMap: RecordMap
 }
 
 export interface Collection {
-    recordMap: {
-        block: {
-            [blockId: string]: RecordValue
-        },
-        collection: {},
-        collection_view: {}
-    }
+    recordMap: RecordMap
     result: {
         blockIds: string[],
         total: number,
@@ -126,15 +128,33 @@ export const loadFullPageChunk = async (pageId: string): Promise<RecordValue[]> 
     return result
 };
 
-export const loadTable = async (collectionId: string, collectionViewId: string): Promise<Collection> => {
+export const loadTable = (collectionId: string, collectionViewId: string, query = undefined): Promise<Collection> => {
     const data = {
-        collectionId: collectionId,
-        collectionViewId: collectionViewId,
+        collectionId: getFullBlockId(collectionId),
+        collectionViewId: getFullBlockId(collectionViewId),
         loader: {
             type: 'table'
-        }
+        },
+        query: query
     };
     return post<Collection>("/queryCollection", data)
+};
+
+export const loadTablePageBlocks = async (collectionId: string, collectionViewId: string): Promise<RecordValue[]> => {
+    const pageChunkValues = await loadPageChunk(collectionId, 100);
+    const tableView = pageChunkValues.recordMap.collection_view[collectionViewId];
+    let collection;
+    for (let c in pageChunkValues.recordMap.collection) {
+        collection = pageChunkValues.recordMap.collection[c];
+    }
+    console.log(collection);
+    const queryResult = await loadTable(
+        collection.value.id,
+        collectionViewId,
+        tableView.value.query);
+    console.log(tableView.value.query);
+    return queryResult.result.blockIds
+        .map(id => queryResult.recordMap.block[id]);
 };
 
 interface DicNode {

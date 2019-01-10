@@ -1,25 +1,26 @@
 import * as React from 'react'
 import styled from "styled-components";
 import {BlockNode} from "../../api/notion";
-import BulletedListBlock from "./BulletedListBlock";
+import BulletedListBlock from "./list/BulletedListBlock";
 import CodeBlock from "./CodeBlock";
 import CollectionViewBlock from "./CollectionViewBlock";
-import ColumnBlock from "./ColumnBlock";
-import ColumnListBlock from "./ColumnListBlock";
+import ColumnBlock from "./column/ColumnBlock";
+import ColumnListBlock from "./column/ColumnListBlock";
 import DividerBlock from "./DividerBlock";
-import HeaderBlock from "./HeaderBlock";
-import ImageBlock from "./ImageBlock";
+import HeaderBlock from "./header/HeaderBlock";
+import ImageBlock from "./figure/ImageBlock";
 import QuoteBlock from "./QuoteBlock";
-import SubHeaderBlock from "./SubHeaderBlock";
+import SubHeaderBlock from "./header/SubHeaderBlock";
 import TextBlock from "./TextBlock";
-import VideoBlock from "./VideoBlock";
+import VideoBlock from "./figure/VideoBlock";
 
 const Container = styled.div`
   width: 100%;
   line-height: 1.5;
-  font-size: 16px;
+  font-size: 18px;
   box-sizing: border-box;
   margin: 1px 0;
+  padding-top: 16px;
 `;
 
 interface IProps {

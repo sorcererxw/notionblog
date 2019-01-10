@@ -19,7 +19,8 @@
     "axios": "^0.18.0",
     "moment": "^2.23.0",
     "disqus-react": "^1.0.5",
-    "cjkspace": "^0.0.3"
+    "cjkspace": "^0.0.3",
+    "han-css": "^3.3.0"
   },
   "devDependencies": {
     "@types/jest": "^23.3.11",

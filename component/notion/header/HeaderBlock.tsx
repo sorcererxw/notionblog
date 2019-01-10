@@ -1,5 +1,11 @@
 import * as React from 'react'
-import {BlockNode} from "../../api/notion";
+import styled from "styled-components";
+import {BlockNode} from "../../../api/notion";
+
+const Header = styled.h2`
+  font-size: 32px;
+  margin: 0;
+`;
 
 interface IProps {
     value: BlockNode
@@ -19,7 +25,7 @@ class HeaderBlock extends React.Component<IProps, IState> {
         if (properties === undefined) {
             return null;
         }
-        return <h2>{properties.title}</h2>
+        return <Header>{properties.title}</Header>
     }
 }
 

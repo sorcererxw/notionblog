@@ -1,7 +1,7 @@
 import * as React from 'react'
 import styled from "styled-components";
-import {BlockNode} from "../../api/notion";
-import NotionBlock from "./NotionBlock";
+import {BlockNode} from "../../../api/notion";
+import NotionBlock from "../NotionBlock";
 
 const Container = styled.div`
   width: 100%;

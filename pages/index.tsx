@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from "styled-components";
 import '../style/index.css';
 import AppLayout from "../component/AppLayout";
-import {getDisplayBlockId, Collection, loadTable, BlockValue} from "../api/notion";
+import {getDisplayBlockId, Collection, loadTable, BlockValue, loadTablePageBlocks} from "../api/notion";
 import * as moment from 'moment';
 import blogConfig from '../blog.config'
 import MetaHead from "../component/MetaHead";
@@ -13,17 +13,30 @@ const Content = styled.div`
   margin: auto;
 `;
 
+const ItemTitle = styled.a`
+  font-weight: 600;
+  font-size: 18px;
+  max-width: 50%;
+  text-decoration-line: none;
+`;
+
 const Panel = styled.div`
   margin: 3em 0;
 `;
 
 const PostItem = styled.div`
-    margin: 8px 0;
+    margin: 16px 0;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
 `;
 
 const PubDate = styled.span`
-   color:#666;
-   margin-right: 2em;
+   color:rgb(187, 187, 187);
+   font-size: 18px;
+   font-weight: 500;
 `;
 
 interface IProps {
@@ -35,23 +48,17 @@ interface IState {
 }
 
 const PostLink = (props: { page: string, title: string }) => (
-    <a href={`/post/${props.page}`}> {props.title}</a>
+    <ItemTitle href={`/post/${props.page}`}> {props.title}</ItemTitle>
 );
 
 class Index extends React.Component<IProps, IState> {
     static async getInitialProps() {
-        const table = await loadTable(blogConfig.blog_table_id, blogConfig.blog_table_view_id);
-        const data = table.result.blockIds
-            .map(id => table.recordMap.block[id])
-            .filter(it => it.value !== undefined
-                && it.value.properties !== undefined
-                && it.value.properties["{JfZ"] !== undefined
-                && it.value.properties["{JfZ"].length > 0)
-            .map(it=>it.value);
+        const table = await loadTable(blogConfig.blog_table_page_id, blogConfig.blog_table_view_id);
+        const data = await loadTablePageBlocks(blogConfig.blog_table_page_id, blogConfig.blog_table_view_id);
 
         return {
             table: table,
-            data: data
+            data: data.map(it => it.value)
         }
     }
 
@@ -78,10 +85,11 @@ class Index extends React.Component<IProps, IState> {
             if (it.properties === undefined) {
                 return null
             }
-            const date = moment(it.created_time).format("YYYY-MM-DD");
+            const date = moment(it.created_time).format("MMM DD, YYYY");
             return <PostItem key={idx}>
-                <PubDate>{date}</PubDate>
                 <PostLink page={getDisplayBlockId(it.id)} title={it.properties.title[0]}/>
+                <div style={{flex: 1}}/>
+                <PubDate>{date}</PubDate>
             </PostItem>
         });
 
