@@ -48,7 +48,6 @@ export default class Post extends React.Component<IProps, IState> {
                     {this.renderCover()}
                     {this.renderTitle()}
                     {this.renderPage()}
-                    {this.renderComment()}
                 </Content>
             </AppLayout>
         </div>

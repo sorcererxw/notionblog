@@ -1,7 +1,6 @@
-import * as moment from 'moment';
 import * as React from 'react'
 import styled from "styled-components";
-import {BlockValue} from "../../api/notion";
+import {BlockValue, getDate} from "../../api/notion";
 
 const Container = styled.div`
   margin:16px 0;
@@ -15,12 +14,13 @@ const Title = styled.h1`
 `;
 
 const MetaContainer = styled.div`
-  margin: 8px 0;
+  margin: 4px 0;
 `;
 
 const PubDate = styled.div`
   font-size: 16px;
   color: rgba(0,0,0,.54);
+  font-weight: 600;
   line-height: 1.2;
 `;
 
@@ -42,11 +42,11 @@ export default class PageHeaderBlock extends React.Component<IProps, IState> {
         if (properties === undefined) {
             return null;
         }
-        const pubData = moment(this.props.value.created_time).format("YYYY-MM-DD");
+        const pubData = getDate(this.props.value);
         return <Container>
             <Title>{properties.title}</Title>
             <MetaContainer>
-                <PubDate>发布于 {pubData}</PubDate>
+                <PubDate>{pubData}</PubDate>
             </MetaContainer>
         </Container>
     }

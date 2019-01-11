@@ -4,6 +4,11 @@
     "@zeit/next-typescript/babel"
   ],
   "plugins": [
-    "styled-components"
+    [
+      "styled-components",
+      {
+        "ssr": true
+      }
+    ]
   ]
 }
