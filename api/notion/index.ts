@@ -31,6 +31,12 @@ export interface BlockProperties {
     source: string[]
 }
 
+export interface SchemeValue {
+    name: string,
+    type: string,
+    options: []
+}
+
 export interface BlockValue {
     id: string,
     content: string[]
@@ -43,7 +49,10 @@ export interface BlockValue {
     parent_id: string,
     parent_table: string,
     alive: boolean,
-    query: object
+    query: object,
+    schema: {
+        [schemeId: string]: SchemeValue
+    }
 }
 
 export interface RecordValue {
@@ -140,21 +149,32 @@ export const loadTable = (collectionId: string, collectionViewId: string, query 
     return post<Collection>("/queryCollection", data)
 };
 
-export const loadTablePageBlocks = async (collectionId: string, collectionViewId: string): Promise<RecordValue[]> => {
+export const loadTablePageBlocks = async (collectionId: string, collectionViewId: string): Promise<Collection> => {
     const pageChunkValues = await loadPageChunk(collectionId, 100);
     const tableView = pageChunkValues.recordMap.collection_view[collectionViewId];
     let collection;
     for (let c in pageChunkValues.recordMap.collection) {
         collection = pageChunkValues.recordMap.collection[c];
     }
-    console.log(collection);
     const queryResult = await loadTable(
         collection.value.id,
         collectionViewId,
         tableView.value.query);
-    console.log(tableView.value.query);
-    return queryResult.result.blockIds
-        .map(id => queryResult.recordMap.block[id]);
+    return queryResult
+};
+
+export const loadTablePageRecoard = async (collectionId: string, collectionViewId: string): Promise<RecordMap> => {
+    const pageChunkValues = await loadPageChunk(collectionId, 100);
+    const tableView = pageChunkValues.recordMap.collection_view[collectionViewId];
+    let collection;
+    for (let c in pageChunkValues.recordMap.collection) {
+        collection = pageChunkValues.recordMap.collection[c];
+    }
+    const queryResult = await loadTable(
+        collection.value.id,
+        collectionViewId,
+        tableView.value.query);
+    return queryResult.recordMap
 };
 
 interface DicNode {
