@@ -1,3 +1,5 @@
+import * as moment from 'moment';
+
 const fetch = require("node-fetch");
 const BASE_URL = "https://www.notion.so/api/v3";
 
@@ -263,4 +265,30 @@ export function getDisplayBlockId(blockId: string): string {
     } else {
         return blockId
     }
+}
+
+export function getDate(value: BlockValue): string {
+    const format = "MMM DD, YYYY";
+    let date = moment(value.created_time).format(format);
+    const properties = value.properties;
+    if (properties !== undefined) {
+        const dateValue = properties[",n,\""];
+        if (dateValue !== undefined) {
+            const dateString = dateValue[0][1][0][1]['start_date'];
+            date = moment(dateString, "YYYY-MM-DD").format(format);
+        }
+    }
+    return date;
+}
+
+export function getTags(value: BlockValue): string[] {
+    let result = [];
+    const properties = value.properties;
+    if (properties !== undefined) {
+        const tagValue = properties["X<$7"];
+        if (tagValue !== undefined && tagValue.length > 0) {
+            result = tagValue[0][0].split(",");
+        }
+    }
+    return result;
 }

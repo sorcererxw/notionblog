@@ -6,9 +6,8 @@ import {
     getDisplayBlockId,
     BlockValue,
     loadTablePageBlocks,
-    SchemeValue, RecordValue
+    SchemeValue, RecordValue, getDate, getTags
 } from "../api/notion";
-import * as moment from 'moment';
 import blogConfig from '../blog.config'
 import MetaHead from "../component/MetaHead";
 
@@ -120,12 +119,7 @@ class Index extends React.Component<IProps, IState> {
             if (properties === undefined) {
                 return null
             }
-            let date = moment(it.created_time).format("MMM DD, YYYY");
-            const dateValue = properties[",n,\""];
-            if (dateValue !== undefined) {
-                const dateString = dateValue[0][1][0][1]['start_date'];
-                date = moment(dateString, "YYYY-MM-DD").format("MMM DD, YYYY");
-            }
+            let date = getDate(it);
 
             const titleBar = <ItemTitleBar>
                 <PostLink page={getDisplayBlockId(it.id)} title={it.properties.title[0]}/>
@@ -134,9 +128,8 @@ class Index extends React.Component<IProps, IState> {
             </ItemTitleBar>;
 
             let tagBar = null;
-            const tagValue = properties["X<$7"];
-            if (tagValue !== undefined && tagValue.length > 0) {
-                const tagItems = tagValue[0][0].split(",");
+            const tagItems = getTags(it);
+            if (tagItems.length > 0) {
                 tagBar = <ItemTagBar>
                     {tagItems.map((v, k) => <Tag key={k}>{v}</Tag>)}
                 </ItemTagBar>;
