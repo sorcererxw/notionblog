@@ -2,7 +2,12 @@ import * as React from 'react';
 import styled from "styled-components";
 import '../style/index.css';
 import AppLayout from "../component/AppLayout";
-import {getDisplayBlockId, Collection, loadTable, BlockValue, loadTablePageBlocks} from "../api/notion";
+import {
+    getDisplayBlockId,
+    BlockValue,
+    loadTablePageBlocks,
+    SchemeValue, RecordValue
+} from "../api/notion";
 import * as moment from 'moment';
 import blogConfig from '../blog.config'
 import MetaHead from "../component/MetaHead";
@@ -25,12 +30,38 @@ const Panel = styled.div`
 `;
 
 const PostItem = styled.div`
-    margin: 16px 0;
+    margin: 36px 0;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
+`;
+
+const ItemTitleBar = styled.div`
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    max-width: 100%;
+    box-sizing: border-box;
+`;
+
+const ItemTagBar = styled.div`
+  margin-top: 4px;
+  display: flex;
+  flex-direction: row;
+`;
+
+const Tag = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-right: 8px;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  text-align: center;
+  color:rgb(187, 187, 187);
+  align-self: baseline;
 `;
 
 const PubDate = styled.span`
@@ -41,7 +72,7 @@ const PubDate = styled.span`
 
 interface IProps {
     data: BlockValue[],
-    table: Collection
+    scheme: SchemeValue[]
 }
 
 interface IState {
@@ -53,18 +84,21 @@ const PostLink = (props: { page: string, title: string }) => (
 
 class Index extends React.Component<IProps, IState> {
     static async getInitialProps() {
-        const table = await loadTable(blogConfig.blog_table_page_id, blogConfig.blog_table_view_id);
-        const data = await loadTablePageBlocks(blogConfig.blog_table_page_id, blogConfig.blog_table_view_id);
-
+        const result = await loadTablePageBlocks(blogConfig.blog_table_page_id, blogConfig.blog_table_view_id);
+        let collection: RecordValue;
+        for (let key in result.recordMap.collection) {
+            collection = result.recordMap.collection[key];
+            break;
+        }
         return {
-            table: table,
-            data: data.map(it => it.value)
+            scheme: collection.value.schema,
+            data: result.result.blockIds.map(it => result.recordMap.block[it].value)
         }
     }
 
     public render(): React.ReactNode {
-        console.log(this.props.table);
         console.log(this.props.data);
+        console.log(this.props.scheme);
         return (
             <div>
                 <MetaHead/>
@@ -82,14 +116,35 @@ class Index extends React.Component<IProps, IState> {
 
     private renderList(): React.ReactNode {
         const list = this.props.data.map((it, idx) => {
-            if (it.properties === undefined) {
+            const properties = it.properties;
+            if (properties === undefined) {
                 return null
             }
-            const date = moment(it.created_time).format("MMM DD, YYYY");
-            return <PostItem key={idx}>
+            let date = moment(it.created_time).format("MMM DD, YYYY");
+            const dateValue = properties[",n,\""];
+            if (dateValue !== undefined) {
+                const dateString = dateValue[0][1][0][1]['start_date'];
+                date = moment(dateString, "YYYY-MM-DD").format("MMM DD, YYYY");
+            }
+
+            const titleBar = <ItemTitleBar>
                 <PostLink page={getDisplayBlockId(it.id)} title={it.properties.title[0]}/>
                 <div style={{flex: 1}}/>
                 <PubDate>{date}</PubDate>
+            </ItemTitleBar>;
+
+            let tagBar = null;
+            const tagValue = properties["X<$7"];
+            if (tagValue !== undefined && tagValue.length > 0) {
+                const tagItems = tagValue[0][0].split(",");
+                tagBar = <ItemTagBar>
+                    {tagItems.map((v, k) => <Tag key={k}>{v}</Tag>)}
+                </ItemTagBar>;
+            }
+
+            return <PostItem key={idx}>
+                {titleBar}
+                {tagBar}
             </PostItem>
         });
 
