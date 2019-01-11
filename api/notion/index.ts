@@ -1,7 +1,8 @@
 import * as moment from 'moment';
 
 const fetch = require("node-fetch");
-const BASE_URL = "https://www.notion.so/api/v3";
+// const BASE_URL = "https://www.notion.so/api/v3";
+const BASE_URL = "http://localhost:8095/api";
 
 function post<T>(url: string, data: object): Promise<T> {
     return fetch(`${BASE_URL}${url}`,

@@ -75,6 +75,8 @@ interface IProps {
 }
 
 interface IState {
+    data: BlockValue[],
+    scheme: SchemeValue[]
 }
 
 const PostLink = (props: { page: string, title: string }) => (
@@ -93,6 +95,31 @@ class Index extends React.Component<IProps, IState> {
             scheme: collection.value.schema,
             data: result.result.blockIds.map(it => result.recordMap.block[it].value)
         }
+    }
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: [],
+            scheme: []
+        }
+    }
+
+    async componentDidMount(): Promise<void> {
+        const result = await loadTablePageBlocks(blogConfig.blog_table_page_id, blogConfig.blog_table_view_id);
+        let collection: RecordValue;
+        for (let key in result.recordMap.collection) {
+            collection = result.recordMap.collection[key];
+            break;
+        }
+        const schemes = [];
+        for (let key in collection.value.schema) {
+            schemes.push(collection.value.schema[key])
+        }
+        this.setState({
+            data: result.result.blockIds.map(it => result.recordMap.block[it].value),
+            scheme: schemes
+        });
     }
 
     public render(): React.ReactNode {
