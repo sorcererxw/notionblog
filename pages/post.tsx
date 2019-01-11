@@ -11,6 +11,8 @@ const Content = styled.div`
   width: 768px;
   max-width: 90%;
   margin: auto;
+  display: flex;
+  flex-direction: column;
 `;
 
 const CoverImage = styled.img`
