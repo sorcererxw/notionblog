@@ -23,7 +23,7 @@ const CoverImage = styled.img`
 
 interface IProps {
     blockQuery: string,
-    // data: BlockNode[]
+    data: BlockNode[]
 }
 
 interface IState {
@@ -35,7 +35,7 @@ export default class Post extends React.Component<IProps, IState> {
         const pageId = query.block;
         return {
             blockQuery: pageId,
-            // data: recordListToTree(await loadFullPageChunk(pageId))
+            data: recordListToTree(await loadFullPageChunk(pageId))
         }
     }
 
@@ -47,14 +47,16 @@ export default class Post extends React.Component<IProps, IState> {
     }
 
     async componentDidMount(): Promise<void> {
-        const pageId = this.props.blockQuery;
+        // const pageId = this.props.blockQuery;
         this.setState({
-            data: recordListToTree(await loadFullPageChunk(pageId))
-        });
+            data: this.props.data
+        })
+        // this.setState({
+        //     data: recordListToTree(await loadFullPageChunk(pageId))
+        // });
     }
 
     public render(): React.ReactNode {
-        console.log(this.state.data);
         if (this.state.data.length === 0) {
             return <div>
                 <MetaHead/>

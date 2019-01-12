@@ -1,6 +1,7 @@
 const express = require('express')
 const {parse} = require('url')
 const next = require('next')
+const proxyMiddleware = require('http-proxy-middleware')
 
 const devProxy = {
     '/api': {
@@ -22,24 +23,20 @@ const handle = app.getRequestHandler()
 
 app.prepare().then(() => {
     const server = express()
-    if (dev && devProxy) {
-        const proxyMiddleware = require('http-proxy-middleware')
+    if (devProxy) {
         Object.keys(devProxy).forEach(function (context) {
             server.use(proxyMiddleware(context, devProxy[context]))
         })
     }
 
+    server.all("/post/:id", (req, res) => {
+        return app.render(req, res, '/post', {
+            block: req.params.id
+        })
+    })
+
     server.all('*', (req, res) => {
-        const parsedUrl = parse(req.url, true)
-        const {pathname, query} = parsedUrl
-        if (pathname.match("^/post/[a-zA-Z0-9]+$")) {
-            const pageId = /\/post\/([a-zA-Z0-9]+)/.exec(pathname)[1]
-            return app.render(req, res, '/post', {
-                block: pageId
-            })
-        } else {
-            return handle(req, res, parsedUrl)
-        }
+        return handle(req, res)
     })
 
     server.listen(port, err => {
