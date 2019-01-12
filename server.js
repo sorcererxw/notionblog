@@ -1,29 +1,51 @@
-const {createServer} = require('http')
+const express = require('express')
 const {parse} = require('url')
 const next = require('next')
+const proxyMiddleware = require('http-proxy-middleware')
+
+const devProxy = {
+    '/api': {
+        target: "https://www.notion.so/api/v3/",
+        pathRewrite: {'^/api': '/'},
+        changeOrigin: true
+    }
+}
 
 const port = parseInt(process.env.PORT, 10) || 3000
+const env = process.env.NODE_ENV
 const dev = process.env.NODE_ENV !== 'production'
-const app = next({dev})
+const app = next({
+    dir: '.',
+    dev
+})
 const handle = app.getRequestHandler()
 
+
 app.prepare().then(() => {
-    createServer((req, res) => {
-        const parsedUrl = parse(req.url, true)
-        const {pathname, query} = parsedUrl
-        if (pathname.match("^/post/[a-zA-Z0-9]+$")) {
-            const pageId = /\/post\/([a-zA-Z0-9]+)/.exec(pathname)[1]
-            app.render(req, res, '/post', {
-                block: pageId
-            })
-        } else {
-            handle(req, res, parsedUrl)
-        }
-    }).listen(port, err => {
+    const server = express()
+    if (devProxy) {
+        Object.keys(devProxy).forEach(function (context) {
+            server.use(proxyMiddleware(context, devProxy[context]))
+        })
+    }
+
+    server.all("/post/:id", (req, res) => {
+        return app.render(req, res, '/post', {
+            block: req.params.id
+        })
+    })
+
+    server.all('*', (req, res) => {
+        return handle(req, res)
+    })
+
+    server.listen(port, err => {
         if (err) {
-            console.log(err)
             throw err
         }
-        console.log(`> Ready on http://localhost:${port}`)
+        console.log(`> Ready on port ${port} [${env}]`)
     })
+}).catch(err => {
+    console.log('An error occurred, unable to start the server')
+    console.log(err)
 })

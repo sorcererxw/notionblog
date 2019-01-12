@@ -1,13 +1,36 @@
 import * as moment from 'moment';
+import axios from 'axios'
+
+const client = axios.create({
+    baseURL: "/api",
+    headers: {
+        'content-type': 'application/json;charset=UTF-8',
+        'User-Agent': ''
+    },
+});
+client.defaults.headers.common["User-Agent"] = "";
 
 const fetch = require("node-fetch");
-const BASE_URL = "https://www.notion.so/api/v3";
+const isBrowser = typeof window !== 'undefined';
 
 function post<T>(url: string, data: object): Promise<T> {
-    return fetch(`${BASE_URL}${url}`,
+    if (isBrowser) {
+        fetch(`https://blog.sorcererxw.com/api${url}`,
+            {
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json;charset=UTF-8',
+                    'accept-encoding': '',
+                },
+                method: 'POST',
+            }
+        ).then(res => res.json())
+        // client.post(url, data).then(it => it.data)
+    }
+    return fetch(`https://www.notion.so/api/v3${url}`,
         {
             body: JSON.stringify(data),
-            headers: {'content-type': 'application/json'},
+            headers: {'content-type': 'application/json;charset=UTF-8'},
             method: 'POST',
         }
     ).then(res => res.json())
@@ -165,7 +188,7 @@ export const loadTablePageBlocks = async (collectionId: string, collectionViewId
     return queryResult
 };
 
-export const loadTablePageRecoard = async (collectionId: string, collectionViewId: string): Promise<RecordMap> => {
+export const loadTablePageRecord = async (collectionId: string, collectionViewId: string): Promise<RecordMap> => {
     const pageChunkValues = await loadPageChunk(collectionId, 100);
     const tableView = pageChunkValues.recordMap.collection_view[collectionViewId];
     let collection;

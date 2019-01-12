@@ -1,17 +1,16 @@
 import * as React from 'react'
-import SyntaxHighlighter, {} from 'react-syntax-highlighter';
+import SyntaxHighlighter, { } from 'react-syntax-highlighter';
 import styled from "styled-components";
-import {BlockValue} from "../../api/notion";
+import { BlockValue } from "../../api/notion";
 
 const Container = styled.div`
-    margin: 16px 0;
     width: 100%;
     max-width: 100%;
     background: rgb(242, 241, 238);
-    padding: 16px;
     box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
+    position: relative;
+    text-align: left;
+    display: block;
 `;
 
 const Pre = styled.pre`
@@ -23,13 +22,20 @@ const Code = styled.code`
 `;
 
 const LanguageBar = styled.div`
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 30px;
+    justify-content: flex-end;
     display: flex;
     flex-direction: row;
+    padding: 0 8px;
 `;
 
 const LanguageLabel = styled.code`
     font-size: 12px;
     color: rgba(55, 53, 47, 0.6);
+    opacity: 0.4;
 `;
 
 interface IProps {
@@ -56,13 +62,20 @@ class CodeBlock extends React.Component<IProps, IState> {
         return <Container>
             <SyntaxHighlighter
                 customStyle={{
-                    padding: 4
+                    boxSizing: "border-box",
+                    paddingTop: 24,
+                    paddingBottom: 24,
+                    paddingLeft: 20,
+                    paddingRight: 20
                 }}
                 PreTag={Pre}
                 CodeTag={Code}
-                children={codeText}/>
+                children={codeText} />
             <LanguageBar>
-                <div style={{flex: 1}}/>
+                <div style={{
+                    maxWidth: '100%',
+                    flex: 1
+                }} />
                 <LanguageLabel>{language}</LanguageLabel>
             </LanguageBar>
         </Container>

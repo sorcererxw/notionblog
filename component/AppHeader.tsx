@@ -16,7 +16,7 @@ const Content = styled.div`
 `;
 
 const Logo = styled.div`
-  font-size: 1.2em;
+  font-size: 24px;
   font-weight: bold;
   
   >a{

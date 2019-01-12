@@ -9,12 +9,15 @@ const Container = styled.div`
   flex-direction: row;
   box-sizing: border-box;
   align-items: flex-start;
-  width: 100%; 
-  padding-left: 2px; 
+  width: 100%;
 `;
 
 const Content = styled.div`
-  width: 100%;
+  flex: 1;
+  width: calc(100% - 26px);
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
   box-sizing: border-box;
 `;
 
@@ -37,6 +40,8 @@ const ListItem = styled.div`
 `;
 
 const ChildrenContainer = styled.div`
+    display: flex;
+    flex-direction: column;
     max-width: 100%;
     box-sizing: border-box;
 `;

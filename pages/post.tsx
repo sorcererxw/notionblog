@@ -5,12 +5,13 @@ import MetaHead from "../component/MetaHead";
 import NotionBlockList from "../component/notion/base/NotionBlockList";
 import PageHeaderBlock from "../component/notion/PageHeaderBlock";
 import {loadFullPageChunk, recordListToTree, BlockNode} from "../api/notion";
-import Disqus from 'disqus-react';
 
 const Content = styled.div`
   width: 768px;
   max-width: 90%;
   margin: auto;
+  display: flex;
+  flex-direction: column;
 `;
 
 const CoverImage = styled.img`
@@ -21,26 +22,48 @@ const CoverImage = styled.img`
 `;
 
 interface IProps {
+    blockQuery: string,
     data: BlockNode[]
 }
 
 interface IState {
+    data: BlockNode[]
 }
 
 export default class Post extends React.Component<IProps, IState> {
     static async getInitialProps({query}) {
         const pageId = query.block;
         return {
+            blockQuery: pageId,
             data: recordListToTree(await loadFullPageChunk(pageId))
         }
     }
 
     constructor(props: any) {
         super(props);
+        this.state = {
+            data: []
+        }
+    }
+
+    async componentDidMount(): Promise<void> {
+        // const pageId = this.props.blockQuery;
+        this.setState({
+            data: this.props.data
+        })
+        // this.setState({
+        //     data: recordListToTree(await loadFullPageChunk(pageId))
+        // });
     }
 
     public render(): React.ReactNode {
-        console.log(this.props.data);
+        if (this.state.data.length === 0) {
+            return <div>
+                <MetaHead/>
+                <AppLayout>
+                </AppLayout>
+            </div>
+        }
         return <div>
             <MetaHead title={this.getTitle()}/>
             <AppLayout>
@@ -51,16 +74,15 @@ export default class Post extends React.Component<IProps, IState> {
                 </Content>
             </AppLayout>
         </div>
-
     }
 
     private getTitle(): string {
-        const properties = this.props.data[0].value.properties;
+        const properties = this.state.data[0].value.properties;
         return properties.title[0]
     }
 
     private renderCover(): React.ReactNode {
-        const data = this.props.data[0];
+        const data = this.state.data[0];
         if (data === undefined || data == null) {
             return null;
         }
@@ -83,27 +105,12 @@ export default class Post extends React.Component<IProps, IState> {
     }
 
     private renderTitle(): React.ReactNode {
-        const titleBlock = this.props.data[0].value;
+        const titleBlock = this.state.data[0].value;
         return <PageHeaderBlock value={titleBlock}/>
     }
 
     private renderPage(): React.ReactNode {
-        const blockData = this.props.data[0].children;
+        const blockData = this.state.data[0].children;
         return <div><NotionBlockList blocks={blockData}/></div>;
-    }
-
-    private renderComment(): React.ReactNode {
-        const shortName = "";
-        const config = {};
-        return <div>
-            <Disqus.CommentCount
-                shortname={shortName}
-                config={config}>
-                Comments
-            </Disqus.CommentCount>
-            <Disqus.DiscussionEmbed
-                shortname={shortName}
-                config={config}/>
-        </div>
     }
 }
