@@ -1,3 +1,4 @@
+import {Moment} from "moment";
 import * as moment from 'moment';
 import axios from 'axios'
 
@@ -290,18 +291,17 @@ export function getDisplayBlockId(blockId: string): string {
     }
 }
 
-export function getDate(value: BlockValue): string {
-    const format = "MMM DD, YYYY";
-    let date = moment(value.created_time).format(format);
+export function getDate(value: BlockValue): Moment {
+    let mom = moment(value.created_time);
     const properties = value.properties;
     if (properties !== undefined) {
         const dateValue = properties[",n,\""];
         if (dateValue !== undefined) {
             const dateString = dateValue[0][1][0][1]['start_date'];
-            date = moment(dateString, "YYYY-MM-DD").format(format);
+            mom = moment(dateString, "YYYY-MM-DD")
         }
     }
-    return date;
+    return mom
 }
 
 export function getTags(value: BlockValue): string[] {

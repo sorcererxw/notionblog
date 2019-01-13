@@ -19,7 +19,7 @@ const MetaContainer = styled.div`
 
 const PubDate = styled.div`
   font-size: 16px;
-  color: rgba(0,0,0,.54);
+  color: rgb(187, 187, 187);
   font-weight: 600;
   line-height: 1.2;
 `;
@@ -42,7 +42,7 @@ export default class PageHeaderBlock extends React.Component<IProps, IState> {
         if (properties === undefined) {
             return null;
         }
-        const pubData = getDate(this.props.value);
+        const pubData = getDate(this.props.value).format("MMM DD, YYYY");
         return <Container>
             <Title>{properties.title}</Title>
             <MetaContainer>
