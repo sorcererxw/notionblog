@@ -2,23 +2,24 @@ import * as React from "react";
 import styled from "styled-components";
 import {BlockValue, getDate, getDisplayBlockId, getTags} from "../api/notion";
 import Responsive from 'react-responsive';
+import * as moment from 'moment';
 
 const Mobile = props => <Responsive {...props} maxWidth={767}/>;
 const Desktop = props => <Responsive {...props} minWidth={768}/>;
 
-const ItemTitle = styled.a`
-  font-weight: 600;
-  font-size: 18px;
-  text-decoration-line: none;
-`;
-
 const PostItem = styled.div`
-    margin: 36px 0;
+    margin: 32px 0;
     display: flex;
     flex-direction: column;
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
+`;
+
+const ItemTitle = styled.a`
+  font-weight: 700;
+  font-size: 18px;
+  text-decoration-line: none;
 `;
 
 const ItemTitleBar = styled.div`
@@ -85,7 +86,7 @@ export default class ArchiveItem extends React.Component<IProps, IState> {
 
         const title = <PostLink page={getDisplayBlockId(it.id)} title={it.properties.title[0]}/>
 
-        const dateView = <PubDate>{getDate(it)}</PubDate>;
+        const dateView = <PubDate>{moment(getDate(it)).format("MMM DD")}</PubDate>;
 
         const desktop = <Desktop>
             <PostItem>

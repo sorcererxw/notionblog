@@ -5,7 +5,7 @@ import AppLayout from "../component/AppLayout";
 import {
     BlockValue,
     loadTablePageBlocks,
-    SchemeValue, RecordValue
+    SchemeValue, RecordValue, getDate
 } from "../api/notion";
 import blogConfig from '../blog.config'
 import ArchiveItem from "../component/ArchiveItem";
@@ -17,8 +17,10 @@ const Content = styled.div`
   margin: auto;
 `;
 
-const Panel = styled.div`
-  margin: 3em 0;
+const YearHeader = styled.div`
+  font-weight: 700;
+  font-size: 32px;
+  margin-top: 48px;
 `;
 
 interface IProps {
@@ -76,9 +78,7 @@ class Index extends React.Component<IProps, IState> {
                 <MetaHead/>
                 <AppLayout>
                     <Content>
-                        <Panel>
-                            {this.renderList()}
-                        </Panel>
+                        {this.renderList()}
                     </Content>
                 </AppLayout>
             </div>
@@ -87,9 +87,19 @@ class Index extends React.Component<IProps, IState> {
 
 
     private renderList(): React.ReactNode {
-        const list = this.props.data.map((it, idx) => {
-            return <ArchiveItem blockValue={it} key={idx}/>
-        });
+        const list = [];
+
+        let lastYear = 3000;
+
+        for (let idx = 0; idx < this.props.data.length; idx++) {
+            const it = this.props.data[idx];
+            const year = getDate(it).year();
+            if (year !== lastYear) {
+                list.push(<YearHeader>{year}</YearHeader>);
+                lastYear = year;
+            }
+            list.push(<ArchiveItem blockValue={it} key={idx}/>)
+        }
 
         return (
             <div>{list}</div>
