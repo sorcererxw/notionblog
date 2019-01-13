@@ -12,10 +12,11 @@ const client = axios.create({
 client.defaults.headers.common["User-Agent"] = "";
 
 const fetch = require("node-fetch");
-const isBrowser = typeof window !== 'undefined';
+
+// const isBrowser = typeof window !== 'undefined';
 
 function post<T>(url: string, data: object): Promise<T> {
-    if (isBrowser) {
+    if (false) {
         fetch(`https://blog.sorcererxw.com/api${url}`,
             {
                 body: JSON.stringify(data),
@@ -36,6 +37,13 @@ function post<T>(url: string, data: object): Promise<T> {
         }
     ).then(res => res.json())
 }
+
+const propertiesMap = {
+    name: 'R>;m',
+    tags: 'X<$7',
+    publish: '{JfZ',
+    date: ',n,"'
+};
 
 export interface BlockFormat {
     page_cover: string,
@@ -291,11 +299,22 @@ export function getDisplayBlockId(blockId: string): string {
     }
 }
 
+export function getName(value: BlockValue): string {
+    const properties = value.properties;
+    if (properties !== undefined) {
+        const nameValue: string[] = properties[propertiesMap.name];
+        if (nameValue !== undefined && nameValue.length > 0) {
+            return nameValue[0][0];
+        }
+    }
+    return ""
+}
+
 export function getDate(value: BlockValue): Moment {
     let mom = moment(value.created_time);
     const properties = value.properties;
     if (properties !== undefined) {
-        const dateValue = properties[",n,\""];
+        const dateValue = properties[propertiesMap.date];
         if (dateValue !== undefined) {
             const dateString = dateValue[0][1][0][1]['start_date'];
             mom = moment(dateString, "YYYY-MM-DD")
@@ -308,10 +327,21 @@ export function getTags(value: BlockValue): string[] {
     let result = [];
     const properties = value.properties;
     if (properties !== undefined) {
-        const tagValue = properties["X<$7"];
+        const tagValue = properties[propertiesMap.tags];
         if (tagValue !== undefined && tagValue.length > 0) {
             result = tagValue[0][0].split(",");
         }
     }
     return result;
+}
+
+export async function getIdByName(name: string, tablePageId: string, tableViewId: string): Promise<string> {
+    const result = await loadTablePageBlocks(tablePageId, tableViewId);
+    const data = result.result.blockIds.map(it => result.recordMap.block[it].value);
+    for (let item of data) {
+        if (getName(item) === name) {
+            return item.id
+        }
+    }
+    return ""
 }

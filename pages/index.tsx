@@ -56,6 +56,10 @@ class Index extends React.Component<IProps, IState> {
     }
 
     async componentDidMount(): Promise<void> {
+        this.setState({
+            data: this.props.data,
+            scheme: this.props.scheme
+        })
         // const result = await loadTablePageBlocks(blogConfig.blog_table_page_id, blogConfig.blog_table_view_id);
         // let collection: RecordValue;
         // for (let key in result.recordMap.collection) {
@@ -73,6 +77,7 @@ class Index extends React.Component<IProps, IState> {
     }
 
     public render(): React.ReactNode {
+        console.log(this.state.data);
         return (
             <div>
                 <MetaHead/>
@@ -87,12 +92,14 @@ class Index extends React.Component<IProps, IState> {
 
 
     private renderList(): React.ReactNode {
+        const data = this.state.data;
+
         const list = [];
 
         let lastYear = 3000;
 
-        for (let idx = 0; idx < this.props.data.length; idx++) {
-            const it = this.props.data[idx];
+        for (let idx = 0; idx < data.length; idx++) {
+            const it = data[idx];
             const year = getDate(it).year();
             if (year !== lastYear) {
                 list.push(<YearHeader>{year}</YearHeader>);
