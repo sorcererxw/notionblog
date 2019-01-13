@@ -4,7 +4,8 @@ import AppLayout from "../component/AppLayout";
 import MetaHead from "../component/MetaHead";
 import NotionBlockList from "../component/notion/base/NotionBlockList";
 import PageHeaderBlock from "../component/notion/PageHeaderBlock";
-import {loadFullPageChunk, recordListToTree, BlockNode} from "../api/notion";
+import {loadFullPageChunk, recordListToTree, BlockNode, getIdByName} from "../api/notion";
+import blogConfig from '../blog.config'
 
 const Content = styled.div`
   width: 768px;
@@ -32,7 +33,7 @@ interface IState {
 
 export default class Post extends React.Component<IProps, IState> {
     static async getInitialProps({query}) {
-        const pageId = query.block;
+        const pageId = await getIdByName(query.block, blogConfig.blog_table_page_id, blogConfig.blog_table_view_id);
         return {
             blockQuery: pageId,
             data: recordListToTree(await loadFullPageChunk(pageId))

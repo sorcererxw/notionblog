@@ -6,4 +6,4 @@ module.exports = {
     blog_table_page_id: "d6f20169e3b849059656e33a47e19003",
     blog_table_view_id: "e38cce53-9501-43c2-8d34-49b99397cbca",
     google_analytics_id: 'UA-125409209-1'
-}
+};

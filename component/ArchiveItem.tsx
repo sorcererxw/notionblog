@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import {BlockValue, getDate, getDisplayBlockId, getTags} from "../api/notion";
+import {BlockValue, getDate, getName, getTags} from "../api/notion";
 import Responsive from 'react-responsive';
 import * as moment from 'moment';
 
@@ -84,7 +84,7 @@ export default class ArchiveItem extends React.Component<IProps, IState> {
             </ItemTagBar>;
         }
 
-        const title = <PostLink page={getDisplayBlockId(it.id)} title={it.properties.title[0]}/>
+        const title = <PostLink page={getName(it)} title={it.properties.title[0]}/>;
 
         const dateView = <PubDate>{moment(getDate(it)).format("MMM DD")}</PubDate>;
 

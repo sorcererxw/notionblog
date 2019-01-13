@@ -14,12 +14,13 @@ const devProxy = {
 const port = parseInt(process.env.PORT, 10) || 3000
 const env = process.env.NODE_ENV
 const dev = process.env.NODE_ENV !== 'production'
+console.log(`dev: ${dev}`)
+
 const app = next({
     dir: '.',
     dev
 })
 const handle = app.getRequestHandler()
-
 
 app.prepare().then(() => {
     const server = express()
@@ -29,9 +30,10 @@ app.prepare().then(() => {
         })
     }
 
-    server.all("/post/:id", (req, res) => {
+    server.all("/post/:name", async (req, res) => {
+        const pageId = req.params.name
         return app.render(req, res, '/post', {
-            block: req.params.id
+            block: pageId
         })
     })
 
