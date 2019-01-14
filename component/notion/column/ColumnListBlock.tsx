@@ -10,7 +10,7 @@ const Container = styled.div`
   box-sizing: border-box;
 `;
 
-const ColumnContainer = styled.div<{ ratio: number }>`
+const ColumnContainer = styled.div<{ ratio: number | undefined }>`
   padding-top: 12px;
   padding-bottom: 12px; 
   flex-grow: 0; 
@@ -37,13 +37,13 @@ class ColumnListBlock extends React.Component<Props, {}> {
     }
 
     public render(): React.ReactNode {
-        const content = [];
+        const content: React.ReactNode[] = [];
         this.props.block.children.forEach((v, k) => {
             if (v.value.type === 'column') {
                 if (k > 0) {
                     content.push(<Gap key={k * 2 - 1}/>)
                 }
-                const ratio = v.value.format.column_ratio;
+                const ratio: number | undefined = v.value.format ? v.value.format.column_ratio : undefined;
                 content.push(
                     <ColumnContainer ratio={ratio} key={k * 2}>
                         <ColumnBlock block={v}/>

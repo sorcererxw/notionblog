@@ -7,9 +7,10 @@ import {
     loadTablePageBlocks,
     SchemeValue, RecordValue, getDate
 } from "../api/notion";
-import blogConfig from '../blog.config'
 import ArchiveItem from "../component/ArchiveItem";
 import MetaHead from "../component/MetaHead";
+
+const blogConfig = require("../config");
 
 const Content = styled.div`
   width: 768px;
@@ -35,14 +36,14 @@ interface IState {
 
 class Index extends React.Component<IProps, IState> {
     static async getInitialProps() {
-        const result = await loadTablePageBlocks(blogConfig.blog_table_page_id, blogConfig.blog_table_view_id);
-        let collection: RecordValue;
+        const result = await loadTablePageBlocks(blogConfig.blogTablePageId, blogConfig.blogTableViewId);
+        let collection: RecordValue | null = null;
         for (let key in result.recordMap.collection) {
             collection = result.recordMap.collection[key];
             break;
         }
         return {
-            scheme: collection.value.schema,
+            scheme: collection != null ? collection.value.schema : [],
             data: result.result.blockIds.map(it => result.recordMap.block[it].value)
         }
     }
@@ -77,7 +78,6 @@ class Index extends React.Component<IProps, IState> {
     }
 
     public render(): React.ReactNode {
-        console.log(this.state.data);
         return (
             <div>
                 <MetaHead/>
@@ -94,7 +94,7 @@ class Index extends React.Component<IProps, IState> {
     private renderList(): React.ReactNode {
         const data = this.state.data;
 
-        const list = [];
+        const list: React.ReactNode[] = [];
 
         let lastYear = 3000;
 

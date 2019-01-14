@@ -24,8 +24,8 @@ class NotionBlockList extends React.Component<IProps, IState> {
 
     public render(): React.ReactNode {
         const blocks = this.props.blocks;
-        const result = [];
-        let lastType = undefined;
+        const result: React.ReactNode[] = [];
+        let lastType: string = "";
         let sameTypeCnt = 0;
         for (let i = 0; i < blocks.length; i++) {
             const block = blocks[i];

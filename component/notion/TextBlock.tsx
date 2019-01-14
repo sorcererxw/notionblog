@@ -30,7 +30,7 @@ class TextBlock extends React.Component<IProps, IState> {
                 let italic = false;
                 let highlight = false;
                 let deleted = false;
-                let link = null;
+                let link = "";
 
                 if (textProperties !== undefined) {
                     for (const p of textProperties) {

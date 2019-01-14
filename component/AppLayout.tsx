@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from "styled-components";
-import AppFooter from "../component/AppFooter";
-import AppHeader from "../component/AppHeader";
+import AppFooter from "./AppFooter";
+import AppHeader from "./AppHeader";
 import '../style/index.css';
 
 const Container = styled.div`

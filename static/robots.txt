@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /post/*
+
+Sitemap: https://blog.sorcererxw.com/sitemap.xml

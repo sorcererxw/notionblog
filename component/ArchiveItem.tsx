@@ -76,7 +76,7 @@ export default class ArchiveItem extends React.Component<IProps, IState> {
             return null
         }
 
-        let tagBar = null;
+        let tagBar: React.ReactNode | null = null;
         const tagItems = getTags(it);
         if (tagItems.length > 0) {
             tagBar = <ItemTagBar>
@@ -84,7 +84,7 @@ export default class ArchiveItem extends React.Component<IProps, IState> {
             </ItemTagBar>;
         }
 
-        const title = <PostLink page={getName(it)} title={it.properties.title[0]}/>;
+        const title = <PostLink page={getName(it)} title={properties.title[0]}/>;
 
         const dateView = <PubDate>{moment(getDate(it)).format("MMM DD")}</PubDate>;
 

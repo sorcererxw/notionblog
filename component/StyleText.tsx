@@ -9,10 +9,9 @@ const Italic = styled.i`
 
 const Highlight = styled.code`
   background: rgba(0,0,0,.05);
-  line-height: normal;
-  font-size: 0.95em;
   margin: 0 2px;
-  padding: 3px 4px;
+  align-self: center;
+  padding: 2px 4px;
   border-radius: 3px; 
 `;
 
@@ -65,8 +64,6 @@ class StyleText extends React.Component<IProps, {}> {
             <span>{this.props.text}</span>
         )))))
     }
-
-
 }
 
 export default StyleText
