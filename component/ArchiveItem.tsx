@@ -19,7 +19,7 @@ const PostItem = styled.div`
 const ItemTitle = styled.a`
   font-weight: 700;
   font-size: 18px;
-  text-decoration-line: none;
+  text-decoration: none;
 `;
 
 const ItemTitleBar = styled.div`

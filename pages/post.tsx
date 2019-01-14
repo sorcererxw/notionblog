@@ -115,7 +115,6 @@ export default class Post extends React.Component<IProps, IState> {
 
         const coverUrl = getRealImageUrl(format.page_cover);
         const pageCoverPosition = format.page_cover_position === undefined ? -1 : format.page_cover_position;
-        console.log(pageCoverPosition);
         if (pageCoverPosition >= 0) {
             return <CoverImage src={coverUrl} style={{
                 objectPosition: `center ${(1 - pageCoverPosition) * 100}%`
