@@ -4,7 +4,8 @@ import styled from "styled-components";
 const Footer = styled.div`
   display: flex;
   width: 100%;
-  font-size: 0.8em;
+  color: rgb(152,152,152);
+  font-size: 14px;
   padding: 48px 0 40px;
   flex-direction: column;
   align-items: center;

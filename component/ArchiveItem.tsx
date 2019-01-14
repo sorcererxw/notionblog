@@ -19,7 +19,7 @@ const PostItem = styled.div`
 const ItemTitle = styled.a`
   font-weight: 700;
   font-size: 18px;
-  text-decoration-line: none;
+  text-decoration: none;
 `;
 
 const ItemTitleBar = styled.div`
@@ -38,6 +38,7 @@ const ItemTagBar = styled.div`
 
 const Tag = styled.div`
   display: flex;
+  user-select: none;
   flex-direction: row;
   margin-right: 8px;
   align-items: center;
@@ -80,7 +81,7 @@ export default class ArchiveItem extends React.Component<IProps, IState> {
         const tagItems = getTags(it);
         if (tagItems.length > 0) {
             tagBar = <ItemTagBar>
-                {tagItems.map((v, k) => <Tag key={k}>{v}</Tag>)}
+                {tagItems.map((v, k) => <Tag key={k}>#{v}</Tag>)}
             </ItemTagBar>;
         }
 
