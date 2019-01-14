@@ -33,8 +33,8 @@ class VideoBlock extends React.Component<IProps, IState> {
         if (format == null) {
             return null;
         }
-        let videoNode = null;
-        let captionNode = null;
+        let videoNode: React.ReactNode | null = null;
+        let captionNode: React.ReactNode | null = null;
         // language=RegExp
         if (format.display_source.match("^http(s)?://(www.)?youtube.com/.+$")) {
             const option = {

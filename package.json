@@ -26,7 +26,9 @@
     "http-proxy-middleware": "^0.19.1",
     "compression": "^1.7.3",
     "react-ga": "^2.5.6",
-    "next-offline": "^3.3.3"
+    "next-offline": "^3.3.3",
+    "lru-cache": "^5.1.1",
+    "sitemap": "^2.1.0"
   },
   "devDependencies": {
     "@types/jest": "^23.3.11",
@@ -39,12 +41,14 @@
     "@types/styled-components": "^4.1.4",
     "typescript": "^3.2.2",
     "babel-plugin-styled-components": "^1.10.0",
-    "cross-env": "^5.2.0"
+    "cross-env": "^5.2.0",
+    "ts-node": "^7.0.1",
+    "nodemon": "^1.18.9"
   },
   "scripts": {
-    "dev": "node server.js",
+    "dev": "node server/app.js",
     "build": "next build",
-    "start": "set NODE_ENV=production && node server.js",
+    "start": "set NODE_ENV=production && node server/app.js",
     "gcp-build": "npm run build"
   }
 }

@@ -13,10 +13,10 @@ client.defaults.headers.common["User-Agent"] = "";
 
 const fetch = require("node-fetch");
 
-// const isBrowser = typeof window !== 'undefined';
+const isBrowser = typeof window !== 'undefined';
 
 function post<T>(url: string, data: object): Promise<T> {
-    if (false) {
+    if (isBrowser) {
         fetch(`https://blog.sorcererxw.com/api${url}`,
             {
                 body: JSON.stringify(data),
@@ -171,15 +171,17 @@ export const loadFullPageChunk = async (pageId: string): Promise<RecordValue[]> 
     return result
 };
 
-export const loadTable = (collectionId: string, collectionViewId: string, query = undefined): Promise<Collection> => {
+export const loadTable = (collectionId: string, collectionViewId: string, query: object): Promise<Collection> => {
     const data = {
         collectionId: getFullBlockId(collectionId),
         collectionViewId: getFullBlockId(collectionViewId),
         loader: {
             type: 'table'
-        },
-        query: query
+        }
     };
+    if (query != null) {
+        data['query'] = query;
+    }
     return post<Collection>("/queryCollection", data)
 };
 
@@ -222,9 +224,10 @@ export interface BlockNode {
 }
 
 const recordLstToDic = (list: RecordValue[]): Map<string, DicNode> => {
-    const findNode = (dic: Map<String, DicNode>, id: String): DicNode => {
+    const findNode = (dic: Map<String, DicNode>, id: String): DicNode | null => {
         if (dic.has(id)) {
-            return dic.get(id);
+            const result = dic.get(id);
+            return result ? result : null;
         }
         for (let [key, entryValue] of dic) {
             key;

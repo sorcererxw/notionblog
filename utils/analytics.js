@@ -1,9 +1,11 @@
 import ReactGA from 'react-ga'
-import {google_analytics_id} from "../blog.config"
+
+const config = require("../config")
+const googleAnalyticsId = config.googleAnalyticsId
 
 export const initGA = () => {
     console.log('GA init')
-    ReactGA.initialize(google_analytics_id)
+    ReactGA.initialize(googleAnalyticsId)
 }
 
 export const logPageView = () => {

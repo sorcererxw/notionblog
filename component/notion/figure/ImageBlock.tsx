@@ -35,8 +35,8 @@ class ImageBlock extends React.Component<IProps, IState> {
         const format = this.props.value.format;
         const properties = this.props.value.properties;
 
-        let imageNode = null;
-        let captionNode = null;
+        let imageNode: React.ReactNode | null = null;
+        let captionNode: React.ReactNode | null = null;
 
         if (format !== undefined) {
             imageNode = <Image

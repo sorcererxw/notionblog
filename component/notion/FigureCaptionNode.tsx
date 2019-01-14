@@ -35,7 +35,7 @@ class FigureCaptionNode extends React.Component<IProps, IState> {
         let italic = false;
         let highlight = false;
         let deleted = false;
-        let link = null;
+        let link = undefined;
 
         if (textProperties !== undefined) {
             for (const p of textProperties) {

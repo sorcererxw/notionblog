@@ -1,11 +1,14 @@
 import * as React from 'react';
+import '../style/index.css';
 import styled from "styled-components";
 import AppLayout from "../component/AppLayout";
 import MetaHead from "../component/MetaHead";
 import NotionBlockList from "../component/notion/base/NotionBlockList";
 import PageHeaderBlock from "../component/notion/PageHeaderBlock";
-import {loadFullPageChunk, recordListToTree, BlockNode, getIdByName} from "../api/notion";
-import blogConfig from '../blog.config'
+import {loadFullPageChunk, recordListToTree, BlockNode, getIdByName, getName} from "../api/notion"
+import {DiscussionEmbed} from 'disqus-react';
+
+const blogConfig = require('../config');
 
 const Content = styled.div`
   width: 768px;
@@ -17,9 +20,15 @@ const Content = styled.div`
 
 const CoverImage = styled.img`
   width: 100%;
+  border-width: 0;
+  border-radius: 4px;
   height: 30vh;
   object-fit: cover;
   object-position: center 0;
+`;
+
+const Comment = styled.div`
+  margin-top: 40px;
 `;
 
 interface IProps {
@@ -33,7 +42,7 @@ interface IState {
 
 export default class Post extends React.Component<IProps, IState> {
     static async getInitialProps({query}) {
-        const pageId = await getIdByName(query.block, blogConfig.blog_table_page_id, blogConfig.blog_table_view_id);
+        const pageId = await getIdByName(query.block, blogConfig.blogTablePageId, blogConfig.blogTableViewId);
         return {
             blockQuery: pageId,
             data: recordListToTree(await loadFullPageChunk(pageId))
@@ -72,6 +81,7 @@ export default class Post extends React.Component<IProps, IState> {
                     {this.renderCover()}
                     {this.renderTitle()}
                     {this.renderPage()}
+                    {this.renderComment()}
                 </Content>
             </AppLayout>
         </div>
@@ -79,7 +89,10 @@ export default class Post extends React.Component<IProps, IState> {
 
     private getTitle(): string {
         const properties = this.state.data[0].value.properties;
-        return properties.title[0]
+        if (properties !== undefined && properties.title.length > 0) {
+            return properties.title[0]
+        }
+        return ""
     }
 
     private renderCover(): React.ReactNode {
@@ -101,7 +114,13 @@ export default class Post extends React.Component<IProps, IState> {
         };
 
         const coverUrl = getRealImageUrl(format.page_cover);
-        // const pageCoverPosition = format.page_cover_position === undefined ? 0 : format.page_cover_position;
+        const pageCoverPosition = format.page_cover_position === undefined ? -1 : format.page_cover_position;
+        console.log(pageCoverPosition);
+        if (pageCoverPosition >= 0) {
+            return <CoverImage src={coverUrl} style={{
+                objectPosition: `center ${(1 - pageCoverPosition) * 100}%`
+            }}/>
+        }
         return <CoverImage src={coverUrl}/>
     }
 
@@ -113,5 +132,22 @@ export default class Post extends React.Component<IProps, IState> {
     private renderPage(): React.ReactNode {
         const blockData = this.state.data[0].children;
         return <div><NotionBlockList blocks={blockData}/></div>;
+    }
+
+    private renderComment(): React.ReactNode {
+        const data = this.state.data[0].value;
+        const name = getName(data);
+        const title = this.getTitle();
+        const disqusShortname = 'sorcererxwblog';
+        const disqusConfig = {
+            url: `https://blog.sorcererxw.com/post/${name}`,
+            identifier: name,
+            title: title,
+        };
+
+        return <Comment>
+            <DiscussionEmbed shortname={disqusShortname} config={disqusConfig}/>
+        </Comment>
+
     }
 }
