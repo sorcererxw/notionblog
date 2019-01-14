@@ -67,6 +67,7 @@ export default class Post extends React.Component<IProps, IState> {
     }
 
     public render(): React.ReactNode {
+        console.log(this.state.data);
         if (this.state.data.length === 0) {
             return <div>
                 <MetaHead/>
