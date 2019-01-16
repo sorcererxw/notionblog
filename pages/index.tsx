@@ -1,6 +1,5 @@
 import * as React from 'react';
 import styled from "styled-components";
-import '../style/index.css';
 import AppLayout from "../component/AppLayout";
 import {
     BlockValue,

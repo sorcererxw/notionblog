@@ -53,6 +53,7 @@ const PubDate = styled.span`
    align-self: baseline;
    color:rgb(187, 187, 187);
    font-size: 16px;
+   user-select: none;
    font-weight: 500;
 `;
 
