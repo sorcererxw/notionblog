@@ -1,15 +1,8 @@
 import * as React from 'react'
 import styled from "styled-components";
 import {BlockValue} from "../../../api/types";
+import FigureBlockContainer from "./FigureBlockContainer";
 import FigureCaption from "./FigureCaption";
-
-const Container = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
 
 const Image = styled.img`
   object-fit: contain;
@@ -30,30 +23,36 @@ class ImageBlock extends React.Component<Props, State> {
     }
 
     public render(): React.ReactNode {
+
+        let imageNode: React.ReactNode | null = this.renderImage();
+        let captionNode: React.ReactNode | null = this.renderCaption();
+
+        return <FigureBlockContainer>
+            {imageNode}
+            {captionNode}
+        </FigureBlockContainer>
+    }
+
+    private renderImage = (): React.ReactNode | null => {
         const format = this.props.value.format;
         const properties = this.props.value.properties;
-
-        console.log(format);
-        console.log(properties);
-
-        let imageNode: React.ReactNode | null = null;
-        let captionNode: React.ReactNode | null = null;
-
         if (format !== undefined) {
-            imageNode = <Image
+            return <Image
                 width={format.block_width}
                 src={getImageUrl(format.display_source)}/>
         } else if (properties !== undefined) {
-            imageNode = <Image src={getImageUrl(properties.source[0][0])}/>
+            return <Image src={getImageUrl(properties.source[0][0])}/>
+        } else {
+            return null;
         }
+    };
 
+    private renderCaption = (): React.ReactNode | null => {
+        const properties = this.props.value.properties;
         if (properties !== undefined && properties.caption !== undefined) {
-            captionNode = <FigureCaption caption={properties.caption}/>
+            return <FigureCaption caption={properties.caption}/>
         }
-        return <Container>
-            {imageNode}
-            {captionNode}
-        </Container>
+        return null;
     }
 }
 
