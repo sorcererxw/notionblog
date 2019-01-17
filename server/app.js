@@ -59,6 +59,10 @@ app.prepare().then(() => {
 
     server.all("/post/:name", async (req, res) => {
         const pageId = await getIdByName(req.params.name)
+        if (pageId == null || pageId.length === 0) {
+            res.statusCode = 404
+            return app.render(req, res, "/_error")
+        }
         return app.render(req, res, '/post', {
             block: pageId
         })
