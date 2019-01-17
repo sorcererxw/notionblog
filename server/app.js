@@ -40,17 +40,8 @@ app.prepare().then(() => {
     })
 
     server.all('/sitemap.xml', async (_, res) => {
-        console.log("get sitemap")
         res.header('Content-Type', 'application/xml')
-        console.log(await getSitemap())
-
         res.send(await getSitemap())
-    })
-
-    server.all("/api/blog", async (req, res) => {
-        res.setHeader('Content-Type', 'application/json')
-        const result = await getPosts()
-        res.send(JSON.stringify(result))
     })
 
     server.all("/api/blog/:id", async (req, res) => {
@@ -60,8 +51,18 @@ app.prepare().then(() => {
         res.send(JSON.stringify(result))
     })
 
+    server.all("/api/blog", async (req, res) => {
+        res.setHeader('Content-Type', 'application/json')
+        const result = await getPosts()
+        res.send(JSON.stringify(result))
+    })
+
     server.all("/post/:name", async (req, res) => {
         const pageId = await getIdByName(req.params.name)
+        if (pageId == null || pageId.length === 0) {
+            res.statusCode = 404
+            return app.render(req, res, "/_error")
+        }
         return app.render(req, res, '/post', {
             block: pageId
         })

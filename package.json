@@ -31,7 +31,9 @@
     "react-youtube": "^7.8.0",
     "sitemap": "^2.1.0",
     "styled-components": "^4.1.3",
-    "node-fetch": "latest"
+    "node-fetch": "^2.3.0",
+    "react-images": "^0.5.19",
+    "react-medium-image-zoom": "^3.0.15"
   },
   "devDependencies": {
     "@types/jest": "^23.3.11",

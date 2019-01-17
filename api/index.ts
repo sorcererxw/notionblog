@@ -1,9 +1,10 @@
 import axios from 'axios'
 import {Article, ArticleMeta} from "./types";
 
-const client = axios.create();
+// const baseUrl = "https://blog.sorcererxw.com";
+const baseUrl = "http://127.0.0.1:3000";
 
-const baseUrl = "http://localhost:3000";
+const client = axios.create();
 
 export const getArticleMetaList = (): Promise<ArticleMeta[]> => {
     return client.get(`${baseUrl}/api/blog`)

@@ -1,18 +1,8 @@
 import * as React from 'react'
 import YouTube from 'react-youtube';
-import styled from "styled-components";
 import {BlockValue} from "../../../api/types";
+import FigureBlockContainer from "./FigureBlockContainer";
 import FigureCaption from "./FigureCaption";
-
-const Container = styled.div`
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 100%;
-  justify-content: center;
-`;
 
 interface IProps {
     value: BlockValue
@@ -49,10 +39,10 @@ class VideoBlock extends React.Component<IProps, IState> {
         if (properties !== undefined && properties.caption !== undefined) {
             captionNode = <FigureCaption caption={properties.caption}/>
         }
-        return <Container>
+        return <FigureBlockContainer>
             {videoNode}
             {captionNode}
-        </Container>
+        </FigureBlockContainer>
     }
 
     private getYoutubeId = (url: string): string => {

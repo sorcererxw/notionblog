@@ -4,7 +4,7 @@ import styled from "styled-components";
 const Footer = styled.div`
   display: flex;
   width: 100%;
-  color: rgb(152,152,152);
+  color: var(--caption-color);
   font-size: 14px;
   padding: 48px 0 40px;
   flex-direction: column;

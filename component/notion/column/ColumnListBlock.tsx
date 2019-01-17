@@ -17,7 +17,7 @@ const ColumnContainer = styled.div<{ ratio: number | undefined }>`
 `;
 
 const Gap = styled.div`
-    width: 46px; 
+    width: 40px; 
     flex-grow: 0; 
     flex-shrink: 0; 
     transition: opacity 200ms ease-out 0s; 

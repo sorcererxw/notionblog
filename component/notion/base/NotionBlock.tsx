@@ -1,6 +1,7 @@
 import * as React from 'react'
 import styled from "styled-components";
 import {BlockNode} from "../../../api/types";
+import LoomBlock from "../figure/LoomBlock";
 import BulletedListBlock from "../list/BulletedListBlock";
 import CodeBlock from "../CodeBlock";
 import CollectionViewBlock from "../CollectionViewBlock";
@@ -17,7 +18,7 @@ import VideoBlock from "../figure/VideoBlock";
 
 const Container = styled.div`
   letter-spacing: 0.1px;
-  color: rgb(55, 53, 47);
+  color: var(--font-color);
   width: 100%;
   max-width: 100%;
   line-height: 1.5;
@@ -68,6 +69,8 @@ class NotionBlock extends React.Component<IProps, IState> {
             return <CollectionViewBlock value={block.value}/>
         } else if (type === 'video') {
             return <VideoBlock value={block.value}/>
+        } else if (type === 'loom') {
+            return <LoomBlock value={block.value}/>
         } else if (type === 'divider') {
             return <DividerBlock/>
         } else if (type === 'bulleted_list') {
