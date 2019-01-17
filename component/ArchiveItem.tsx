@@ -20,6 +20,11 @@ const ItemTitle = styled.a`
   font-weight: 700;
   font-size: 18px;
   text-decoration: none;
+  color: var(--head-color);
+  
+  :hover {
+    text-decoration: underline;
+  }
 `;
 
 const ItemTitleBar = styled.div`
@@ -45,13 +50,13 @@ const Tag = styled.div`
   justify-content: center;
   font-size: 16px;
   text-align: center;
-  color:rgb(187, 187, 187);
+  color:var(--caption-color);
   align-self: baseline;
 `;
 
 const PubDate = styled.span`
    align-self: baseline;
-   color:rgb(187, 187, 187);
+   color:var(--caption-color);
    font-size: 16px;
    user-select: none;
    font-weight: 500;

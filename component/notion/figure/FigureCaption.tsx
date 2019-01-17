@@ -5,6 +5,7 @@ import StyleText from "../../StyleText";
 const Caption = styled.figcaption`
   line-height: 1.4;
   opacity: 0.68;
+  color: var(--caption-color);
   margin-top: 8px;
   font-size: 14px;
 `;

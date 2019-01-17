@@ -38,6 +38,7 @@ interface Props {
 }
 
 interface State {
+    article: Article
 }
 
 export default class Post extends React.Component<Props, State> {
@@ -56,8 +57,16 @@ export default class Post extends React.Component<Props, State> {
         }
     }
 
+    componentDidMount(): void {
+        this.setState({
+            article: this.props.article
+        })
+    }
+
     public render(): React.ReactNode {
-        const article = this.props.article;
+        const article = this.state.article;
+
+        console.log(article);
 
         if (article === undefined) {
             return <div>

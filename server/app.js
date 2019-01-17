@@ -40,23 +40,20 @@ app.prepare().then(() => {
     })
 
     server.all('/sitemap.xml', async (_, res) => {
-        console.log("get sitemap")
         res.header('Content-Type', 'application/xml')
-        console.log(await getSitemap())
-
         res.send(await getSitemap())
-    })
-
-    server.all("/api/blog", async (req, res) => {
-        res.setHeader('Content-Type', 'application/json')
-        const result = await getPosts()
-        res.send(JSON.stringify(result))
     })
 
     server.all("/api/blog/:id", async (req, res) => {
         const id = req.params.id
         res.setHeader('Content-Type', 'application/json')
         const result = await getPost(id)
+        res.send(JSON.stringify(result))
+    })
+
+    server.all("/api/blog", async (req, res) => {
+        res.setHeader('Content-Type', 'application/json')
+        const result = await getPosts()
         res.send(JSON.stringify(result))
     })
 

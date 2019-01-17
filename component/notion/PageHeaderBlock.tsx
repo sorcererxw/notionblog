@@ -19,7 +19,7 @@ const MetaContainer = styled.div`
 
 const PubDate = styled.div`
   font-size: 16px;
-  color: rgb(187, 187, 187);
+  color: var(--caption-color);
   font-weight: 600;
   line-height: 1.2;
 `;

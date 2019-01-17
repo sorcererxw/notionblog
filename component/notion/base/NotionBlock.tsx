@@ -17,7 +17,7 @@ import VideoBlock from "../figure/VideoBlock";
 
 const Container = styled.div`
   letter-spacing: 0.1px;
-  color: rgb(55, 53, 47);
+  color: var(--font-color);
   width: 100%;
   max-width: 100%;
   line-height: 1.5;

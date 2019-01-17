@@ -15,6 +15,7 @@ const Content = styled.div`
 `;
 
 const YearHeader = styled.div`
+  color: var(--head-color);
   font-weight: 700;
   font-size: 32px;
   margin-top: 48px;
@@ -48,8 +49,6 @@ class Index extends React.Component<Props, State> {
     }
 
     public render(): React.ReactNode {
-        console.log(this.props.data);
-
         return (
             <div>
                 <MetaHead/>

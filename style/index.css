@@ -1,11 +1,19 @@
 :root {
-    --background-color: #fff;
+    --background-color: #f8f8f5;
+    --font-color: #424242;
+    --head-color: #212121;
+    --caption-color: #9c9c9c;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--head-color)
 }
 
 body {
+    background-color: var(--background-color);
     margin: 0;
     padding: 0;
-    color: rgb(55, 53, 47);
+    color: var(--font-color);
     font-family: "Classic Grotesque W01", "Avenir Next", "Segoe UI", "Helvetica Neue", Arial, "Hiragino Sans GB", "PingFang SC", "Heiti SC", "Microsoft YaHei UI", "Microsoft YaHei", "Source Han Sans", sans-serif
 }
 

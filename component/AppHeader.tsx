@@ -20,7 +20,7 @@ const Logo = styled.div`
   font-weight: bold;
   
   >a{
-    color: inherit; 
+    color: var(--head-color); 
     text-decoration: none;
   }
 `;
