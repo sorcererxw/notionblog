@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import {BlockValue, getDate, getName, getTags} from "../api/notion";
+import {ArticleMeta} from "../api/types";
 import Responsive from 'react-responsive';
 import * as moment from 'moment';
 
@@ -53,41 +53,37 @@ const PubDate = styled.span`
    align-self: baseline;
    color:rgb(187, 187, 187);
    font-size: 16px;
+   user-select: none;
    font-weight: 500;
 `;
 
-interface IProps {
-    blockValue: BlockValue
+interface Props {
+    meta: ArticleMeta
 }
 
-interface IState {
-    _: any
+interface State {
 }
 
 const PostLink = (props: { page: string, title: string }) => (
     <ItemTitle href={`/post/${props.page}`}> {props.title}</ItemTitle>
 );
 
-export default class ArchiveItem extends React.Component<IProps, IState> {
+export default class ArchiveItem extends React.Component<Props, State> {
 
     public render(): React.ReactNode {
-        const it = this.props.blockValue;
-        const properties = it.properties;
-        if (properties === undefined) {
-            return null
-        }
+        const it = this.props.meta;
 
         let tagBar: React.ReactNode | null = null;
-        const tagItems = getTags(it);
+        const tagItems = it.tags;
         if (tagItems.length > 0) {
             tagBar = <ItemTagBar>
                 {tagItems.map((v, k) => <Tag key={k}>#{v}</Tag>)}
             </ItemTagBar>;
         }
 
-        const title = <PostLink page={getName(it)} title={properties.title[0]}/>;
+        const title = <PostLink page={it.name} title={it.title}/>;
 
-        const dateView = <PubDate>{moment(getDate(it)).format("MMM DD")}</PubDate>;
+        const dateView = <PubDate>{moment(it.date).format("MMM DD")}</PubDate>;
 
         const desktop = <Desktop>
             <PostItem>

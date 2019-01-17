@@ -1,11 +1,12 @@
 import * as React from 'react'
 import styled from "styled-components";
-import StyleText from "../StyleText";
+import StyleText from "../../StyleText";
 
 const Caption = styled.figcaption`
   line-height: 1.4;
   opacity: 0.68;
-  font-size: 0.8em;
+  margin-top: 8px;
+  font-size: 14px;
 `;
 
 interface IProps {
@@ -13,10 +14,9 @@ interface IProps {
 }
 
 interface IState {
-    _: undefined
 }
 
-class FigureCaptionNode extends React.Component<IProps, IState> {
+class FigureCaption extends React.Component<IProps, IState> {
     constructor(props: any) {
         super(props);
     }
@@ -65,4 +65,4 @@ class FigureCaptionNode extends React.Component<IProps, IState> {
 
 }
 
-export default FigureCaptionNode
+export default FigureCaption

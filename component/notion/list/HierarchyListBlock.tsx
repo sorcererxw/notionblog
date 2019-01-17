@@ -1,6 +1,6 @@
 import * as React from 'react'
 import styled from "styled-components";
-import {BlockNode} from "../../../api/notion";
+import {BlockNode} from "../../../api/types";
 import NotionBlockList from "../base/NotionBlockList";
 import TextBlock from "../TextBlock";
 
@@ -43,6 +43,7 @@ const ChildrenContainer = styled.div`
     display: flex;
     flex-direction: column;
     max-width: 100%;
+    margin-top: -8px;
     box-sizing: border-box;
 `;
 

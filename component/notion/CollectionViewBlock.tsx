@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {BlockValue} from "../../api/notion";
+import {BlockValue} from "../../api/types";
 
 interface IProps {
     value: BlockValue

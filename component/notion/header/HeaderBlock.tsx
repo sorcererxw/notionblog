@@ -1,21 +1,21 @@
 import * as React from 'react'
 import styled from "styled-components";
-import {BlockNode} from "../../../api/notion";
+import {BlockNode} from "../../../api/types";
 
 const Header = styled.h2`
   font-size: 32px;
   margin: 0;
+  margin-top: 32px;
 `;
 
-interface IProps {
+interface Props {
     value: BlockNode
 }
 
-interface IState {
-    _: undefined
+interface State {
 }
 
-class HeaderBlock extends React.Component<IProps, IState> {
+class HeaderBlock extends React.Component<Props, State> {
     constructor(props: any) {
         super(props);
     }

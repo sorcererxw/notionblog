@@ -1,21 +1,21 @@
 import * as React from 'react'
 import styled from "styled-components";
-import {BlockValue} from "../../../api/notion";
+import {BlockValue} from "../../../api/types";
 
 const Subheader = styled.h3`
-   font-size: 24px;
+   font-size: 22px;
    margin: 0;
+   margin-top: 8px;
 `;
 
-interface IProps {
+interface Props {
     value: BlockValue
 }
 
-interface IState {
-    _: undefined
+interface State {
 }
 
-class SubHeaderBlock extends React.Component<IProps, IState> {
+class SubHeaderBlock extends React.Component<Props, State> {
     constructor(props: any) {
         super(props);
     }

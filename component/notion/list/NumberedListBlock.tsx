@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {BlockNode} from "../../../api/notion";
+import {BlockNode} from "../../../api/types";
 import HierarchyListBlock from "./HierarchyListBlock";
 
 interface IProps {
