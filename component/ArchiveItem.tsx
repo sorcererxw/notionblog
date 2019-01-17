@@ -88,7 +88,7 @@ export default class ArchiveItem extends React.Component<Props, State> {
 
         const title = <PostLink page={it.name} title={it.title}/>;
 
-        const dateView = <PubDate>{moment(it.date).format("MMM DD")}</PubDate>;
+        const dateView = <PubDate>{moment.unix(it.date).format("MMM DD")}</PubDate>;
 
         const desktop = <Desktop>
             <PostItem>
