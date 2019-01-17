@@ -1,8 +1,8 @@
 import * as React from 'react'
 import YouTube from 'react-youtube';
 import styled from "styled-components";
-import {BlockValue} from "../../../api/notion";
-import FigureCaptionNode from "../FigureCaptionNode";
+import {BlockValue} from "../../../api/types";
+import FigureCaption from "./FigureCaption";
 
 const Container = styled.div`
   box-sizing: border-box;
@@ -47,7 +47,7 @@ class VideoBlock extends React.Component<IProps, IState> {
                 videoId={this.getYoutubeId(format.display_source)}/>
         }
         if (properties !== undefined && properties.caption !== undefined) {
-            captionNode = <FigureCaptionNode caption={properties.caption}/>
+            captionNode = <FigureCaption caption={properties.caption}/>
         }
         return <Container>
             {videoNode}

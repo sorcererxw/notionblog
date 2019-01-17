@@ -1,13 +1,15 @@
 import * as React from 'react';
 import styled from "styled-components";
+import {Article} from "../api/types";
 import AppLayout from "../component/AppLayout";
 import MetaHead from "../component/MetaHead";
 import NotionBlockList from "../component/notion/base/NotionBlockList";
 import PageHeaderBlock from "../component/notion/PageHeaderBlock";
-import {loadFullPageChunk, recordListToTree, BlockNode, getIdByName, getName} from "../api/notion"
 import {DiscussionEmbed} from 'disqus-react';
 
-const blogConfig = require('../config');
+import {getArticle} from '../api';
+
+import * as blogConfig from '../config';
 
 const Content = styled.div`
   width: 768px;
@@ -30,77 +32,56 @@ const Comment = styled.div`
   margin-top: 40px;
 `;
 
-interface IProps {
+interface Props {
     blockQuery: string,
-    data: BlockNode[]
+    article: Article
 }
 
-interface IState {
-    data: BlockNode[]
+interface State {
 }
 
-export default class Post extends React.Component<IProps, IState> {
+export default class Post extends React.Component<Props, State> {
     static async getInitialProps({query}) {
-        const pageId = await getIdByName(query.block, blogConfig.blogTablePageId, blogConfig.blogTableViewId);
+        const pageId = query.block;
         return {
             blockQuery: pageId,
-            data: recordListToTree(await loadFullPageChunk(pageId))
+            article: await getArticle(pageId)
         }
     }
 
     constructor(props: any) {
         super(props);
         this.state = {
-            data: []
+            article: undefined
         }
     }
 
-    async componentDidMount(): Promise<void> {
-        // const pageId = this.props.blockQuery;
-        this.setState({
-            data: this.props.data
-        })
-        // this.setState({
-        //     data: recordListToTree(await loadFullPageChunk(pageId))
-        // });
-    }
-
     public render(): React.ReactNode {
-        if (this.state.data.length === 0) {
+        const article = this.props.article;
+
+        if (article === undefined) {
             return <div>
                 <MetaHead/>
                 <AppLayout>
                 </AppLayout>
             </div>
         }
+
         return <div>
-            <MetaHead title={this.getTitle()}/>
+            <MetaHead title={article.meta.title}/>
             <AppLayout>
                 <Content>
-                    {this.renderCover()}
-                    {this.renderTitle()}
-                    {this.renderPage()}
-                    {this.renderComment()}
+                    {this.renderCover(article)}
+                    {Post.renderTitle(article)}
+                    {Post.renderPage(article)}
+                    {Post.renderComment(article)}
                 </Content>
             </AppLayout>
         </div>
     }
 
-    private getTitle(): string {
-        const properties = this.state.data[0].value.properties;
-        if (properties !== undefined && properties.title.length > 0) {
-            return properties.title[0]
-        }
-        return ""
-    }
-
-    private renderCover(): React.ReactNode {
-        const data = this.state.data[0];
-        if (data === undefined || data == null) {
-            return null;
-        }
-        const item = data.value;
-        const format = item.format;
+    private renderCover(article: Article): React.ReactNode {
+        const format = article.meta.cover;
         if (format === undefined || format.page_cover === undefined || format.page_cover.length === 0) {
             return null;
         }
@@ -122,21 +103,23 @@ export default class Post extends React.Component<IProps, IState> {
         return <CoverImage src={coverUrl}/>
     }
 
-    private renderTitle(): React.ReactNode {
-        const titleBlock = this.state.data[0].value;
-        return <PageHeaderBlock value={titleBlock}/>
+    private static renderTitle(article: Article): React.ReactNode {
+        return <PageHeaderBlock title={article.meta.title} pubDate={article.meta.date}/>
     }
 
-    private renderPage(): React.ReactNode {
-        const blockData = this.state.data[0].children;
+    private static renderPage(article: Article): React.ReactNode {
+        const blockData = article.blocks;
         return <div><NotionBlockList blocks={blockData}/></div>;
     }
 
-    private renderComment(): React.ReactNode {
-        const data = this.state.data[0].value;
-        const name = getName(data);
-        const title = this.getTitle();
-        const disqusShortname = 'sorcererxwblog';
+    private static renderComment(article: Article): React.ReactNode {
+        if (blogConfig.disqusConfig.enable == false) {
+            return <div/>
+        }
+
+        const name = article.meta.name;
+        const title = article.meta.title;
+        const shortName = blogConfig.disqusConfig.shortName;
         const disqusConfig = {
             url: `https://blog.sorcererxw.com/post/${name}`,
             identifier: name,
@@ -144,7 +127,7 @@ export default class Post extends React.Component<IProps, IState> {
         };
 
         return <Comment>
-            <DiscussionEmbed shortname={disqusShortname} config={disqusConfig}/>
+            <DiscussionEmbed shortname={shortName} config={disqusConfig}/>
         </Comment>
 
     }

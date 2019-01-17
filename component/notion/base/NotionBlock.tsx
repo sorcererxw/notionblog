@@ -1,6 +1,6 @@
 import * as React from 'react'
 import styled from "styled-components";
-import {BlockNode} from "../../../api/notion";
+import {BlockNode} from "../../../api/types";
 import BulletedListBlock from "../list/BulletedListBlock";
 import CodeBlock from "../CodeBlock";
 import CollectionViewBlock from "../CollectionViewBlock";
@@ -16,13 +16,14 @@ import TextBlock from "../TextBlock";
 import VideoBlock from "../figure/VideoBlock";
 
 const Container = styled.div`
+  letter-spacing: 0.1px;
   color: rgb(55, 53, 47);
   width: 100%;
   max-width: 100%;
   line-height: 1.5;
   font-size: 18px;
   margin: 1px 0;
-  padding-top: 16px;
+  padding-top: 12px;
   box-sizing: border-box;
   display: block;
 `;

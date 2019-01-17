@@ -1,15 +1,10 @@
 const express = require('express')
 const next = require('next')
 const proxyMiddleware = require('http-proxy-middleware')
-const LRUCache = require('lru-cache')
 const path = require('path')
-const getPosts = require("./posts")
 const sm = require('sitemap')
-
-const ssrCache = new LRUCache({
-    max: 100,
-    maxAge: 1000 * 60 * 60 // 1hour
-})
+const getPosts = require("./provider").getPosts
+const getPost = require("./provider").getPost
 
 const reverseProxy = {
     '/api': {
@@ -33,7 +28,7 @@ const handle = app.getRequestHandler()
 app.prepare().then(() => {
     const server = express()
 
-    if (reverseProxy) {
+    if (reverseProxy && false) {
         Object.keys(reverseProxy).forEach(function (context) {
             server.use(proxyMiddleware(context, reverseProxy[context]))
         })
@@ -52,9 +47,22 @@ app.prepare().then(() => {
         res.send(await getSitemap())
     })
 
+    server.all("/api/blog", async (req, res) => {
+        res.setHeader('Content-Type', 'application/json')
+        const result = await getPosts()
+        res.send(JSON.stringify(result))
+    })
+
+    server.all("/api/blog/:id", async (req, res) => {
+        const id = req.params.id
+        res.setHeader('Content-Type', 'application/json')
+        const result = await getPost(id)
+        res.send(JSON.stringify(result))
+    })
+
     server.all("/post/:name", async (req, res) => {
-        const pageId = req.params.name
-        return renderAndCache(req, res, '/post', {
+        const pageId = await getIdByName(req.params.name)
+        return app.render(req, res, '/post', {
             block: pageId
         })
     })
@@ -74,7 +82,21 @@ app.prepare().then(() => {
     console.log(err)
 })
 
-async function getSitemap() {
+const nameMap = {}
+
+const getIdByName = async (name) => {
+    if (nameMap[name] !== undefined) return nameMap[name]
+    const posts = await getPosts()
+    for (let post of posts) {
+        if (post.name === name) {
+            nameMap[name] = post.id
+            return post.id
+        }
+    }
+    return ""
+}
+
+const getSitemap = async () => {
     const sitemap = sm.createSitemap({
         hostname: 'https://blog.sorcererxw.com',
         cacheTime: 600000 // 600 sec - cache purge period
@@ -82,51 +104,13 @@ async function getSitemap() {
 
     const posts = await getPosts()
     for (let i = 0; i < posts.length; i += 1) {
-        const post = posts[i]
+        const name = posts[i].name
         sitemap.add({
-            url: `/post/${post}`,
+            url: `/post/${name}`,
             changefreq: 'always',
             priority: 0.9
         })
     }
 
     return sitemap.toString()
-}
-
-/*
- * NB: make sure to modify this to take into account anything that should trigger
- * an immediate page change (e.g a locale stored in req.session)
- */
-function getCacheKey(req) {
-    return `${req.url}`
-}
-
-async function renderAndCache(req, res, pagePath, queryParams) {
-    const key = getCacheKey(req)
-
-    // If we have a page in the cache, let's serve it
-    if (ssrCache.has(key)) {
-        res.setHeader('x-cache', 'HIT')
-        res.send(ssrCache.get(key))
-        return
-    }
-
-    try {
-        // If not let's render the page into HTML
-        const html = await app.renderToHTML(req, res, pagePath, queryParams)
-
-        // Something is wrong with the request, let's skip the cache
-        if (res.statusCode !== 200) {
-            res.send(html)
-            return
-        }
-
-        // Let's cache this page
-        ssrCache.set(key, html)
-
-        res.setHeader('x-cache', 'MISS')
-        res.send(html)
-    } catch (err) {
-        app.renderError(err, req, res, pagePath, queryParams)
-    }
 }

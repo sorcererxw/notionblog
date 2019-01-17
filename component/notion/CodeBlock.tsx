@@ -1,7 +1,7 @@
 import * as React from 'react'
 import SyntaxHighlighter, { } from 'react-syntax-highlighter';
 import styled from "styled-components";
-import { BlockValue } from "../../api/notion";
+import { BlockValue } from "../../api/types";
 
 const Container = styled.div`
     width: 100%;

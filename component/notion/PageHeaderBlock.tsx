@@ -1,6 +1,6 @@
+import * as moment from "moment";
 import * as React from 'react'
 import styled from "styled-components";
-import {BlockValue, getDate} from "../../api/notion";
 
 const Container = styled.div`
   margin:16px 0;
@@ -25,11 +25,11 @@ const PubDate = styled.div`
 `;
 
 interface IProps {
-    value: BlockValue
+    title: string,
+    pubDate: number
 }
 
 interface IState {
-    _: undefined
 }
 
 export default class PageHeaderBlock extends React.Component<IProps, IState> {
@@ -38,13 +38,9 @@ export default class PageHeaderBlock extends React.Component<IProps, IState> {
     }
 
     public render(): React.ReactNode {
-        const properties = this.props.value.properties;
-        if (properties === undefined) {
-            return null;
-        }
-        const pubData = getDate(this.props.value).format("MMM DD, YYYY");
+        const pubData = moment.unix(this.props.pubDate).format("MMM DD, YYYY");
         return <Container>
-            <Title>{properties.title}</Title>
+            <Title>{this.props.title}</Title>
             <MetaContainer>
                 <PubDate>{pubData}</PubDate>
             </MetaContainer>

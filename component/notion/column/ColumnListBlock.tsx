@@ -1,6 +1,6 @@
 import * as React from 'react'
 import styled from "styled-components";
-import {BlockNode} from "../../../api/notion";
+import {BlockNode} from "../../../api/types";
 import ColumnBlock from "./ColumnBlock";
 
 const Container = styled.div`
@@ -11,8 +11,6 @@ const Container = styled.div`
 `;
 
 const ColumnContainer = styled.div<{ ratio: number | undefined }>`
-  padding-top: 12px;
-  padding-bottom: 12px; 
   flex-grow: 0; 
   flex-shrink: 0; 
   width: calc((100% - 92px) * ${p => p.ratio ? p.ratio : 1});
