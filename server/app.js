@@ -37,7 +37,6 @@ app.prepare().then(() => {
     })
 
     server.all('/((\\d+))/((\\d+))/((\\d+))/:name', async (req, res) => {
-        console.log("301")
         res.redirect(301, `/${req.params.name}`)
     })
 
@@ -53,8 +52,16 @@ app.prepare().then(() => {
             res.statusCode = 404
             return app.render(req, res, "/_error")
         }
+        const article = await getPost(pageId)
         return app.render(req, res, '/post', {
-            block: pageId
+            block: pageId,
+            article: article
+        })
+    })
+
+    server.all("/", async (req, res) => {
+        return app.render(req, res, '/', {
+            posts: await getPosts()
         })
     })
 

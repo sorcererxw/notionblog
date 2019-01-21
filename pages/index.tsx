@@ -4,7 +4,6 @@ import {ArticleMeta} from "../api/types";
 import AppLayout from "../component/AppLayout";
 import ArchiveItem from "../component/ArchiveItem";
 import MetaHead from "../component/MetaHead";
-import {getArticleMetaList} from '../api'
 
 import * as moment from "moment";
 
@@ -30,9 +29,10 @@ interface State {
 }
 
 class Index extends React.Component<Props, State> {
-    static async getInitialProps() {
-        const result = await getArticleMetaList();
-        return {data: result}
+    static async getInitialProps({query}) {
+        return {
+            data: query.posts
+        }
     }
 
     constructor(props) {

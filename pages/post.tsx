@@ -7,8 +7,6 @@ import NotionBlockList from "../component/notion/base/NotionBlockList";
 import PageHeaderBlock from "../component/notion/PageHeaderBlock";
 import {DiscussionEmbed} from 'disqus-react';
 
-import {getArticle} from '../api';
-
 import * as blogConfig from '../config';
 
 const Content = styled.div`
@@ -44,9 +42,10 @@ interface State {
 export default class Post extends React.Component<Props, State> {
     static async getInitialProps({query}) {
         const pageId = query.block;
+        const article = query.article;
         return {
             blockQuery: pageId,
-            article: await getArticle(pageId)
+            article: article
         }
     }
 
@@ -65,8 +64,6 @@ export default class Post extends React.Component<Props, State> {
 
     public render(): React.ReactNode {
         const article = this.state.article;
-
-        console.log(article);
 
         if (article === undefined) {
             return <div>
