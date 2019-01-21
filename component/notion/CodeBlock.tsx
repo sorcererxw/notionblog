@@ -1,7 +1,7 @@
 import * as React from 'react'
-import SyntaxHighlighter, { } from 'react-syntax-highlighter';
+import SyntaxHighlighter, {} from 'react-syntax-highlighter';
 import styled from "styled-components";
-import { BlockValue } from "../../api/types";
+import {BlockValue} from "../../api/types";
 
 const Container = styled.div`
     width: 100%;
@@ -56,9 +56,11 @@ class CodeBlock extends React.Component<IProps, IState> {
         if (properties === undefined) {
             return null;
         }
-        const language = properties.language[0];
-        const codeText: string = properties.title[0];
-
+        const language = properties.language[0][0];
+        const codeText: string = properties.title[0][0];
+        if (language === 'HTML' && codeText.startsWith("<!--render-->")) {
+            return <div dangerouslySetInnerHTML={{__html: codeText}}/>
+        }
         return <Container>
             <SyntaxHighlighter
                 customStyle={{
@@ -70,12 +72,12 @@ class CodeBlock extends React.Component<IProps, IState> {
                 }}
                 PreTag={Pre}
                 CodeTag={Code}
-                children={codeText} />
+                children={codeText}/>
             <LanguageBar>
                 <div style={{
                     maxWidth: '100%',
                     flex: 1
-                }} />
+                }}/>
                 <LanguageLabel>{language}</LanguageLabel>
             </LanguageBar>
         </Container>
