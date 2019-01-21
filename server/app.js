@@ -1,18 +1,9 @@
 const express = require('express')
 const next = require('next')
-const proxyMiddleware = require('http-proxy-middleware')
 const path = require('path')
 const sm = require('sitemap')
 const getPosts = require("./provider").getPosts
 const getPost = require("./provider").getPost
-
-const reverseProxy = {
-    '/api': {
-        target: "https://www.notion.so/api/v3/",
-        pathRewrite: {'^/api': '/'},
-        changeOrigin: true
-    }
-}
 
 const port = parseInt(process.env.PORT, 10) || 3000
 const env = process.env.NODE_ENV
@@ -27,12 +18,6 @@ const handle = app.getRequestHandler()
 
 app.prepare().then(() => {
     const server = express()
-
-    if (reverseProxy && false) {
-        Object.keys(reverseProxy).forEach(function (context) {
-            server.use(proxyMiddleware(context, reverseProxy[context]))
-        })
-    }
 
     server.all('/robots.txt', (_, res) => {
         console.log(path.join(__dirname, '../static', 'robots.txt'))
@@ -49,6 +34,11 @@ app.prepare().then(() => {
         res.setHeader('Content-Type', 'application/json')
         const result = await getPost(id)
         res.send(JSON.stringify(result))
+    })
+
+    server.all('/((\\d+))/((\\d+))/((\\d+))/:name', async (req, res) => {
+        console.log("301")
+        res.redirect(301, `/${req.params.name}`)
     })
 
     server.all("/api/blog", async (req, res) => {

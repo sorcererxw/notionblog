@@ -10,7 +10,6 @@
     "@zeit/next-typescript": "^1.1.1",
     "axios": "^0.18.0",
     "babel-plugin-transform-remove-console": "^6.9.4",
-    "cjkspace": "^0.0.3",
     "compression": "^1.7.3",
     "disqus-react": "^1.0.5",
     "express": "^4.16.4",
