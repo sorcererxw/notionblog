@@ -37,7 +37,7 @@ app.prepare().then(() => {
     })
 
     server.all('/((\\d+))/((\\d+))/((\\d+))/:name', async (req, res) => {
-        res.redirect(301, `/${req.params.name}`)
+        res.redirect(301, `/post/${req.params.name}`)
     })
 
     server.all("/api/blog", async (req, res) => {
