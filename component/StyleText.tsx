@@ -13,6 +13,8 @@ const Highlight = styled.code`
   align-self: center;
   padding: 2px 4px;
   border-radius: 3px; 
+  max-width: 100%;
+  word-break: break-word;
 `;
 
 const Link = styled.a`
