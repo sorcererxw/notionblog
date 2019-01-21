@@ -1,11 +1,8 @@
 import * as React from "react";
 import styled from "styled-components";
 import {ArticleMeta} from "../api/types";
-import Responsive from 'react-responsive';
 import * as moment from 'moment';
-
-const Mobile = props => <Responsive {...props} maxWidth={767}/>;
-const Desktop = props => <Responsive {...props} minWidth={768}/>;
+import {Desktop, Mobile} from "./Responsive";
 
 const PostItem = styled.div`
     margin: 32px 0;

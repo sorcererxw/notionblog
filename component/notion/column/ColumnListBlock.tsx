@@ -1,12 +1,20 @@
 import * as React from 'react'
 import styled from "styled-components";
 import {BlockNode} from "../../../api/types";
+import {Desktop, Mobile} from "../../Responsive";
 import ColumnBlock from "./ColumnBlock";
 
-const Container = styled.div`
+const DesktopContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
+  box-sizing: border-box;
+`;
+
+const MobileContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
   box-sizing: border-box;
 `;
 
@@ -35,6 +43,14 @@ class ColumnListBlock extends React.Component<Props, {}> {
     }
 
     public render(): React.ReactNode {
+
+        return <div>
+            {this.renderDesktop()}
+            {this.renderMobile()}
+        </div>
+    }
+
+    private renderDesktop(): React.ReactNode {
         const content: React.ReactNode[] = [];
         this.props.block.children.forEach((v, k) => {
             if (v.value.type === 'column') {
@@ -50,9 +66,34 @@ class ColumnListBlock extends React.Component<Props, {}> {
             }
         });
 
-        return <Container>
-            {content}
-        </Container>
+        return <Desktop>
+            <DesktopContainer>
+                {content}
+            </DesktopContainer>
+        </Desktop>
+    }
+
+    private renderMobile(): React.ReactNode {
+        const content: React.ReactNode[] = [];
+        this.props.block.children.forEach((v, k) => {
+            if (v.value.type === 'column') {
+                if (k > 0) {
+                    content.push(<Gap key={k * 2 - 1}/>)
+                }
+                content.push(
+                    <div key={k * 2}>
+                        <ColumnBlock block={v}/>
+                    </div>
+                )
+            }
+        });
+
+
+        return <Mobile>
+            <MobileContainer>
+                {content}
+            </MobileContainer>
+        </Mobile>
     }
 }
 
