@@ -1,5 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
+import * as config from '../config'
 
 const Container = styled.div`
   width: 100%;
@@ -38,7 +39,7 @@ export default class AppHeader extends React.Component<IProps, IState> {
     public render(): React.ReactNode {
         return <Container>
             <Content>
-                <Logo><a href={'/'}>SorcererXW's Blog</a></Logo>
+                <Logo><a href={'/'}>{config.blogName}</a></Logo>
                 <div style={{flex: 1}}/>
             </Content>
         </Container>;
