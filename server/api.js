@@ -47,6 +47,7 @@ const getRecordValues = function (...blockIds) {
 
 const loadPageChunk = function (pageId, count, cursor = {stack: []}) {
     const data = {
+        chunkNumber: 0,
         cursor: cursor,
         limit: count,
         pageId: getFullBlockId(pageId),
