@@ -11,3 +11,7 @@ module.exports.getPosts = () => {
 module.exports.getPost = (id) => {
     return service.getArticle(id)
 }
+
+module.exports.getSignedFileUrls = (data) => {
+    return service.getSignedFileUrls(data)
+}

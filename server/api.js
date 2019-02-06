@@ -226,4 +226,8 @@ const getArticleMetaList = async (tableId, viewId) => {
         .map(it => blockValueToArticleMeta(it))
 }
 
-module.exports = {getArticle, getArticleMetaList}
+const getSignedFileUrls = async (data) => {
+    return await post("/getSignedFileUrls", data)
+}
+
+module.exports = {getArticle, getArticleMetaList, getSignedFileUrls}

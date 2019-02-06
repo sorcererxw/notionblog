@@ -6,7 +6,6 @@ import MetaHead from "../component/MetaHead";
 import NotionBlockList from "../component/notion/base/NotionBlockList";
 import PageHeaderBlock from "../component/notion/PageHeaderBlock";
 import {DiscussionEmbed} from 'disqus-react';
-
 import * as blogConfig from '../config';
 
 const Content = styled.div`
@@ -64,6 +63,8 @@ export default class Post extends React.Component<Props, State> {
 
     public render(): React.ReactNode {
         const article = this.state.article;
+
+        console.log(article);
 
         if (article === undefined) {
             return <div>
