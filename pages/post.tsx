@@ -6,7 +6,6 @@ import MetaHead from "../component/MetaHead";
 import NotionBlockList from "../component/notion/base/NotionBlockList";
 import PageHeaderBlock from "../component/notion/PageHeaderBlock";
 import {DiscussionEmbed} from 'disqus-react';
-
 import * as blogConfig from '../config';
 
 const Content = styled.div`

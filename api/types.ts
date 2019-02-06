@@ -95,3 +95,7 @@ export interface Article {
     meta: ArticleMeta,
     blocks: BlockNode[]
 }
+
+export interface SignedFileUrls {
+    signedUrls: string[]
+}

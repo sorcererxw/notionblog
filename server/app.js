@@ -4,6 +4,8 @@ const path = require('path')
 const sm = require('sitemap')
 const getPosts = require("./provider").getPosts
 const getPost = require("./provider").getPost
+const getSignedFileUrls = require("./provider").getSignedFileUrls
+const bodyParser = require('body-parser')
 
 const port = parseInt(process.env.PORT, 10) || 3000
 const env = process.env.NODE_ENV
@@ -18,6 +20,8 @@ const handle = app.getRequestHandler()
 
 app.prepare().then(() => {
     const server = express()
+    server.use(bodyParser.urlencoded({extended: true}))
+    server.use(bodyParser.json())
 
     server.all('/robots.txt', (_, res) => {
         console.log(path.join(__dirname, '../static', 'robots.txt'))
@@ -34,6 +38,12 @@ app.prepare().then(() => {
         res.setHeader('Content-Type', 'application/json')
         const result = await getPost(id)
         res.send(JSON.stringify(result))
+    })
+
+    server.all("/api/notion/getSignedFileUrls", async (req, res) => {
+        const signedUrls =await getSignedFileUrls(req.body)
+        res.setHeader('Content-Type', 'application/json')
+        res.send(JSON.stringify(signedUrls))
     })
 
     server.all('/((\\d+))/((\\d+))/((\\d+))/:name', async (req, res) => {
