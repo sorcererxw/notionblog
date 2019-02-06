@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled from "styled-components";
 import '../style/index.css';
 import MetaHead from "../component/MetaHead";
+import {Desktop, Mobile} from "../component/Responsive";
 
 const Container = styled.div`
   width: 768px;
@@ -17,7 +18,7 @@ const Container = styled.div`
 const StatsCode = styled.div`
   font-size: 256px;
   white-space: nowrap;
-  max-font-size: 30vw;
+  max-width: 100%;
   font-weight: 900;
   user-select: none;
 `;
@@ -26,6 +27,7 @@ const RedirectButton = styled.a`
   font-size: 36px;
   margin: 36px 0;
   text-decoration: none;
+  text-align: center;
   border-radius: 4px;
   padding: 8px;
   user-select: none;
@@ -40,7 +42,8 @@ const RedirectButton = styled.a`
 export default () => (
     <Container>
         <MetaHead title={"Page Not Found"}/>
-        <StatsCode>4🌚4</StatsCode>
+        <Desktop><StatsCode>4🌚4</StatsCode></Desktop>
+        <Mobile><StatsCode style={{fontSize: '30vw'}}>4🌚4</StatsCode></Mobile>
         <RedirectButton href={"/"}>Go to Homepage</RedirectButton>
     </Container>
 )

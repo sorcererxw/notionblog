@@ -27,7 +27,6 @@ class VideoBlock extends React.Component<IProps, IState> {
 
     async componentDidMount(): Promise<void> {
         const format = this.props.value.format;
-        console.log(format);
 
         if (format == null) {
             return
@@ -39,9 +38,7 @@ class VideoBlock extends React.Component<IProps, IState> {
                 youtube: true
             })
         } else if (format.display_source.match("^.*secure\.notion-static\.com.*$")) {
-            console.log("notion video");
             const signedFileUrls: SignedFileUrls = await api.getSignedFileUrls([format.display_source]);
-            console.log(signedFileUrls);
             if (signedFileUrls !== undefined
                 && signedFileUrls.signedUrls !== undefined
                 && signedFileUrls.signedUrls.length > 0) {
