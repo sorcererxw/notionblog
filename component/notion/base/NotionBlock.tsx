@@ -2,6 +2,7 @@ import * as React from 'react'
 import styled from "styled-components";
 import {BlockNode} from "../../../api/types";
 import LoomBlock from "../figure/LoomBlock";
+import SubSubHeaderBlock from "../header/SubSubHeaderBlock";
 import BulletedListBlock from "../list/BulletedListBlock";
 import CodeBlock from "../CodeBlock";
 import CollectionViewBlock from "../CollectionViewBlock";
@@ -61,6 +62,8 @@ class NotionBlock extends React.Component<IProps, IState> {
             return <HeaderBlock value={block}/>
         } else if (type === 'sub_header') {
             return <SubHeaderBlock value={block.value}/>
+        } else if (type === 'sub_sub_header') {
+            return <SubSubHeaderBlock value={block.value}/>
         } else if (type === 'image') {
             return <ImageBlock value={block.value}/>
         } else if (type === 'code') {
