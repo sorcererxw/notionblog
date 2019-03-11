@@ -1,6 +1,7 @@
 import * as React from 'react'
 import styled from "styled-components";
-import {BlockValue} from "../../../api/types";
+import * as api from "../../../api";
+import {BlockValue, SignedFileUrls} from "../../../api/types";
 import FigureBlockContainer from "./FigureBlockContainer";
 import FigureCaption from "./FigureCaption";
 
@@ -15,11 +16,32 @@ interface Props {
 }
 
 interface State {
+    width: number
+    source: string
 }
 
 class ImageBlock extends React.Component<Props, State> {
     constructor(props: any) {
         super(props);
+        this.state = {
+            width: -1,
+            source: ""
+        }
+    }
+
+    async componentDidMount(): Promise<void> {
+        const format = this.props.value.format;
+        const properties = this.props.value.properties;
+        if (format !== undefined) {
+            this.setState({
+                width: format.block_width,
+                source: await getImageUrl(format.display_source)
+            });
+        } else if (properties !== undefined) {
+            this.setState({
+                source: await getImageUrl(properties.source[0][0])
+            });
+        }
     }
 
     public render(): React.ReactNode {
@@ -34,16 +56,14 @@ class ImageBlock extends React.Component<Props, State> {
     }
 
     private renderImage = (): React.ReactNode | null => {
-        const format = this.props.value.format;
-        const properties = this.props.value.properties;
-        if (format !== undefined) {
-            return <Image
-                width={format.block_width}
-                src={getImageUrl(format.display_source)}/>
-        } else if (properties !== undefined) {
-            return <Image src={getImageUrl(properties.source[0][0])}/>
+        const {source, width} = this.state;
+        if (source.length == 0) {
+            return null
+        }
+        if (width >= 0) {
+            return <Image width={width} src={source}/>
         } else {
-            return null;
+            return <Image src={source}/>
         }
     };
 
@@ -56,9 +76,14 @@ class ImageBlock extends React.Component<Props, State> {
     }
 }
 
-const getImageUrl = (url: string) => {
+const getImageUrl = async (url: string) => {
     if (url.match("/secure.notion-static.com/")) {
-        return "https://www.notion.so/image/" + encodeURIComponent(url);
+        const signedFileUrls: SignedFileUrls = await api.getSignedFileUrls([url]);
+        if (signedFileUrls !== undefined
+            && signedFileUrls.signedUrls !== undefined
+            && signedFileUrls.signedUrls.length > 0) {
+            return signedFileUrls.signedUrls[0]
+        }
     }
     return url;
 };
