@@ -2,10 +2,10 @@ import * as React from 'react'
 import styled from "styled-components";
 import {BlockValue} from "../../../api/types";
 
-const Subheader = styled.h3`
-   font-size: 24px;
+const SubSubheader = styled.h4`
+   font-size: 18px;
    margin: 0;
-   margin-top: 8px;
+   margin-top: 6px;
 `;
 
 interface Props {
@@ -15,7 +15,7 @@ interface Props {
 interface State {
 }
 
-class SubHeaderBlock extends React.Component<Props, State> {
+class SubSubHeaderBlock extends React.Component<Props, State> {
     constructor(props: any) {
         super(props);
     }
@@ -25,8 +25,8 @@ class SubHeaderBlock extends React.Component<Props, State> {
         if (properties === undefined) {
             return null;
         }
-        return <Subheader>{properties.title}</Subheader>
+        return <SubSubheader>{properties.title}</SubSubheader>
     }
 }
 
-export default SubHeaderBlock
+export default SubSubHeaderBlock
