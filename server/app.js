@@ -2,11 +2,11 @@ const express = require('express')
 const next = require('next')
 const path = require('path')
 const sm = require('sitemap')
-const getPosts = require("./provider").getPosts
 const getPost = require("./provider").getPost
 const getSignedFileUrls = require("./provider").getSignedFileUrls
 const bodyParser = require('body-parser')
 const schedule = require('node-schedule')
+const getPosts = require("./provider").getPosts
 
 const port = parseInt(process.env.PORT, 10) || 3000
 const env = process.env.NODE_ENV
@@ -19,7 +19,7 @@ console.log(`dev: ${dev}`)
 const app = next({dev})
 const handle = app.getRequestHandler()
 
-let blogListCache = []
+let blogList = []
 
 app.prepare().then(() => {
     const server = express()
@@ -27,7 +27,8 @@ app.prepare().then(() => {
     server.use(bodyParser.json())
 
     schedule.scheduleJob("* * * * *", async () => {
-        blogListCache = await getPosts()
+        console.log("update blog")
+        blogList = await getPosts()
     })
 
     server.all('/robots.txt', (_, res) => {
@@ -59,8 +60,7 @@ app.prepare().then(() => {
 
     server.all("/api/blog", async (req, res) => {
         res.setHeader('Content-Type', 'application/json')
-        const result = await getPosts()
-        res.send(JSON.stringify(result))
+        res.send(JSON.stringify(blogList))
     })
 
     server.all("/post/:name", async (req, res) => {
@@ -78,7 +78,7 @@ app.prepare().then(() => {
 
     server.all("/blog", async (req, res) => {
         return app.render(req, res, '/blog', {
-            posts: blogListCache
+            posts: blogList
         })
     })
 
@@ -97,14 +97,10 @@ app.prepare().then(() => {
     console.log(err)
 })
 
-const nameMap = {}
 
 const getIdByName = async (name) => {
-    if (nameMap[name] !== undefined) return nameMap[name]
-    const posts = await getPosts()
-    for (let post of posts) {
+    for (let post of blogList) {
         if (post.name === name) {
-            nameMap[name] = post.id
             return post.id
         }
     }
@@ -117,9 +113,8 @@ const getSitemap = async () => {
         cacheTime: 600000 // 600 sec - cache purge period
     })
 
-    const posts = await getPosts()
-    for (let i = 0; i < posts.length; i += 1) {
-        const name = posts[i].name
+    for (let i = 0; i < blogList.length; i += 1) {
+        const name = blogList[i].name
         sitemap.add({
             url: `/post/${name}`,
             changefreq: 'always',
