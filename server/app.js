@@ -6,22 +6,29 @@ const getPosts = require("./provider").getPosts
 const getPost = require("./provider").getPost
 const getSignedFileUrls = require("./provider").getSignedFileUrls
 const bodyParser = require('body-parser')
+const schedule = require('node-schedule')
 
 const port = parseInt(process.env.PORT, 10) || 3000
 const env = process.env.NODE_ENV
 const dev = process.env.NODE_ENV !== 'production'
 
-const ROOT_URL = dev ? `http://localhost:${port}` : 'https://blog.sorcererxw.com'
+const ROOT_URL = dev ? `http://localhost:${port}` : 'https://sorcererxw.com'
 
 console.log(`dev: ${dev}`)
 
 const app = next({dev})
 const handle = app.getRequestHandler()
 
+let blogListCache = []
+
 app.prepare().then(() => {
     const server = express()
     server.use(bodyParser.urlencoded({extended: true}))
     server.use(bodyParser.json())
+
+    schedule.scheduleJob("* * * * *", async () => {
+        blogListCache = await getPosts()
+    })
 
     server.all('/robots.txt', (_, res) => {
         console.log(path.join(__dirname, '../static', 'robots.txt'))
@@ -41,7 +48,7 @@ app.prepare().then(() => {
     })
 
     server.all("/api/notion/getSignedFileUrls", async (req, res) => {
-        const signedUrls =await getSignedFileUrls(req.body)
+        const signedUrls = await getSignedFileUrls(req.body)
         res.setHeader('Content-Type', 'application/json')
         res.send(JSON.stringify(signedUrls))
     })
@@ -69,9 +76,9 @@ app.prepare().then(() => {
         })
     })
 
-    server.all("/", async (req, res) => {
-        return app.render(req, res, '/', {
-            posts: await getPosts()
+    server.all("/blog", async (req, res) => {
+        return app.render(req, res, '/blog', {
+            posts: blogListCache
         })
     })
 
@@ -106,7 +113,7 @@ const getIdByName = async (name) => {
 
 const getSitemap = async () => {
     const sitemap = sm.createSitemap({
-        hostname: 'https://blog.sorcererxw.com',
+        hostname: 'https://sorcererxw.com',
         cacheTime: 600000 // 600 sec - cache purge period
     })
 
@@ -119,6 +126,5 @@ const getSitemap = async () => {
             priority: 0.9
         })
     }
-
     return sitemap.toString()
 }

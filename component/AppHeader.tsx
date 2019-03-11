@@ -54,9 +54,9 @@ export default class AppHeader extends React.Component<Props, State> {
     private renderDesktop(): React.ReactNode {
         return <Container>
             <Content>
-                <Logo><a href={'/'}>{config.blogName}</a></Logo>
+                <Logo><a href={'/blog'}>{config.blogName}</a></Logo>
                 <div style={{flex: 1}}/>
-                <a>About</a>
+                {/*<a>About</a>*/}
             </Content>
         </Container>
     }
@@ -68,13 +68,13 @@ export default class AppHeader extends React.Component<Props, State> {
 
         return <Container>
             <Content>
-                <Logo><a href={'/'}>{config.blogName}</a></Logo>
+                <Logo><a href={'/blog'}>{config.blogName}</a></Logo>
                 <div style={{flex: 1}}/>
-                <button onClick={() => this.setState({expandMenu: !this.state.expandMenu})}>
-                    menu
-                </button>
+                {/*<button onClick={() => this.setState({expandMenu: !this.state.expandMenu})}>*/}
+                    {/*menu*/}
+                {/*</button>*/}
             </Content>
-            {menu}
+            {/*{menu}*/}
         </Container>
     }
 }

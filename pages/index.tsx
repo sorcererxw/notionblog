@@ -1,86 +1,80 @@
-import * as React from 'react';
-import styled from "styled-components";
-import {ArticleMeta} from "../api/types";
-import AppLayout from "../component/AppLayout";
-import ArchiveItem from "../component/ArchiveItem";
+import * as React from "react";
+import {Component} from "react";
 import MetaHead from "../component/MetaHead";
 
-import * as moment from "moment";
-
-const Content = styled.div`
-  width: 768px;
-  max-width: 90%;
-  margin: auto;
-`;
-
-const YearHeader = styled.div`
-  color: var(--head-color);
-  font-weight: 700;
-  font-size: 32px;
-  margin-top: 48px;
-`;
-
-interface Props {
-    data: ArticleMeta[],
-}
-
-interface State {
-    data: ArticleMeta[],
-}
-
-class Index extends React.Component<Props, State> {
-    static async getInitialProps({query}) {
-        return {
-            data: query.posts
-        }
-    }
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            data: []
-        }
-    }
-
-    async componentDidMount(): Promise<void> {
-        this.setState({
-            data: this.props.data
-        })
-    }
-
-    public render(): React.ReactNode {
-        return (
-            <div>
-                <MetaHead/>
-                <AppLayout>
-                    <Content>
-                        {this.renderList()}
-                    </Content>
-                </AppLayout>
+class Index extends Component {
+    render() {
+        const LinkWrapper = (props) => (
+            <li style={{
+                paddingBottom: 8,
+            }}>
+                <span style={{
+                    fontFamily: '"Noto Serif",serif',
+                    color: '#424242',
+                    fontSize: '1.2rem',
+                    alignItems: 'center',
+                    display: 'inline-flex'
+                }}>
+                    {props.children}
+                </span>
+            </li>
+        );
+        const content = (
+            <div style={{
+                minHeight: '100vh',
+                boxSizing: 'border-box',
+                display: 'flex'
+            }}>
+                <div style={{
+                    padding: 16,
+                    paddingTop: '12em',
+                    width: 1024,
+                    margin: '0 auto',
+                    boxSizing: 'border-box',
+                }}>
+                    <h1 style={{
+                        fontSize: '3rem',
+                        fontFamily: '"Noto Serif",serif',
+                        color: '#212121',
+                    }}>SorcererXW</h1>
+                    <ul style={{
+                        listStyleType: 'none',
+                        padding: 0,
+                    }}>
+                        <LinkWrapper>
+                            <a href={'/blog'}
+                               style={{
+                                   marginLeft: 16,
+                                   marginRight: 16,
+                                   color: '#424242',
+                               }}>
+                                Blog
+                            </a>
+                        </LinkWrapper>
+                        {/*<LinkWrapper>*/}
+                        {/*Projects*/}
+                        {/*</LinkWrapper>*/}
+                        <LinkWrapper>
+                            <a href={'https://github.com/sorcererxw'}
+                               target={'_blank'}
+                               style={{
+                                   marginLeft: 16,
+                                   marginRight: 16,
+                                   color: '#424242',
+                               }}>
+                                Github
+                            </a>
+                        </LinkWrapper>
+                    </ul>
+                </div>
             </div>
         );
+        return (<div>
+                <MetaHead/>
+                {content}
+            </div>
+        )
     }
-
-
-    private renderList(): React.ReactNode {
-        const list: React.ReactNode[] = [];
-        let lastYear = 3000;
-        let key = 0;
-
-        this.state.data.forEach(it => {
-            const year = moment.unix(it.date).year();
-            if (year !== lastYear) {
-                list.push(<YearHeader key={key++}>{year}</YearHeader>);
-                lastYear = year;
-            }
-            list.push(<ArchiveItem meta={it} key={key++}/>)
-        });
-
-        return (
-            <div>{list}</div>
-        );
-    }
-
 }
 
-export default Index;
+export default Index
