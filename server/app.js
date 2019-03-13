@@ -2,15 +2,15 @@ const express = require('express')
 const next = require('next')
 const path = require('path')
 const sm = require('sitemap')
-const getPosts = require("./provider").getPosts
 const getPost = require("./provider").getPost
 const getSignedFileUrls = require("./provider").getSignedFileUrls
 const bodyParser = require('body-parser')
 const schedule = require('node-schedule')
+const getPosts = require("./provider").getPosts
 
 const port = parseInt(process.env.PORT, 10) || 3000
 const env = process.env.NODE_ENV
-const dev = process.env.NODE_ENV !== 'production'
+const dev = env !== 'production'
 
 const ROOT_URL = dev ? `http://localhost:${port}` : 'https://sorcererxw.com'
 
@@ -19,7 +19,7 @@ console.log(`dev: ${dev}`)
 const app = next({dev})
 const handle = app.getRequestHandler()
 
-let blogListCache = []
+let blogList = []
 
 app.prepare().then(() => {
     const server = express()
@@ -27,7 +27,8 @@ app.prepare().then(() => {
     server.use(bodyParser.json())
 
     schedule.scheduleJob("* * * * *", async () => {
-        blogListCache = await getPosts()
+        console.log("update blog")
+        blogList = await getPosts()
     })
 
     server.all('/robots.txt', (_, res) => {
@@ -59,13 +60,17 @@ app.prepare().then(() => {
 
     server.all("/api/blog", async (req, res) => {
         res.setHeader('Content-Type', 'application/json')
-        const result = await getPosts()
-        res.send(JSON.stringify(result))
+        res.send(JSON.stringify(blogList))
     })
 
     server.all("/post/:name", async (req, res) => {
-        const pageId = await getIdByName(req.params.name)
-        if (pageId == null || pageId.length === 0) {
+        const getIdByName = (name) => {
+            for (let post of blogList)
+                if (post.name === name) return post.id
+            return undefined
+        }
+        const pageId = getIdByName(req.params.name) || ""
+        if (pageId.length === 0) {
             res.statusCode = 404
             return app.render(req, res, "/_error")
         }
@@ -78,7 +83,7 @@ app.prepare().then(() => {
 
     server.all("/blog", async (req, res) => {
         return app.render(req, res, '/blog', {
-            posts: blogListCache
+            posts: blogList
         })
     })
 
@@ -87,9 +92,7 @@ app.prepare().then(() => {
     })
 
     server.listen(port, err => {
-        if (err) {
-            throw err
-        }
+        if (err) throw err
         console.log(`> Ready on ${ROOT_URL} [${env}]`)
     })
 }).catch(err => {
@@ -97,29 +100,14 @@ app.prepare().then(() => {
     console.log(err)
 })
 
-const nameMap = {}
-
-const getIdByName = async (name) => {
-    if (nameMap[name] !== undefined) return nameMap[name]
-    const posts = await getPosts()
-    for (let post of posts) {
-        if (post.name === name) {
-            nameMap[name] = post.id
-            return post.id
-        }
-    }
-    return ""
-}
-
 const getSitemap = async () => {
     const sitemap = sm.createSitemap({
         hostname: 'https://sorcererxw.com',
         cacheTime: 600000 // 600 sec - cache purge period
     })
 
-    const posts = await getPosts()
-    for (let i = 0; i < posts.length; i += 1) {
-        const name = posts[i].name
+    for (let i = 0; i < blogList.length; i += 1) {
+        const name = blogList[i].name
         sitemap.add({
             url: `/post/${name}`,
             changefreq: 'always',

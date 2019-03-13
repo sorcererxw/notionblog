@@ -8,18 +8,33 @@ import PageHeaderBlock from "../component/notion/PageHeaderBlock";
 import {DiscussionEmbed} from 'disqus-react';
 import * as blogConfig from '../config';
 
-const Content = styled.div`
+const CardBox = styled.article`
   width: 768px;
-  max-width: 90%;
+  max-width: 100%;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  border-radius: 8px;
+  border-color: #dadce0;
+  border-style: solid;
+  border-width: 1px;
   margin: auto;
   display: flex;
+  background-repeat: no-repeat;
   flex-direction: column;
+  overflow: hidden;
+`;
+
+const Content = styled.section`
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 32px;
 `;
 
 const CoverImage = styled.img`
   width: 100%;
   border-width: 0;
-  border-radius: 4px;
+  border-radius: 0;
   height: 30vh;
   object-fit: cover;
   object-position: center 0;
@@ -75,12 +90,14 @@ export default class Post extends React.Component<Props, State> {
         return <div>
             <MetaHead title={article.meta.title}/>
             <AppLayout>
-                <Content>
+                <CardBox>
                     {this.renderCover(article)}
-                    {Post.renderTitle(article)}
-                    {Post.renderPage(article)}
-                    {Post.renderComment(article)}
-                </Content>
+                    <Content>
+                        {Post.renderTitle(article)}
+                        {Post.renderPage(article)}
+                        {Post.renderComment(article)}
+                    </Content>
+                </CardBox>
             </AppLayout>
         </div>
     }
