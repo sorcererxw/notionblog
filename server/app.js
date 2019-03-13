@@ -10,7 +10,7 @@ const getPosts = require("./provider").getPosts
 
 const port = parseInt(process.env.PORT, 10) || 3000
 const env = process.env.NODE_ENV
-const dev = process.env.NODE_ENV !== 'production'
+const dev = env !== 'production'
 
 const ROOT_URL = dev ? `http://localhost:${port}` : 'https://sorcererxw.com'
 
@@ -64,8 +64,13 @@ app.prepare().then(() => {
     })
 
     server.all("/post/:name", async (req, res) => {
-        const pageId = await getIdByName(req.params.name)
-        if (pageId == null || pageId.length === 0) {
+        const getIdByName = (name) => {
+            for (let post of blogList)
+                if (post.name === name) return post.id
+            return undefined
+        }
+        const pageId = getIdByName(req.params.name) || ""
+        if (pageId.length === 0) {
             res.statusCode = 404
             return app.render(req, res, "/_error")
         }
@@ -87,25 +92,13 @@ app.prepare().then(() => {
     })
 
     server.listen(port, err => {
-        if (err) {
-            throw err
-        }
+        if (err) throw err
         console.log(`> Ready on ${ROOT_URL} [${env}]`)
     })
 }).catch(err => {
     console.log('An error occurred, unable to start the server')
     console.log(err)
 })
-
-
-const getIdByName = async (name) => {
-    for (let post of blogList) {
-        if (post.name === name) {
-            return post.id
-        }
-    }
-    return ""
-}
 
 const getSitemap = async () => {
     const sitemap = sm.createSitemap({
