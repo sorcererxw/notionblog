@@ -28,7 +28,7 @@ const Content = styled.section`
   max-width: 100%;
   display: flex;
   flex-direction: column;
-  margin: 32px;
+  margin: 24px;
 `;
 
 const CoverImage = styled.img`
