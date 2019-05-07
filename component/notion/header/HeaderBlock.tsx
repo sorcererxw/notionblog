@@ -4,8 +4,7 @@ import {BlockNode} from "../../../api/types";
 
 const Header = styled.h2`
   font-size: 32px;
-  margin: 0;
-  margin-top: 32px;
+  margin: 32px 0 0;
 `;
 
 interface Props {

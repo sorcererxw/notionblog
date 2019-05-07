@@ -77,7 +77,7 @@ export default class AppHeader extends React.Component<Props, State> {
                 {/*menu*/}
                 {/*</button>*/}
             </Content>
-            {/*{menu}*/}
+            {menu}
         </Container>
     }
 }

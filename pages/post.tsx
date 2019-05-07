@@ -78,7 +78,7 @@ export default class Post extends React.Component<Props, State> {
 
     public render(): React.ReactNode {
         const article = this.state.article;
-
+        console.log(article);
         if (article === undefined) {
             return <div>
                 <MetaHead/>

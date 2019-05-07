@@ -1,7 +1,7 @@
 import * as React from 'react'
 import styled from "styled-components";
 import * as api from "../../../api";
-import {BlockValue, SignedFileUrls} from "../../../api/types";
+import {BlockValue, SignedFileUrls, UnsignedUrl} from "../../../api/types";
 import FigureBlockContainer from "./FigureBlockContainer";
 import FigureCaption from "./FigureCaption";
 
@@ -30,16 +30,15 @@ class ImageBlock extends React.Component<Props, State> {
     }
 
     async componentDidMount(): Promise<void> {
-        const format = this.props.value.format;
-        const properties = this.props.value.properties;
+        const {id, format, properties} = this.props.value;
         if (format !== undefined) {
             this.setState({
                 width: format.block_width,
-                source: await getImageUrl(format.display_source)
+                source: await getImageUrl(format.display_source, id)
             });
         } else if (properties !== undefined) {
             this.setState({
-                source: await getImageUrl(properties.source[0][0])
+                source: await getImageUrl(properties.source[0][0], id)
             });
         }
     }
@@ -76,9 +75,16 @@ class ImageBlock extends React.Component<Props, State> {
     }
 }
 
-const getImageUrl = async (url: string) => {
+const getImageUrl = async (url: string, id: string) => {
     if (url.match("/secure.notion-static.com/")) {
-        const signedFileUrls: SignedFileUrls = await api.getSignedFileUrls([url]);
+        const unsignedUrl: UnsignedUrl = {
+            url: url,
+            permissionRecord: {
+                id: id,
+                table: "block"
+            }
+        };
+        const signedFileUrls: SignedFileUrls = await api.getSignedFileUrls([unsignedUrl]);
         if (signedFileUrls !== undefined
             && signedFileUrls.signedUrls !== undefined
             && signedFileUrls.signedUrls.length > 0) {

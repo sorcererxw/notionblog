@@ -1,6 +1,6 @@
 import * as React from 'react'
 import YouTube from 'react-youtube';
-import {BlockValue, SignedFileUrls} from "../../../api/types";
+import {BlockValue, SignedFileUrls, UnsignedUrl} from "../../../api/types";
 import FigureBlockContainer from "./FigureBlockContainer";
 import FigureCaption from "./FigureCaption";
 import {Player} from 'video-react';
@@ -26,7 +26,7 @@ class VideoBlock extends React.Component<IProps, IState> {
     }
 
     async componentDidMount(): Promise<void> {
-        const format = this.props.value.format;
+        const {id, format} = this.props.value;
 
         if (format == null) {
             return
@@ -38,7 +38,14 @@ class VideoBlock extends React.Component<IProps, IState> {
                 youtube: true
             })
         } else if (format.display_source.match("^.*secure\.notion-static\.com.*$")) {
-            const signedFileUrls: SignedFileUrls = await api.getSignedFileUrls([format.display_source]);
+            const unsignedUrl: UnsignedUrl = {
+                url: format.display_source,
+                permissionRecord: {
+                    id: id,
+                    table: "block"
+                }
+            };
+            const signedFileUrls: SignedFileUrls = await api.getSignedFileUrls([unsignedUrl]);
             if (signedFileUrls !== undefined
                 && signedFileUrls.signedUrls !== undefined
                 && signedFileUrls.signedUrls.length > 0) {
