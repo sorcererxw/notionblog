@@ -99,3 +99,13 @@ export interface Article {
 export interface SignedFileUrls {
     signedUrls: string[]
 }
+
+export interface PermissionRecord {
+    id: string,
+    table: string
+}
+
+export interface UnsignedUrl {
+    url: string,
+    permissionRecord: PermissionRecord
+}

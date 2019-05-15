@@ -28,7 +28,7 @@ const Content = styled.section`
   max-width: 100%;
   display: flex;
   flex-direction: column;
-  margin: 32px;
+  margin: 24px;
 `;
 
 const CoverImage = styled.img`
@@ -78,7 +78,7 @@ export default class Post extends React.Component<Props, State> {
 
     public render(): React.ReactNode {
         const article = this.state.article;
-
+        console.log(article);
         if (article === undefined) {
             return <div>
                 <MetaHead/>

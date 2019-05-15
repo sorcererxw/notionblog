@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {Article, ArticleMeta, SignedFileUrls} from "./types";
+import {Article, ArticleMeta, SignedFileUrls, UnsignedUrl} from "./types";
 
 const client = axios.create();
 
@@ -13,7 +13,7 @@ export const getArticle = (id: string): Promise<Article> => {
         .then(it => it.data)
 };
 
-export const getSignedFileUrls = (urls: string[]): Promise<SignedFileUrls> => {
+export const getSignedFileUrls = (urls: UnsignedUrl[]): Promise<SignedFileUrls> => {
     return client.post(`/api/notion/getSignedFileUrls`, {urls: urls})
         .then(it => it.data)
 };

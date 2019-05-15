@@ -4,8 +4,7 @@ import {BlockValue} from "../../../api/types";
 
 const SubSubheader = styled.h4`
    font-size: 18px;
-   margin: 0;
-   margin-top: 6px;
+   margin: 6px 0 0;
 `;
 
 interface Props {

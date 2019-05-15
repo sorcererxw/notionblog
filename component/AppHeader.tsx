@@ -67,14 +67,17 @@ export default class AppHeader extends React.Component<Props, State> {
         </div>;
 
         return <Container>
-            <Content>
+            <Content style={{
+                marginLeft: 24,
+                marginRight: 24
+            }}>
                 <Logo><a href={'/blog'}>{config.blogName}</a></Logo>
                 <div style={{flex: 1}}/>
                 {/*<button onClick={() => this.setState({expandMenu: !this.state.expandMenu})}>*/}
-                    {/*menu*/}
+                {/*menu*/}
                 {/*</button>*/}
             </Content>
-            {/*{menu}*/}
+            {menu}
         </Container>
     }
 }
