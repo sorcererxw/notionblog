@@ -1,8 +1,27 @@
 const moment = require("moment")
 const fetch = require("node-fetch")
+const winston = require('winston')
 
-function post(url, data) {
-    return fetch(`https://www.notion.so/api/v3${url}`,
+const logger = winston.createLogger({
+    level: 'info',
+    format: winston.format.json(),
+    defaultMeta: {service: 'api'},
+    transports: [
+        //
+        // - Write to all logs with level `info` and below to `combined.log`
+        // - Write all logs error (and below) to `error.log`.
+        //
+        new winston.transports.File({filename: 'error.log', level: 'error'}),
+        new winston.transports.File({filename: 'combined.log'})
+    ]
+});
+
+logger.add(new winston.transports.Console({
+    format: winston.format.simple()
+}));
+
+async function post(url, data) {
+    return await fetch(`https://www.notion.so/api/v3${url}`,
         {
             body: JSON.stringify(data),
             headers: {'content-type': 'application/json;charset=UTF-8'},
@@ -71,7 +90,7 @@ const queryCollection = function (collectionId, collectionViewId, query) {
 }
 
 const getPageRecords = async function (pageId) {
-    const limit = 100
+    const limit = 50
     const result = []
     let cursor = {stack: []}
     do {
@@ -100,8 +119,27 @@ const loadTablePageBlocks = async (collectionId, collectionViewId) => {
         tableView.value.query)
 }
 
+const printTreeLevel = (root, level) => {
+    if (root === undefined) return
+    let indent = ''
+    for (let i = 0; i < level; i++) indent += '  '
+    console.log(indent + root.value.id)
+    for (let c of root.children) {
+        printTreeLevel(c, level + 1)
+    }
+}
+
+const countTreeNode = (root) => {
+    if (root === undefined) return 0
+    let count = 1
+    for (let c of root.children) {
+        count += countTreeNode(c)
+    }
+    return count
+}
+
 const recordValueListToBlockNodes = (list) => {
-    const recordLstToDic = (list) => {
+    const recordListToDic = (list) => {
         const findNode = (dic, id) => {
             if (dic.has(id)) {
                 const result = dic.get(id)
@@ -117,14 +155,17 @@ const recordValueListToBlockNodes = (list) => {
         }
         const dic = new Map()
 
-        list.forEach(item => {
+        list.forEach((item, idx) => {
             const itemId = item.value.id
             const itemParentId = item.value.parent_id
+            console.log(`${idx}: id: ${itemId} parent: ${itemParentId}`)
+
             const node = {
                 record: item,
                 children: new Map()
             }
             dic.forEach((entryValue, key) => {
+
                 if (entryValue.record.value.parent_id === itemId) {
                     node.children.set(key, entryValue)
                     dic.delete(key)
@@ -150,11 +191,15 @@ const recordValueListToBlockNodes = (list) => {
             children: result
         }
     }
-    const dicTree = recordLstToDic(list)
+
+    const dicTree = recordListToDic(list)
     const result = []
     dicTree.forEach((v) => {
         result.push(convertDicNodeToBlockNode(v))
     })
+
+    console.log(result.map(it=>countTreeNode(it)))
+
     return result
 }
 

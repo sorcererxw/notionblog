@@ -22,3 +22,5 @@ yarn-error.log*
 
 .next
 dist
+combined.log
+error.log
