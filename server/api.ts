@@ -1,8 +1,16 @@
 import fetch from 'node-fetch'
 import moment from 'moment'
-import { Article, ArticleMeta, BlockNode, BlockValue, RecordValue } from '../api/types'
+import {
+    Article,
+    ArticleMeta,
+    BlockNode,
+    BlockValue, Collection,
+    PageChunk,
+    RecordValue,
+    UnsignedUrl,
+} from '../api/types'
 
-async function post(url: string, data: any) {
+async function post<T>(url: string, data: any): Promise<T> {
     return fetch(`https://www.notion.so/api/v3${url}`,
         {
             body: JSON.stringify(data),
@@ -31,7 +39,9 @@ const getFullBlockId = (blockId: string): string => {
 
 }
 
-const loadPageChunk = (pageId: string, count: number, cursor = { stack: [] }) => {
+const loadPageChunk = (
+    pageId: string, count: number, cursor = { stack: [] },
+): Promise<PageChunk> => {
     const data = {
         chunkNumber: 0,
         cursor,
@@ -42,7 +52,9 @@ const loadPageChunk = (pageId: string, count: number, cursor = { stack: [] }) =>
     return post('/loadPageChunk', data)
 }
 
-const queryCollection = (collectionId: string, collectionViewId: string, query: any) => {
+const queryCollection = (
+    collectionId: string, collectionViewId: string, query: any,
+): Promise<Collection> => {
     const data = {
         collectionId: getFullBlockId(collectionId),
         collectionViewId: getFullBlockId(collectionViewId),
@@ -118,11 +130,12 @@ const countTreeNode = (root: BlockNode) => {
 
 const recordValueListToBlockNodes = (list: RecordValue[]) => {
     type DicNode = {
-        children: Map<string, DicNode>
+        children: Map<string, DicNode>,
+        record: RecordValue
     }
 
     const recordListToDic = (recordList: RecordValue[]): Map<string, DicNode> => {
-        const findNode = (dic: Map<string, DicNode>, id: string) => {
+        const findNode = (dic: Map<string, DicNode>, id: string): DicNode | null => {
             if (dic.has(id)) {
                 const result = dic.get(id)
                 return result ? result : null
@@ -162,8 +175,8 @@ const recordValueListToBlockNodes = (list: RecordValue[]) => {
         return dic
     }
 
-    const convertDicNodeToBlockNode = dicNode => {
-        const result = []
+    const convertDicNodeToBlockNode = (dicNode: DicNode): BlockNode => {
+        const result: BlockNode[] = []
         dicNode.children.forEach(v => {
             result.push(convertDicNodeToBlockNode(v))
         })
@@ -249,10 +262,10 @@ const getArticleMetaList = async (tableId: string, viewId: string) => {
     const recordMap = result.recordMap
     return blockIds
         .map((it: string) => recordMap.block[it].value)
-        .map((it: RecordValue) => blockValueToArticleMeta(it))
+        .map((it: BlockValue) => blockValueToArticleMeta(it))
 }
 
-const getSignedFileUrls = async (data: any) => {
+const getSignedFileUrls = async (data: UnsignedUrl) => {
     return post('/getSignedFileUrls', data)
 }
 
