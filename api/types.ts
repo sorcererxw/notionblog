@@ -109,3 +109,7 @@ export interface UnsignedUrl {
     url: string,
     permissionRecord: PermissionRecord
 }
+
+export type TextContent = string
+export type TextStyle = string[]
+export type RichText = [TextContent, TextStyle[]]
