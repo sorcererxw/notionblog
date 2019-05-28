@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "strict": true,
     "target": "esnext",
     "module": "esnext",
     "jsx": "preserve",
@@ -16,6 +17,11 @@
     "noUnusedParameters": true,
     "removeComments": false,
     "preserveConstEnums": true,
-    "sourceMap": true
-  }
+    "sourceMap": true,
+    "outDir": ".next"
+  },
+  "exclude": [
+    ".next",
+    "src/server/**/*.*"
+  ]
 }
