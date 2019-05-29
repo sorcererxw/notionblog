@@ -37,7 +37,7 @@ export interface BlockValue {
     version: number,
     type: string,
     format?: BlockFormat
-    properties?: BlockProperties,
+    properties?: BlockProperties & { [key: string]: any },
     created_time: number,
     last_edited_time: number,
     parent_id: string,
@@ -109,3 +109,7 @@ export interface UnsignedUrl {
     url: string,
     permissionRecord: PermissionRecord
 }
+
+export type TextContent = string
+export type TextStyle = string[]
+export type RichText = [TextContent, TextStyle[]]

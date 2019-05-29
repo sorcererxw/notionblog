@@ -1,19 +1,41 @@
-import axios from 'axios'
-import {Article, ArticleMeta, SignedFileUrls, UnsignedUrl} from "./types";
+import fetch from 'node-fetch'
+import { Article, ArticleMeta, SignedFileUrls, UnsignedUrl } from './types'
 
-const client = axios.create();
+const BASE_URL = 'http://localhost:3000'
 
-export const getArticleMetaList = (): Promise<ArticleMeta[]> => {
-    return client.get(`/api/blog`)
-        .then(it => it.data)
-};
+async function post<T>(url: string, data: any): Promise<T> {
+    return fetch(`${BASE_URL}${url}`,
+        {
+            body: JSON.stringify(data),
+            headers: { 'content-type': 'application/json;charset=UTF-8' },
+            method: 'POST',
+        },
+    ).then(res => res.json())
+}
 
-export const getArticle = (id: string): Promise<Article> => {
-    return client.get(`/api/blog/${id}`)
-        .then(it => it.data)
-};
+async function get<T>(url: string): Promise<T> {
+    return fetch(`${BASE_URL}${url}`,
+        {
+            headers: { 'content-type': 'application/json;charset=UTF-8' },
+            method: 'GET',
+        },
+    ).then(res => res.json())
+}
 
-export const getSignedFileUrls = (urls: UnsignedUrl[]): Promise<SignedFileUrls> => {
-    return client.post(`/api/notion/getSignedFileUrls`, {urls: urls})
-        .then(it => it.data)
-};
+const getArticleMetaList = (): Promise<ArticleMeta[]> => {
+    return get('/api/blog')
+}
+
+const getArticle = (id: string): Promise<Article> => {
+    return get(`/api/blog/${id}`)
+}
+
+const getSignedFileUrls = (urls: UnsignedUrl[]): Promise<SignedFileUrls> => {
+    return post('/api/notion/getSignedFileUrls', { urls })
+}
+
+export default {
+    getArticleMetaList,
+    getArticle,
+    getSignedFileUrls,
+}

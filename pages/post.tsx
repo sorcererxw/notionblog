@@ -1,12 +1,11 @@
-import * as React from 'react';
-import styled from "styled-components";
-import {Article} from "../api/types";
-import AppLayout from "../component/AppLayout";
-import MetaHead from "../component/MetaHead";
-import NotionBlockList from "../component/notion/base/NotionBlockList";
-import PageHeaderBlock from "../component/notion/PageHeaderBlock";
-import {DiscussionEmbed} from 'disqus-react';
-import * as blogConfig from '../config';
+import React from 'react'
+import styled from 'styled-components'
+import { Article } from '../api/types'
+import AppLayout from '../component/AppLayout'
+import MetaHead from '../component/MetaHead'
+import api from '../api'
+import { NextContext } from 'next'
+import ArticleComponent from '../component/articleComponent'
 
 const CardBox = styled.article`
   width: 768px;
@@ -22,135 +21,59 @@ const CardBox = styled.article`
   background-repeat: no-repeat;
   flex-direction: column;
   overflow: hidden;
-`;
-
-const Content = styled.section`
-  max-width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin: 24px;
-`;
-
-const CoverImage = styled.img`
-  width: 100%;
-  border-width: 0;
-  border-radius: 0;
-  height: 30vh;
-  object-fit: cover;
-  object-position: center 0;
-`;
-
-const Comment = styled.div`
-  margin-top: 40px;
-`;
+`
 
 interface Props {
-    blockQuery: string,
-    article: Article
+    article: Article | undefined
+    pageId: string
+    ssr: boolean
 }
 
 interface State {
-    article: Article
+    article: Article | undefined
 }
 
 export default class Post extends React.Component<Props, State> {
-    static async getInitialProps({query}) {
-        const pageId = query.block;
-        const article = query.article;
-        return {
-            blockQuery: pageId,
-            article: article
+    static async getInitialProps({ query }: NextContext) {
+        const pageId = query.pageId
+        const ssr = query.ssr
+        if (ssr && typeof pageId === 'string') {
+            const article = await api.getArticle(pageId)
+            return { article, ssr, pageId }
         }
+        return { pageId, ssr }
     }
 
     constructor(props: any) {
-        super(props);
+        super(props)
         this.state = {
-            article: undefined
+            article: undefined,
         }
     }
 
-    componentDidMount(): void {
-        this.setState({
-            article: this.props.article
-        })
+    async componentDidMount(): Promise<void> {
+        if (this.props.ssr && this.props.article) {
+            this.setState({
+                article: this.props.article,
+            })
+        } else {
+            this.setState({
+                article: await api.getArticle(this.props.pageId),
+            })
+        }
     }
 
     public render(): React.ReactNode {
-        const article = this.state.article;
-        console.log(article);
-        if (article === undefined) {
-            return <div>
-                <MetaHead/>
-                <AppLayout>
-                </AppLayout>
-            </div>
-        }
+        const article = this.state.article
+        console.log(article)
 
         return <div>
-            <MetaHead title={article.meta.title}/>
+            <MetaHead title={article ? article.meta.title : 'loading'}/>
             <AppLayout>
                 <CardBox>
-                    {this.renderCover(article)}
-                    <Content>
-                        {Post.renderTitle(article)}
-                        {Post.renderPage(article)}
-                        {Post.renderComment(article)}
-                    </Content>
+                    <ArticleComponent article={article}/>
                 </CardBox>
             </AppLayout>
         </div>
-    }
-
-    private renderCover(article: Article): React.ReactNode {
-        const format = article.meta.cover;
-        if (format === undefined || format.page_cover === undefined || format.page_cover.length === 0) {
-            return null;
-        }
-        const getRealImageUrl = (url: string): string => {
-            if (url.startsWith("/")) {
-                return "https://www.notion.so" + url;
-            } else {
-                return url;
-            }
-        };
-
-        const coverUrl = getRealImageUrl(format.page_cover);
-        const pageCoverPosition = format.page_cover_position === undefined ? -1 : format.page_cover_position;
-        if (pageCoverPosition >= 0) {
-            return <CoverImage src={coverUrl} style={{
-                objectPosition: `center ${(1 - pageCoverPosition) * 100}%`
-            }}/>
-        }
-        return <CoverImage src={coverUrl}/>
-    }
-
-    private static renderTitle(article: Article): React.ReactNode {
-        return <PageHeaderBlock title={article.meta.title} pubDate={article.meta.date}/>
-    }
-
-    private static renderPage(article: Article): React.ReactNode {
-        const blockData = article.blocks;
-        return <div><NotionBlockList blocks={blockData}/></div>;
-    }
-
-    private static renderComment(article: Article): React.ReactNode {
-        if (blogConfig.disqusConfig.enable == false) {
-            return <div/>
-        }
-
-        const name = article.meta.name;
-        const title = article.meta.title;
-        const shortName = blogConfig.disqusConfig.shortName;
-        const disqusConfig = {
-            url: `https://blog.sorcererxw.com/post/${name}`,
-            identifier: name,
-            title: title,
-        };
-
-        return <Comment>
-            <DiscussionEmbed shortname={shortName} config={disqusConfig}/>
-        </Comment>
-
     }
 }

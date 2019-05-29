@@ -1,10 +1,9 @@
-import * as React from "react";
-import {Component} from "react";
-import MetaHead from "../component/MetaHead";
+import React, { Component, ReactNode } from 'react'
+import MetaHead from '../component/MetaHead'
 
-class Index extends Component {
+class Index extends Component<{}, {}> {
     render() {
-        const LinkWrapper = (props) => (
+        const LinkWrapper = (props: { children: ReactNode | ReactNode[] }) => (
             <li style={{
                 paddingBottom: 8,
             }}>
@@ -13,17 +12,17 @@ class Index extends Component {
                     color: '#424242',
                     fontSize: '1.2rem',
                     alignItems: 'center',
-                    display: 'inline-flex'
+                    display: 'inline-flex',
                 }}>
-                    {props.children}
+                    <>{props.children}</>
                 </span>
             </li>
-        );
+        )
         const content = (
             <div style={{
                 minHeight: '100vh',
                 boxSizing: 'border-box',
-                display: 'flex'
+                display: 'flex',
             }}>
                 <div style={{
                     padding: 16,
@@ -57,6 +56,7 @@ class Index extends Component {
                         <LinkWrapper>
                             <a href={'https://github.com/sorcererxw'}
                                target={'_blank'}
+                               rel='noopener noreferrer'
                                style={{
                                    marginLeft: 16,
                                    marginRight: 16,
@@ -68,8 +68,9 @@ class Index extends Component {
                     </ul>
                 </div>
             </div>
-        );
-        return (<div>
+        )
+        return (
+            <div>
                 <MetaHead/>
                 {content}
             </div>

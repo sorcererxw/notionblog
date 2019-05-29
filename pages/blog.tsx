@@ -1,24 +1,24 @@
-import * as React from 'react';
-import styled from "styled-components";
-import {ArticleMeta} from "../api/types";
-import AppLayout from "../component/AppLayout";
-import ArchiveItem from "../component/ArchiveItem";
-import MetaHead from "../component/MetaHead";
-
-import * as moment from "moment";
+import React from 'react'
+import styled from 'styled-components'
+import { ArticleMeta } from '../api/types'
+import AppLayout from '../component/AppLayout'
+import ArchiveItem from '../component/ArchiveItem'
+import MetaHead from '../component/MetaHead'
+import moment from 'moment'
+import api from '../api'
 
 const Content = styled.div`
   width: 768px;
   max-width: 90%;
   margin: auto;
-`;
+`
 
 const YearHeader = styled.div`
   color: var(--head-color);
   font-weight: 700;
   font-size: 32px;
   margin-top: 48px;
-`;
+`
 
 interface Props {
     data: ArticleMeta[],
@@ -29,22 +29,23 @@ interface State {
 }
 
 class Blog extends React.Component<Props, State> {
-    static async getInitialProps({query}) {
+    static async getInitialProps() {
+        const posts = await api.getArticleMetaList()
         return {
-            data: query.posts
+            data: posts,
         }
     }
 
-    constructor(props) {
-        super(props);
+    constructor(props: Props) {
+        super(props)
         this.state = {
-            data: []
+            data: [],
         }
     }
 
     async componentDidMount(): Promise<void> {
         this.setState({
-            data: this.props.data
+            data: this.props.data,
         })
     }
 
@@ -58,29 +59,28 @@ class Blog extends React.Component<Props, State> {
                     </Content>
                 </AppLayout>
             </div>
-        );
+        )
     }
 
-
     private renderList(): React.ReactNode {
-        const list: React.ReactNode[] = [];
-        let lastYear = 3000;
-        let key = 0;
+        const list: React.ReactNode[] = []
+        let lastYear = 3000
+        let key = 0
 
         this.state.data.forEach(it => {
-            const year = moment.unix(it.date).year();
+            const year = moment.unix(it.date).year()
             if (year !== lastYear) {
-                list.push(<YearHeader key={key++}>{year}</YearHeader>);
-                lastYear = year;
+                list.push(<YearHeader key={key++}>{year}</YearHeader>)
+                lastYear = year
             }
             list.push(<ArchiveItem meta={it} key={key++}/>)
-        });
+        })
 
         return (
             <div>{list}</div>
-        );
+        )
     }
 
 }
 
-export default Blog;
+export default Blog
