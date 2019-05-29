@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import StyleText from '../../StyleText'
+import WrapComponent from '../../wrapComponent'
 
 const Caption = styled.figcaption`
   line-height: 1.4;
@@ -23,8 +24,7 @@ class FigureCaption extends React.Component<IProps, {}> {
         return <Caption>
             {this.props.caption.map((it, idx) => {
                 const styleText = StyleText.fromRichText(it)
-                styleText.key = idx
-                return styleText
+                return <WrapComponent key={idx}>{styleText}</WrapComponent>
             })}
         </Caption>
     }

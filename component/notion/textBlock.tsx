@@ -1,6 +1,7 @@
 import React from 'react'
 import { BlockNode } from '../../api/types'
 import StyleText from '../StyleText'
+import WrapComponent from '../wrapComponent'
 
 interface IProps {
     value: BlockNode
@@ -20,8 +21,11 @@ class TextBlock extends React.Component<IProps, {}> {
         return <div>{
             properties.title.map((it, idx) => {
                 const styleText = StyleText.fromRichText(it)
-                styleText.key = idx
-                return styleText
+                return (
+                    <WrapComponent key={idx}>
+                        {styleText}
+                    </WrapComponent>
+                )
             })
         }
         </div>

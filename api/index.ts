@@ -1,21 +1,37 @@
-import axios from 'axios'
+import fetch from 'node-fetch'
 import { Article, ArticleMeta, SignedFileUrls, UnsignedUrl } from './types'
 
-const client = axios.create()
+const BASE_URL = 'http://localhost:3000'
+
+async function post<T>(url: string, data: any): Promise<T> {
+    return fetch(`${BASE_URL}${url}`,
+        {
+            body: JSON.stringify(data),
+            headers: { 'content-type': 'application/json;charset=UTF-8' },
+            method: 'POST',
+        },
+    ).then(res => res.json())
+}
+
+async function get<T>(url: string): Promise<T> {
+    return fetch(`${BASE_URL}${url}`,
+        {
+            headers: { 'content-type': 'application/json;charset=UTF-8' },
+            method: 'GET',
+        },
+    ).then(res => res.json())
+}
 
 const getArticleMetaList = (): Promise<ArticleMeta[]> => {
-    return client.get('/api/blog')
-        .then(it => it.data)
+    return get('/api/blog')
 }
 
 const getArticle = (id: string): Promise<Article> => {
-    return client.get(`/api/blog/${id}`)
-        .then(it => it.data)
+    return get(`/api/blog/${id}`)
 }
 
 const getSignedFileUrls = (urls: UnsignedUrl[]): Promise<SignedFileUrls> => {
-    return client.post('/api/notion/getSignedFileUrls', { urls })
-        .then(it => it.data)
+    return post('/api/notion/getSignedFileUrls', { urls })
 }
 
 export default {

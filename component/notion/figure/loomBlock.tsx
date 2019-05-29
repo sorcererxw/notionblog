@@ -31,7 +31,7 @@ export default class LoomBlock extends React.Component<Props, {}> {
     private renderLoom(): React.ReactNode | null {
         const format = this.props.value.format
         const properties = this.props.value.properties
-        if (format !== null) {
+        if (format) {
             const width = format.block_width
             const ratio = format.block_aspect_ratio
             return <div style={{
@@ -54,9 +54,13 @@ export default class LoomBlock extends React.Component<Props, {}> {
                     frameBorder={0} allowFullScreen/>
             </div>
         }
-        if (properties !== null) {
+        if (properties) {
             const url = properties.source[0][0]
-            const loomId = /^https:\/\/www.useloom.com\/share\/([0-9a-z]+)$/.exec(url)[1]
+            const test = /^https:\/\/www.useloom.com\/share\/([0-9a-z]+)$/.exec(url)
+            if (test === null || test.length < 1) {
+                return null
+            }
+            const loomId = test[1]
             return <div style={{
                 maxWidth: '100%',
             }}>

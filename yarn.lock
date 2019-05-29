@@ -4844,6 +4844,11 @@ koa-is-json@^1.0.0:
   resolved "https://registry.npm.taobao.org/koa-is-json/download/koa-is-json-1.0.0.tgz#273c07edcdcb8df6a2c1ab7d59ee76491451ec14"
   integrity sha1-JzwH7c3Ljfaiwat9We52SRRR7BQ=
 
+koa-isbot@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.npm.taobao.org/koa-isbot/download/koa-isbot-0.1.1.tgz#980e2546c697e3b9278c5fd32fe37e1374fe8253"
+  integrity sha1-mA4lRsaX47knjF/TL+N+E3T+glM=
+
 koa-router@^7.4.0:
   version "7.4.0"
   resolved "https://registry.npm.taobao.org/koa-router/download/koa-router-7.4.0.tgz#aee1f7adc02d5cb31d7d67465c9eacc825e8c5e0"

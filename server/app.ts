@@ -6,6 +6,7 @@ import nodeSchedule from 'node-schedule'
 import koaBody from 'koa-body'
 import { getPost, getSignedFileUrls, getPosts } from './provider'
 import { ArticleMeta } from '../api/types'
+import isBot from './middleware/isBot'
 
 const port = parseInt(process.env.PORT || '3000', 10)
 const env = process.env.NODE_ENV
@@ -36,7 +37,7 @@ app.prepare().then(async () => {
         ctx.response.body = await getSiteMap()
     })
 
-    router.get('/post/:name', async ctx => {
+    router.get('/post/:name', isBot(), async ctx => {
         const { res, req } = ctx
 
         const getIdByName = (name: string): string | null => {
@@ -52,21 +53,10 @@ app.prepare().then(async () => {
             res.statusCode = 404
             await app.render(req, res, '/_error')
         }
-        await app.render(req, res, '/post', { pageId })
-        ctx.respond = false
-    })
-
-    router.get('/blog', async ctx => {
-        const { res, req } = ctx
-
-        await app.render(req, res, '/blog')
-        ctx.respond = false
-    })
-
-    router.get('*', async ctx => {
-        const { res, req } = ctx
-
-        await handle(req, res)
+        await app.render(req, res, '/post', {
+            ssr: ctx.state.isBot,
+            pageId,
+        })
         ctx.respond = false
     })
 
@@ -93,6 +83,13 @@ app.prepare().then(async () => {
 
     router.use('/api', apiRouter.routes(), apiRouter.allowedMethods())
 
+    router.get('*', async ctx => {
+        const { res, req } = ctx
+
+        await handle(req, res)
+        ctx.respond = false
+    })
+
     server.use(async (ctx, next) => {
         ctx.res.statusCode = 200
         await next()
@@ -105,9 +102,8 @@ app.prepare().then(async () => {
         blogList = await getPosts()
     })
 
-    server.listen(port, ROOT_URL, () => {
-        console.log(`> Ready on ${ROOT_URL} [${env}]`)
-    })
+    server.listen(port)
+    console.log(`> Ready on ${ROOT_URL} [${env}]`)
 }).catch(err => {
     console.log('An error occurred, unable to start the server')
     console.log(err)

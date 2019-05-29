@@ -116,9 +116,6 @@ class StyleText extends React.Component<IProps, {}> {
     }
 
     public render(): React.ReactNode {
-        const isEmptyString = (s: string | undefined | null): boolean =>
-            s === undefined || s === null || s.length === 0
-
         const boldify = (node: React.ReactNode): React.ReactNode =>
             this.props.bold ? <Bold>{node}</Bold> : node
         const italicify = (node: React.ReactNode): React.ReactNode =>
@@ -127,9 +124,12 @@ class StyleText extends React.Component<IProps, {}> {
             this.props.code ? <Code>{node}</Code> : node
         const deletedify = (node: React.ReactNode): React.ReactNode =>
             this.props.deleted ? <Deleted>{node}</Deleted> : node
-        const linkify = (node: React.ReactNode): React.ReactNode =>
-            (isEmptyString(this.props.link)) ? node
-                : <Link href={this.props.link} target='_blank'>{node}</Link>
+        const linkify = (node: React.ReactNode): React.ReactNode => {
+            if (this.props.link) {
+                return <Link href={this.props.link} target='_blank'>{node}</Link>
+            }
+            return node
+        }
         const highlightify = (node: React.ReactNode): React.ReactNode => {
             const { highlight } = this.props
             if (highlight === undefined) {

@@ -3,7 +3,6 @@ import YouTube from 'react-youtube'
 import { BlockValue, SignedFileUrls, UnsignedUrl } from '../../../api/types'
 import FigureBlockContainer from './FigureBlockContainer'
 import FigureCaption from './FigureCaption'
-import { Player } from 'video-react'
 import api from '../../../api/'
 import 'video-react/dist/video-react.css'
 
@@ -12,7 +11,7 @@ interface IProps {
 }
 
 interface IState {
-    source: string,
+    source: string | undefined,
     youtube: boolean
 }
 
@@ -28,7 +27,7 @@ class VideoBlock extends React.Component<IProps, IState> {
     async componentDidMount(): Promise<void> {
         const { id, format } = this.props.value
 
-        if (format === null) {
+        if (!format) {
             return
         }
         // TODO: migrate to video.js
@@ -71,7 +70,7 @@ class VideoBlock extends React.Component<IProps, IState> {
         let videoNode: React.ReactNode | null = null
         let captionNode: React.ReactNode | null = null
 
-        if (state.youtube) {
+        if (state.youtube && format) {
             const option = {
                 height: (format.block_width * format.block_aspect_ratio).toString(),
                 width: format.block_width.toString(),
@@ -81,6 +80,7 @@ class VideoBlock extends React.Component<IProps, IState> {
                 className={'VideoFrame'}
                 videoId={this.getYoutubeId(format.display_source)}/>
         } else {
+            const Player = require('video-react').Player
             videoNode = <Player
                 playsInline
                 src={state.source}/>
