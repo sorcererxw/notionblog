@@ -8,7 +8,7 @@ import {
     PageChunk,
     RecordValue,
     UnsignedUrl,
-} from '../api/types'
+} from '../../api/types'
 
 async function post<T>(url: string, data: any): Promise<T> {
     return fetch(`https://www.notion.so/api/v3${url}`,
