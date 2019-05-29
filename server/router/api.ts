@@ -6,9 +6,10 @@ import notionService from '../service/notionService'
 const router = new Router()
 
 router.get('/blog', async ctx => {
-    console.log('api blog')
+    const blogList = await postService.getPostList()
+    console.log(blogList)
     ctx.response.type = 'application/json'
-    ctx.response.body = await postService.getPostList()
+    ctx.response.body = blogList
 })
 
 router.get('/blog/:id', async ctx => {

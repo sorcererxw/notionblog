@@ -33,7 +33,7 @@ interface State {
 }
 
 export default class AppHeader extends React.Component<{}, State> {
-    constructor(props) {
+    constructor(props: any) {
         super(props)
         this.state = {
             expandMenu: false,
@@ -42,12 +42,12 @@ export default class AppHeader extends React.Component<{}, State> {
 
     public render(): React.ReactNode {
         return <div>
-            <Desktop>{this.renderDesktop()}</Desktop>
+            <Desktop>{AppHeader.renderDesktop()}</Desktop>
             <Mobile>{this.renderMobile()}</Mobile>
         </div>
     }
 
-    private renderDesktop(): React.ReactNode {
+    private static renderDesktop(): React.ReactNode {
         return <Container>
             <Content>
                 <Logo><a href={'/blog'}>{config.blogName}</a></Logo>

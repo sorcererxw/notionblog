@@ -1,6 +1,6 @@
+import { IncomingMessage, ServerResponse } from 'http'
 import Koa from 'koa'
 import next from 'next'
-import Router from 'koa-router'
 
 export default async function setupSSR(app: Koa): Promise<Koa> {
     const nextEngine = next({ dev: true })
@@ -19,15 +19,8 @@ export default async function setupSSR(app: Koa): Promise<Koa> {
         return html
     }
 
-    const router = new Router()
-    router.get('/_next/*', async ctx => {
-        ctx.respond = false
-        await handle(ctx.req, ctx.res)
-    })
-    // router.get('*', async (ctx, next) => {
-    //     await next()
-    //     await nextEngine.handleRequest(ctx.req, ctx.res)
-    // })
-    // app.use(router.routes)
+    app.context.handle = async function(req: IncomingMessage, res: ServerResponse) {
+        await handle(req, res)
+    }
     return app
 }
