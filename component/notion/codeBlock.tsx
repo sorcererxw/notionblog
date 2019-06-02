@@ -47,7 +47,7 @@ interface IState {
 }
 
 class CodeBlock extends React.Component<IProps, IState> {
-    constructor(props: any) {
+    constructor(props: IProps) {
         super(props)
     }
 
@@ -56,8 +56,8 @@ class CodeBlock extends React.Component<IProps, IState> {
         if (properties === undefined) {
             return null
         }
-        const language = properties.language[0][0]
-        const codeText: string = properties.title[0][0]
+        const language = properties.language![0][0]
+        const codeText = properties.title![0][0]
         if (language === 'HTML' && codeText.startsWith('<!--render-->')) {
             // TODO: Safe alternative to dangerouslySetInnerHTML
             // tslint:disable-next-line:react-no-dangerous-html

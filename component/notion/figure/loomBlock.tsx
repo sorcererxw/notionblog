@@ -7,10 +7,9 @@ interface Props {
     value: BlockValue
 }
 
-export default class LoomBlock extends React.Component<Props, {}> {
+export default class LoomBlock extends React.Component<Props> {
     render(): React.ReactNode {
-        if (this.props.value === undefined
-            || this.props.value.properties === undefined
+        if (this.props.value.properties === undefined
             || this.props.value.properties.source === undefined) {
             return <div/>
         }
@@ -18,7 +17,7 @@ export default class LoomBlock extends React.Component<Props, {}> {
 
         let captionNode: React.ReactNode | null = null
 
-        if (properties !== undefined && properties.caption !== undefined) {
+        if (properties.caption !== undefined) {
             captionNode = <FigureCaption caption={properties.caption}/>
         }
 
@@ -55,7 +54,7 @@ export default class LoomBlock extends React.Component<Props, {}> {
             </div>
         }
         if (properties) {
-            const url = properties.source[0][0]
+            const url = properties.source![0][0]
             const test = /^https:\/\/www.useloom.com\/share\/([0-9a-z]+)$/.exec(url)
             if (test === null || test.length < 1) {
                 return null

@@ -40,7 +40,7 @@ interface IProps {
     highlight?: HighlightInfo
 }
 
-class StyleText extends React.Component<IProps, {}> {
+class StyleText extends React.Component<IProps> {
     public static defaultProps = {
         bold: false,
         deleted: null,
@@ -61,46 +61,40 @@ class StyleText extends React.Component<IProps, {}> {
         let link: string | undefined
         const highlight: HighlightInfo = { type: 'none', color: 'default' }
 
-        if (styles !== undefined) {
-            for (const p of styles) {
-                if (p[0] === 'b') {
-                    bold = true
-                } else if (p[0] === 'i') {
-                    italic = true
-                } else if (p[0] === 'c') {
-                    code = true
-                } else if (p[0] === 'a') {
-                    link = p[1]
-                } else if (p[0] === 's') {
-                    deleted = true
-                } else if (p[0] === 'h') {
-                    if (p[1] === undefined || p[1].length === 0) {
+        for (const p of styles) {
+            if (p[0] === 'b') {
+                bold = true
+            } else if (p[0] === 'i') {
+                italic = true
+            } else if (p[0] === 'c') {
+                code = true
+            } else if (p[0] === 'a') {
+                link = p[1]
+            } else if (p[0] === 's') {
+                deleted = true
+            } else if (p[0] === 'h') {
+                const colors = [
+                    { name: 'grey', color: 'grey' },
+                    { name: 'brown', color: 'brown' },
+                    { name: 'orange', color: 'orange' },
+                    { name: 'yellow', color: 'yellow' },
+                    { name: 'green', color: 'green' },
+                    { name: 'blue', color: 'blue' },
+                    { name: 'purple', color: 'purple' },
+                    { name: 'pink', color: 'pink' },
+                    { name: 'red', color: 'red' },
+                ]
+                const splits = p[1].toLowerCase().split('_')
+                for (const c of colors) {
+                    if (c.name !== splits[0]) {
                         continue
                     }
-                    const colors: { name: string, color: Color }[] = [
-                        { name: 'grey', color: 'grey' },
-                        { name: 'brown', color: 'brown' },
-                        { name: 'orange', color: 'orange' },
-                        { name: 'yellow', color: 'yellow' },
-                        { name: 'green', color: 'green' },
-                        { name: 'blue', color: 'blue' },
-                        { name: 'purple', color: 'purple' },
-                        { name: 'pink', color: 'pink' },
-                        { name: 'red', color: 'red' },
-                    ]
-                    const splits = p[1].toLowerCase().split('_')
-                    for (const c of colors) {
-                        if (c.name !== splits[0]) {
-                            continue
-                        }
-                        highlight.color = splits[0]
-                        highlight.type = splits[1] === 'background' ? 'background' : 'text'
-                        break
-                    }
+                    highlight.color = splits[0]
+                    highlight.type = splits[1] === 'background' ? 'background' : 'text'
+                    break
                 }
             }
         }
-
         return <StyleText
             bold={bold}
             deleted={deleted}

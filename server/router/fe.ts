@@ -16,7 +16,7 @@ router.get('/post/:name', isBot(), async ctx => {
         }
         return null
     }
-    const pageId = getIdByName(ctx.params.name)
+    const pageId = await getIdByName(ctx.params.name)
     if (pageId) {
         await ctx.render('/post', {
             ssr: ctx.state.isBot,

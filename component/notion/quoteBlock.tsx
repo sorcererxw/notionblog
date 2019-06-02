@@ -17,7 +17,7 @@ interface IProps {
     value: BlockNode
 }
 
-class QuoteBlock extends React.Component<IProps, {}> {
+class QuoteBlock extends React.Component<IProps> {
     constructor(props: any) {
         super(props)
     }

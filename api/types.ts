@@ -50,8 +50,8 @@ export interface BlockValue {
 }
 
 export interface BlockFormat {
-    page_cover: string,
-    page_cover_position: number,
+    page_cover?: string,
+    page_cover_position?: number,
     block_aspect_ratio: number
     block_full_width: boolean
     block_page_width: boolean
@@ -63,10 +63,10 @@ export interface BlockFormat {
 }
 
 export interface BlockProperties {
-    caption: any[],
-    language: string[],
-    title: any[],
-    source: string[]
+    caption?: RichText[],
+    language?: string[],
+    title?: RichText[],
+    source?: string[]
 }
 
 export interface SchemeValue {

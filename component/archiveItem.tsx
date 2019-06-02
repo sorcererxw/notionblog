@@ -67,7 +67,7 @@ const PostLink = (props: { page: string, title: string }) => (
     <ItemTitle href={`/post/${props.page}`}> {props.title}</ItemTitle>
 )
 
-export default class ArchiveItem extends React.Component<Props, {}> {
+export default class ArchiveItem extends React.Component<Props> {
     public render(): React.ReactNode {
         const it = this.props.meta
 

@@ -7,7 +7,7 @@ interface IProps {
     index: number
 }
 
-class NumberedListBlock extends React.Component<IProps, {}> {
+class NumberedListBlock extends React.Component<IProps> {
     public render(): React.ReactNode {
         return <HierarchyListBlock value={this.props.value} symbol={
             <span>{this.props.index}.</span>

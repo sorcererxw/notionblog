@@ -7,7 +7,7 @@ interface IProps {
     value: BlockNode
 }
 
-class TextBlock extends React.Component<IProps, {}> {
+class TextBlock extends React.Component<IProps> {
     constructor(props: any) {
         super(props)
     }

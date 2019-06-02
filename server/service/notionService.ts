@@ -39,20 +39,21 @@ const getFullBlockId = (blockId: string): string => {
 
 }
 
-const loadPageChunk = (
-    pageId: string, count: number, cursor = { stack: [] },
-): Promise<PageChunk> => {
+async function loadPageChunk(
+    chunkNumber: number, pageId: string, count = 50, cursor = { stack: [] },
+): Promise<PageChunk> {
     const data = {
-        chunkNumber: 0,
+        chunkNumber,
         cursor,
         limit: count,
         pageId: getFullBlockId(pageId),
         verticalColumns: false,
     }
-    return post('/loadPageChunk', data)
+    console.log(data)
+    return post<PageChunk>('/loadPageChunk', data)
 }
 
-const queryCollection = (
+const queryCollection = async (
     collectionId: string, collectionViewId: string, query: any,
 ): Promise<Collection> => {
     const data = {
@@ -70,12 +71,15 @@ const queryCollection = (
 }
 
 const getPageRecords = async (pageId: string): Promise<RecordValue[]> => {
+    console.log(`getPageRecord.params.pageId: ${pageId}`)
     const limit = 50
     const result = []
     let cursor = { stack: [] }
+    let chunkNumber = 0
     do {
-        const pageChunk = (await Promise.resolve(loadPageChunk(pageId, limit, cursor)))
+        const pageChunk = await loadPageChunk(chunkNumber++, pageId, limit, cursor)
         for (const id of Object.keys(pageChunk.recordMap.block)) {
+            console.log(id)
             if (pageChunk.recordMap.block.hasOwnProperty(id)) {
                 const item = pageChunk.recordMap.block[id]
                 if (item.value.alive) {
@@ -89,7 +93,7 @@ const getPageRecords = async (pageId: string): Promise<RecordValue[]> => {
 }
 
 const loadTablePageBlocks = async (collectionId: string, collectionViewId: string) => {
-    const pageChunkValues = await loadPageChunk(collectionId, 100)
+    const pageChunkValues = await loadPageChunk(0, collectionId, 100)
     const recordMap = pageChunkValues.recordMap
     const tableView = recordMap.collection_view[getFullBlockId(collectionViewId)]
     const collection = recordMap.collection[Object.keys(recordMap.collection)[0]]
@@ -99,28 +103,7 @@ const loadTablePageBlocks = async (collectionId: string, collectionViewId: strin
         tableView.value.query)
 }
 
-// tslint:disable-next-line:no-unused
-const printTreeLevel = (root: {
-    value: { id: string }
-    children: []
-}, level: number): void => {
-    if (root === undefined) {
-        return
-    }
-    let indent = ''
-    for (let i = 0; i < level; i++) {
-        indent += '  '
-    }
-    console.log(indent + root.value.id)
-    for (const c of root.children) {
-        printTreeLevel(c, level + 1)
-    }
-}
-
 const countTreeNode = (root: BlockNode) => {
-    if (root === undefined) {
-        return 0
-    }
     let count = 1
     for (const c of root.children) {
         count += countTreeNode(c)
@@ -239,7 +222,7 @@ const blockValueToArticleMeta = (block: BlockValue): ArticleMeta => {
         tags: getTagsFromBlockValue(block),
         date: getDateFromBlockValue(block),
         id: block.id,
-        title: block.properties ? block.properties.title[0] : undefined,
+        title: block.properties ? block.properties.title![0][0] : '',
         createdDate: moment(block.created_time).unix(),
         lastModifiedDate: moment(block.last_edited_time).unix(),
         cover: block.format,

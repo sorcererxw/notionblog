@@ -15,7 +15,7 @@ interface IProps {
     caption: any[]
 }
 
-class FigureCaption extends React.Component<IProps, {}> {
+class FigureCaption extends React.Component<IProps> {
     constructor(props: any) {
         super(props)
     }

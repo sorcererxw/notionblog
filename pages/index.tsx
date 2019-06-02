@@ -1,7 +1,7 @@
 import React, { Component, ReactNode } from 'react'
 import MetaHead from '../component/MetaHead'
 
-class Index extends Component<{}, {}> {
+class Index extends Component {
     render() {
         const LinkWrapper = (props: { children: ReactNode | ReactNode[] }) => (
             <li style={{

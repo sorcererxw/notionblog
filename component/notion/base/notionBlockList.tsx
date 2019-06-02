@@ -14,7 +14,7 @@ interface IProps {
     blocks: BlockNode[]
 }
 
-class NotionBlockList extends React.Component<IProps, {}> {
+class NotionBlockList extends React.Component<IProps> {
     constructor(props: any) {
         super(props)
     }

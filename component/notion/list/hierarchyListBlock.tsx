@@ -51,7 +51,7 @@ interface IProps {
     symbol: React.ReactNode
 }
 
-class HierarchyListBlock extends React.Component<IProps, {}> {
+class HierarchyListBlock extends React.Component<IProps> {
     constructor(props: any) {
         super(props)
         this.state = {

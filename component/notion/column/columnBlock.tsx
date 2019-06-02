@@ -15,7 +15,7 @@ interface Props {
     block: BlockNode
 }
 
-class ColumnBlock extends React.Component<Props, {}> {
+class ColumnBlock extends React.Component<Props> {
     constructor(props: any) {
         super(props)
     }

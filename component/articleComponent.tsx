@@ -27,9 +27,7 @@ const Comment = styled.div`
 
 function renderCover(article: Article): React.ReactNode {
     const format = article.meta.cover
-    if (format === undefined
-        || format.page_cover === undefined
-        || format.page_cover.length === 0) {
+    if (!format || !format.page_cover) {
         return null
     }
     const getRealImageUrl = (url: string): string => {
@@ -37,12 +35,10 @@ function renderCover(article: Article): React.ReactNode {
             return 'https://www.notion.so' + url
         }
         return url
-
     }
 
     const coverUrl = getRealImageUrl(format.page_cover)
-    const pageCoverPosition = format.page_cover_position === undefined ?
-        -1 : format.page_cover_position
+    const pageCoverPosition = format.page_cover_position || -1
     if (pageCoverPosition >= 0) {
         return <CoverImage src={coverUrl} style={{
             objectPosition: `center ${(1 - pageCoverPosition) * 100}%`,

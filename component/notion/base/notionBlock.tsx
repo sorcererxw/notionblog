@@ -35,7 +35,7 @@ interface IProps {
     indexOfSameType: number
 }
 
-class NotionBlock extends React.Component<IProps, {}> {
+class NotionBlock extends React.Component<IProps> {
     static defaultProps = {
         indexOfSameType: 1,
     }
@@ -61,10 +61,10 @@ class NotionBlock extends React.Component<IProps, {}> {
             return <HeaderBlock value={block}/>
         }
         if (type === 'sub_header') {
-            return <SubHeaderBlock value={block.value}/>
+            return <SubHeaderBlock value={block}/>
         }
         if (type === 'sub_sub_header') {
-            return <SubSubHeaderBlock value={block.value}/>
+            return <SubSubHeaderBlock value={block}/>
         }
         if (type === 'image') {
             return <ImageBlock value={block.value}/>

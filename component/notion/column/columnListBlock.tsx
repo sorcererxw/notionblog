@@ -37,7 +37,7 @@ interface Props {
     block: BlockNode
 }
 
-class ColumnListBlock extends React.Component<Props, {}> {
+class ColumnListBlock extends React.Component<Props> {
     constructor(props: any) {
         super(props)
     }
@@ -56,8 +56,7 @@ class ColumnListBlock extends React.Component<Props, {}> {
                 if (k > 0) {
                     content.push(<Gap key={k * 2 - 1}/>)
                 }
-                const ratio: number | undefined = v.value.format ?
-                    v.value.format.column_ratio : undefined
+                const ratio = v.value.format ? v.value.format.column_ratio : undefined
                 content.push(
                     <ColumnContainer ratio={ratio} key={k * 2}>
                         <ColumnBlock block={v}/>

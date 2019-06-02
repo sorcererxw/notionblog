@@ -15,7 +15,7 @@ router.get('/sitemap.xml', async ctx => {
     ctx.response.body = await getSiteMap()
 })
 
-const getSiteMap = async () => {
+async function getSiteMap() {
     const siteMap = require('sitemap').createSitemap({
         hostname: 'https://sorcererxw.com',
         cacheTime: 600000, // 600 sec - cache purge period

@@ -6,7 +6,7 @@ interface IProps {
     title: string
 }
 
-export default class MetaHead extends React.Component<IProps, {}> {
+export default class MetaHead extends React.Component<IProps> {
     static defaultProps = {
         title: config.blogName,
     }
