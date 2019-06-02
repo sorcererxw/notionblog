@@ -1,6 +1,6 @@
 import React from 'react'
 import { BlockNode } from '../../api/types'
-import StyleText from '../StyleText'
+import StyleText from '../styleText'
 import WrapComponent from '../wrapComponent'
 
 interface IProps {

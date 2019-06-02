@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Color } from 'csstype'
-import { RichText } from '../api/types'
+import { RichText, TextStyleType } from '../api/types'
 
 const Bold = styled.strong`
 `
@@ -52,7 +52,7 @@ class StyleText extends React.Component<IProps> {
 
     static fromRichText(text: RichText) {
         const value = text[0]
-        const styles = text[1]
+        const styles = text[1] || []
 
         let bold = false
         let italic = false
@@ -62,17 +62,20 @@ class StyleText extends React.Component<IProps> {
         const highlight: HighlightInfo = { type: 'none', color: 'default' }
 
         for (const p of styles) {
-            if (p[0] === 'b') {
+            if (p[0] === TextStyleType.BOLD) {
                 bold = true
-            } else if (p[0] === 'i') {
+            } else if (p[0] === TextStyleType.ITALIC) {
                 italic = true
-            } else if (p[0] === 'c') {
+            } else if (p[0] === TextStyleType.CODE) {
                 code = true
-            } else if (p[0] === 'a') {
+            } else if (p[0] === TextStyleType.LINK) {
                 link = p[1]
-            } else if (p[0] === 's') {
+            } else if (p[0] === TextStyleType.DELETED) {
                 deleted = true
-            } else if (p[0] === 'h') {
+            } else if (p[0] === TextStyleType.HIGH_LIGHT) {
+                if (!p[1]) {
+                    continue
+                }
                 const colors = [
                     { name: 'grey', color: 'grey' },
                     { name: 'brown', color: 'brown' },

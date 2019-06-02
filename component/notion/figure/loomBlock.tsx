@@ -1,7 +1,7 @@
 import React from 'react'
 import { BlockValue } from '../../../api/types'
-import FigureBlockContainer from './FigureBlockContainer'
-import FigureCaption from './FigureCaption'
+import FigureBlockContainer from './figureBlockContainer'
+import FigureCaption from './figureCaption'
 
 interface Props {
     value: BlockValue

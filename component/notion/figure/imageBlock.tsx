@@ -2,8 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import api from '../../../api'
 import { BlockValue, UnsignedUrl } from '../../../api/types'
-import FigureBlockContainer from './FigureBlockContainer'
-import FigureCaption from './FigureCaption'
+import FigureBlockContainer from './figureBlockContainer'
+import FigureCaption from './figureCaption'
 
 const Image = styled.img`
   object-fit: contain;

@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import { ArticleMeta } from '../api/types'
-import AppLayout from '../component/AppLayout'
-import ArchiveItem from '../component/ArchiveItem'
-import MetaHead from '../component/MetaHead'
+import AppLayout from '../component/appLayout'
+import ArchiveItem from '../component/archiveItem'
+import MetaHead from '../component/metaHead'
 import moment from 'moment'
 import api from '../api'
 

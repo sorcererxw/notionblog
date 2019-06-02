@@ -1,8 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { BlockNode } from '../../../api/types'
-import StyleText from '../../styleText'
-import WrapComponent from '../../wrapComponent'
+import TextBlock from '../textBlock'
 
 const Header = styled.h3`
    font-size: 24px;
@@ -19,22 +18,7 @@ class SubHeaderBlock extends React.Component<Props> {
     }
 
     public render(): React.ReactNode {
-        const properties = this.props.value.value.properties
-        if (properties === undefined) {
-            return null
-        }
-        return <Header>
-            {
-                properties.title!.map((it, idx) => {
-                    const styleText = StyleText.fromRichText(it)
-                    return (
-                        <WrapComponent key={idx}>
-                            {styleText}
-                        </WrapComponent>
-                    )
-                })
-            }
-        </Header>
+        return <Header><TextBlock value={this.props.value}/></Header>
     }
 }
 

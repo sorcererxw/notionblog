@@ -1,6 +1,6 @@
 import React from 'react'
 import { BlockNode } from '../../../api/types'
-import HierarchyListBlock from './HierarchyListBlock'
+import HierarchyListBlock from './hierarchyListBlock'
 
 interface IProps {
     value: BlockNode,

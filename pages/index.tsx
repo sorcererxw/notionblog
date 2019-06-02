@@ -1,5 +1,5 @@
 import React, { Component, ReactNode } from 'react'
-import MetaHead from '../component/MetaHead'
+import MetaHead from '../component/metaHead'
 
 class Index extends Component {
     render() {

@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { ArticleMeta } from '../api/types'
 import moment from 'moment'
-import { Desktop, Mobile } from './Responsive'
+import { Desktop, Mobile } from './responsive'
 
 const PostItem = styled.div`
     margin: 32px 0;

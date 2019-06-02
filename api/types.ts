@@ -110,6 +110,16 @@ export interface UnsignedUrl {
     permissionRecord: PermissionRecord
 }
 
-export type TextContent = string
-export type TextStyle = string[]
-export type RichText = [TextContent, TextStyle[]]
+export enum TextStyleType {
+    BOLD = 'b',
+    ITALIC = 'i',
+    CODE = 'c',
+    LINK = 'a',
+    HIGH_LIGHT = 'h',
+    DELETED = 's',
+}
+
+type TextContent = string
+type TextStyle = [TextStyleType, string?]
+type TextStyles = TextStyle[]
+export type RichText = [TextContent, TextStyles?]

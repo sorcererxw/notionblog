@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import config from '../config'
-import { Desktop, Mobile } from './Responsive'
+import { Desktop, Mobile } from './responsive'
 
 const Container = styled.div`
   width: 100%;

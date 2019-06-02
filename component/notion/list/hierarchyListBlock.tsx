@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import { BlockNode } from '../../../api/types'
-import NotionBlockList from '../base/NotionBlockList'
-import TextBlock from '../TextBlock'
+import NotionBlockList from '../base/notionBlockList'
+import TextBlock from '../textBlock'
 
 const Container = styled.div`
   display: flex;

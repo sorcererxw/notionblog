@@ -1,8 +1,8 @@
 import React from 'react'
 import YouTube from 'react-youtube'
 import { BlockValue, UnsignedUrl } from '../../../api/types'
-import FigureBlockContainer from './FigureBlockContainer'
-import FigureCaption from './FigureCaption'
+import FigureBlockContainer from './figureBlockContainer'
+import FigureCaption from './figureCaption'
 import api from '../../../api/'
 import 'video-react/dist/video-react.css'
 

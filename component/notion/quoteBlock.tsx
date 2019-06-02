@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { BlockNode } from '../../api/types'
-import TextBlock from './TextBlock'
+import TextBlock from './textBlock'
 
 const Container = styled.div`
 `

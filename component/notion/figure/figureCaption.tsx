@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import StyleText from '../../StyleText'
+import StyleText from '../../styleText'
 import WrapComponent from '../../wrapComponent'
 
 const Caption = styled.figcaption`
