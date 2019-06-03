@@ -12,7 +12,7 @@ const Footer = styled.div`
   justify-items: center;
 `
 
-export default class AppFooter extends React.Component<{}, {}> {
+export default class AppFooter extends React.Component {
     public render(): React.ReactNode {
         return (
             <Footer>

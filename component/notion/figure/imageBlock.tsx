@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import api from '../../../api'
-import { BlockValue, SignedFileUrls, UnsignedUrl } from '../../../api/types'
-import FigureBlockContainer from './FigureBlockContainer'
-import FigureCaption from './FigureCaption'
+import { BlockValue, UnsignedUrl } from '../../../api/types'
+import FigureBlockContainer from './figureBlockContainer'
+import FigureCaption from './figureCaption'
 
 const Image = styled.img`
   object-fit: contain;
@@ -21,7 +21,7 @@ interface State {
 }
 
 class ImageBlock extends React.Component<Props, State> {
-    constructor(props: any) {
+    constructor(props: Props) {
         super(props)
         this.state = {
             width: -1,
@@ -38,14 +38,14 @@ class ImageBlock extends React.Component<Props, State> {
             })
         } else if (properties !== undefined) {
             this.setState({
-                source: await getImageUrl(properties.source[0][0], id),
+                source: await getImageUrl(properties.source![0][0], id),
             })
         }
     }
 
     public render(): React.ReactNode {
-        const imageNode: React.ReactNode | null = this.renderImage()
-        const captionNode: React.ReactNode | null = this.renderCaption()
+        const imageNode = this.renderImage()
+        const captionNode = this.renderCaption()
 
         return <FigureBlockContainer>
             {imageNode}
@@ -53,7 +53,7 @@ class ImageBlock extends React.Component<Props, State> {
         </FigureBlockContainer>
     }
 
-    private renderImage = (): React.ReactNode | null => {
+    private readonly renderImage = (): React.ReactNode | null => {
         const { source, width } = this.state
         if (source.length === 0) {
             return null
@@ -64,7 +64,7 @@ class ImageBlock extends React.Component<Props, State> {
         return <Image src={source}/>
     }
 
-    private renderCaption = (): React.ReactNode | null => {
+    private readonly renderCaption = (): React.ReactNode | null => {
         const properties = this.props.value.properties
         if (properties !== undefined && properties.caption !== undefined) {
             return <FigureCaption caption={properties.caption}/>
@@ -73,7 +73,7 @@ class ImageBlock extends React.Component<Props, State> {
     }
 }
 
-const getImageUrl = async (url: string, id: string) => {
+async function getImageUrl(url: string, id: string) {
     if (url.match('/secure.notion-static.com/')) {
         const unsignedUrl: UnsignedUrl = {
             url,
@@ -82,10 +82,8 @@ const getImageUrl = async (url: string, id: string) => {
                 table: 'block',
             },
         }
-        const signedFileUrls: SignedFileUrls = await api.getSignedFileUrls([unsignedUrl])
-        if (signedFileUrls !== undefined
-            && signedFileUrls.signedUrls !== undefined
-            && signedFileUrls.signedUrls.length > 0) {
+        const signedFileUrls = await api.getSignedFileUrls([unsignedUrl])
+        if (signedFileUrls.signedUrls.length > 0) {
             return signedFileUrls.signedUrls[0]
         }
     }

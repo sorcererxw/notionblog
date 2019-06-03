@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import '../style/index.css'
-import MetaHead from '../component/MetaHead'
-import { Desktop, Mobile } from '../component/Responsive'
+import MetaHead from '../component/metaHead'
+import { Desktop, Mobile } from '../component/responsive'
 
 const Container = styled.div`
   width: 768px;

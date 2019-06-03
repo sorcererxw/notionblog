@@ -28,7 +28,7 @@ interface IProps {
     pubDate: number
 }
 
-export default class PageHeaderBlock extends React.Component<IProps, {}> {
+export default class PageHeaderBlock extends React.Component<IProps> {
     constructor(props: any) {
         super(props)
     }

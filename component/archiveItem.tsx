@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { ArticleMeta } from '../api/types'
 import moment from 'moment'
-import { Desktop, Mobile } from './Responsive'
+import { Desktop, Mobile } from './responsive'
 
 const PostItem = styled.div`
     margin: 32px 0;
@@ -67,7 +67,7 @@ const PostLink = (props: { page: string, title: string }) => (
     <ItemTitle href={`/post/${props.page}`}> {props.title}</ItemTitle>
 )
 
-export default class ArchiveItem extends React.Component<Props, {}> {
+export default class ArchiveItem extends React.Component<Props> {
     public render(): React.ReactNode {
         const it = this.props.meta
 

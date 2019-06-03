@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { BlockNode } from '../../../api/types'
-import NotionBlockList from '../base/NotionBlockList'
+import NotionBlockList from '../base/notionBlockList'
 
 const Container = styled.div`
   width: 100%;
@@ -15,7 +15,7 @@ interface Props {
     block: BlockNode
 }
 
-class ColumnBlock extends React.Component<Props, {}> {
+class ColumnBlock extends React.Component<Props> {
     constructor(props: any) {
         super(props)
     }

@@ -17,7 +17,7 @@ const Divider = styled.div`
   width: 100%;
 `
 
-class DividerBlock extends React.Component<{}, {}> {
+class DividerBlock extends React.Component {
     constructor(props: any) {
         super(props)
     }

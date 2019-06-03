@@ -1,4 +1,5 @@
-runtime: nodejs10
+runtime: nodejs
+env: flex
 
 env_variables:
   NODE_ENV: production

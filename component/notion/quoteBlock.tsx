@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { BlockNode } from '../../api/types'
-import TextBlock from './TextBlock'
+import TextBlock from './textBlock'
 
 const Container = styled.div`
 `
@@ -17,7 +17,7 @@ interface IProps {
     value: BlockNode
 }
 
-class QuoteBlock extends React.Component<IProps, {}> {
+class QuoteBlock extends React.Component<IProps> {
     constructor(props: any) {
         super(props)
     }

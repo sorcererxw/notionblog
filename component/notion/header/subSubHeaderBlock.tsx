@@ -1,27 +1,20 @@
 import React from 'react'
 import styled from 'styled-components'
-import { BlockValue } from '../../../api/types'
+import { BlockNode } from '../../../api/types'
+import TextBlock from '../textBlock'
 
-const SubSubheader = styled.h4`
+const Header = styled.h4`
    font-size: 18px;
    margin: 6px 0 0;
 `
 
 interface Props {
-    value: BlockValue
+    value: BlockNode
 }
 
-class SubSubHeaderBlock extends React.Component<Props, {}> {
-    constructor(props: any) {
-        super(props)
-    }
-
+class SubSubHeaderBlock extends React.Component<Props> {
     public render(): React.ReactNode {
-        const properties = this.props.value.properties
-        if (properties === undefined) {
-            return null
-        }
-        return <SubSubheader>{properties.title}</SubSubheader>
+        return <Header><TextBlock value={this.props.value}/></Header>
     }
 }
 

@@ -1,8 +1,8 @@
 import React from 'react'
 import YouTube from 'react-youtube'
-import { BlockValue, SignedFileUrls, UnsignedUrl } from '../../../api/types'
-import FigureBlockContainer from './FigureBlockContainer'
-import FigureCaption from './FigureCaption'
+import { BlockValue, UnsignedUrl } from '../../../api/types'
+import FigureBlockContainer from './figureBlockContainer'
+import FigureCaption from './figureCaption'
 import api from '../../../api/'
 import 'video-react/dist/video-react.css'
 
@@ -45,10 +45,8 @@ class VideoBlock extends React.Component<IProps, IState> {
                     table: 'block',
                 },
             }
-            const signedFileUrls: SignedFileUrls = await api.getSignedFileUrls([unsignedUrl])
-            if (signedFileUrls !== undefined
-                && signedFileUrls.signedUrls !== undefined
-                && signedFileUrls.signedUrls.length > 0) {
+            const signedFileUrls = await api.getSignedFileUrls([unsignedUrl])
+            if (signedFileUrls.signedUrls.length > 0) {
                 this.setState({
                     source: signedFileUrls.signedUrls[0],
                 })
@@ -94,7 +92,7 @@ class VideoBlock extends React.Component<IProps, IState> {
         </FigureBlockContainer>
     }
 
-    private getYoutubeId = (url: string): string => {
+    private readonly getYoutubeId = (url: string): string => {
         const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/
         const match = url.match(regExp)
         return (match && match[7].length === 11) ? match[7] : ''
