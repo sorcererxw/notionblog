@@ -76,6 +76,7 @@
     "start": "set NODE_ENV=production && node dist/server",
     "lint": "tslint --project .",
     "debug": "set NODE_ENV=production && npm run build && npm run start",
-    "gcp-build": "npm run build"
+    "gcp-build": "npm run build",
+    "deploy": "gcloud app deploy"
   }
 }
