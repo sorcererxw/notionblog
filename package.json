@@ -72,7 +72,7 @@
   },
   "scripts": {
     "dev": "nodemon",
-    "build": "npm run lint && next build && tsc --project tsconfig.server.json",
+    "build": "npm run lint && next build && tsc --project tsconfig.server.json && cp -r ./static ./dist/static",
     "start": "set NODE_ENV=production && node dist/server",
     "lint": "tslint --project .",
     "debug": "set NODE_ENV=production && npm run build && npm run start",

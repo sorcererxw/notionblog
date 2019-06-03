@@ -1,14 +1,7 @@
 import Router from 'koa-router'
-import send from 'koa-send'
 import postService from '../service/postService'
 
 const router = new Router()
-
-router.get('/robots.txt', async ctx => (
-    send(ctx, 'robots.txt', {
-        root: __dirname + '/',
-    })
-))
 
 router.get('/sitemap.xml', async ctx => {
     ctx.set('Content-Type', 'application/xml')
