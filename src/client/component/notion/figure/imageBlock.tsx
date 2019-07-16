@@ -4,6 +4,7 @@ import api from '../../../api'
 import { BlockValue, UnsignedUrl } from '../../../api/types'
 import FigureBlockContainer from './figureBlockContainer'
 import FigureCaption from './figureCaption'
+import { ImageBlockValue } from 'notink/dist/types/types'
 
 const Image = styled.img`
   object-fit: contain;
@@ -12,7 +13,7 @@ const Image = styled.img`
 `
 
 interface Props {
-    value: BlockValue
+    value: ImageBlockValue
 }
 
 interface State {

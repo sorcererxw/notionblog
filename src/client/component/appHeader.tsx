@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import config from '../config'
+import config from 'config'
 import { Desktop, Mobile } from './responsive'
 
 const Container = styled.div`
@@ -50,7 +50,7 @@ export default class AppHeader extends React.Component<{}, State> {
     private static renderDesktop(): React.ReactNode {
         return <Container>
             <Content>
-                <Logo><a href={'/blog'}>{config.blogName}</a></Logo>
+                <Logo><a href={'/blog'}>{config.get<string>('blogName')}</a></Logo>
                 <div style={{ flex: 1 }}/>
                 {/*<a>About</a>*/}
             </Content>
@@ -67,7 +67,7 @@ export default class AppHeader extends React.Component<{}, State> {
                 marginLeft: 24,
                 marginRight: 24,
             }}>
-                <Logo><a href={'/blog'}>{config.blogName}</a></Logo>
+                <Logo><a href={'/blog'}>{config.get<string>('blogName')}</a></Logo>
                 <div style={{ flex: 1 }}/>
                 {/*<button onClick={() => this.setState({expandMenu: !this.state.expandMenu})}>*/}
                 {/*menu*/}

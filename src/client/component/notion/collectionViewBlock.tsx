@@ -1,8 +1,8 @@
 import React from 'react'
-import { BlockValue } from '../../api/types'
+import { CollectionViewBlockValue } from 'notink/dist/types/types'
 
 interface IProps {
-    value: BlockValue
+    value: CollectionViewBlockValue
 }
 
 interface IState {

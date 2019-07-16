@@ -2,7 +2,7 @@ import React from 'react'
 import { Article } from '../api/types'
 import PageHeaderBlock from './notion/pageHeaderBlock'
 import NotionBlockList from './notion/base/notionBlockList'
-import blogConfig from '../config'
+import config from 'config'
 import styled from 'styled-components'
 
 const Content = styled.section`
@@ -57,13 +57,13 @@ function renderPage(article: Article): React.ReactNode {
 }
 
 function renderComment(article: Article): React.ReactNode {
-    if (!blogConfig.disqusConfig.enable) {
+    if (!config.get<boolean>('disqusConfig.enable')) {
         return <div/>
     }
 
     const name = article.meta.name
     const title = article.meta.title
-    const shortName = blogConfig.disqusConfig.shortName
+    const shortName = config.get<string>('disqusConfig.shortName')
     const disqusConfig = {
         url: `https://blog.sorcererxw.com/post/${name}`,
         identifier: name,

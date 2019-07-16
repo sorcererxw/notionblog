@@ -1,10 +1,10 @@
 import React from 'react'
-import { BlockNode } from '../../api/types'
 import StyleText from '../styleText'
 import WrapComponent from '../wrapComponent'
+import { TextBlockValue } from 'notink/dist/types/types'
 
 interface IProps {
-    value: BlockNode
+    value: TextBlockValue
 }
 
 class TextBlock extends React.Component<IProps> {
@@ -14,7 +14,7 @@ class TextBlock extends React.Component<IProps> {
 
     public render(): React.ReactNode {
         const block = this.props.value
-        const properties = block.value.properties
+        const properties = block.properties
         if (properties === undefined || properties.title === undefined) {
             return null
         }

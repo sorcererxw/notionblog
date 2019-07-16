@@ -16,6 +16,20 @@ import QuoteBlock from '../quoteBlock'
 import SubHeaderBlock from '../header/subHeaderBlock'
 import TextBlock from '../textBlock'
 import VideoBlock from '../figure/videoBlock'
+import {
+    BlockType,
+    BulletedListBlockValue,
+    CodeBlockValue,
+    CollectionViewBlockValue,
+    HeaderBlockValue,
+    ImageBlockValue,
+    LoomBlockValue,
+    QuoteBlockValue,
+    SubHeaderBlockValue,
+    SubSubHeaderBlockValue,
+    TextBlockValue,
+    VideoBlockValue
+} from 'notink'
 
 const Container = styled.div`
   letter-spacing: 0.1px;
@@ -31,7 +45,7 @@ const Container = styled.div`
 `
 
 interface IProps {
-    block: BlockNode,
+    block: BlockNode<BlockType>,
     indexOfSameType: number
 }
 
@@ -51,35 +65,35 @@ class NotionBlock extends React.Component<IProps> {
     private renderBlock(): React.ReactNode {
         const block = this.props.block
         const type = block.value.type
-        if (type === 'text') {
-            return <TextBlock value={block}/>
+        if (type === BlockType.TEXT) {
+            return <TextBlock value={block.value as TextBlockValue}/>
         }
         if (type === 'quote') {
-            return <QuoteBlock value={block}/>
+            return <QuoteBlock value={block.value as QuoteBlockValue}/>
         }
         if (type === 'header') {
-            return <HeaderBlock value={block}/>
+            return <HeaderBlock value={block.value as HeaderBlockValue}/>
         }
         if (type === 'sub_header') {
-            return <SubHeaderBlock value={block}/>
+            return <SubHeaderBlock value={block.value as SubHeaderBlockValue}/>
         }
         if (type === 'sub_sub_header') {
-            return <SubSubHeaderBlock value={block}/>
+            return <SubSubHeaderBlock value={block.value as SubSubHeaderBlockValue}/>
         }
         if (type === 'image') {
-            return <ImageBlock value={block.value}/>
+            return <ImageBlock value={block.value as ImageBlockValue}/>
         }
         if (type === 'code') {
-            return <CodeBlock value={block.value}/>
+            return <CodeBlock value={block.value as CodeBlockValue}/>
         }
         if (type === 'collection_view') {
-            return <CollectionViewBlock value={block.value}/>
+            return <CollectionViewBlock value={block.value as CollectionViewBlockValue}/>
         }
         if (type === 'video') {
-            return <VideoBlock value={block.value}/>
+            return <VideoBlock value={block.value as VideoBlockValue}/>
         }
         if (type === 'loom') {
-            return <LoomBlock value={block.value}/>
+            return <LoomBlock value={block.value as LoomBlockValue}/>
         }
         if (type === 'divider') {
             return <DividerBlock/>

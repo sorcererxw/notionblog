@@ -1,7 +1,7 @@
 import ReactGA from 'react-ga'
-import config from '../config'
+import config from 'config'
 
-const googleAnalyticsId = config.googleAnalyticsId
+const googleAnalyticsId = config.get<string>('googleAnalyticsId')
 
 export const initGA = () => {
     ReactGA.initialize(googleAnalyticsId)

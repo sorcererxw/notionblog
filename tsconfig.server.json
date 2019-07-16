@@ -8,8 +8,7 @@
     "noEmit": false
   },
   "include": [
-    "server/**/*.ts",
-    "api/**/*.ts",
-    "config/**/*.ts"
+    "src/server/**/*.ts",
+    "src/api/**/*.ts"
   ]
 }

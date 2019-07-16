@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import { BlockNode } from '../../api/types'
 import TextBlock from './textBlock'
+import { QuoteBlockValue } from 'notink/dist/types/types'
 
 const Container = styled.div`
 `
@@ -14,7 +14,7 @@ const Quote = styled.blockquote`
 `
 
 interface IProps {
-    value: BlockNode
+    value: QuoteBlockValue
 }
 
 class QuoteBlock extends React.Component<IProps> {

@@ -1,5 +1,5 @@
 import fetch from 'node-fetch'
-import { Article, ArticleMeta, SignedFileUrls, UnsignedUrl } from './types'
+import { Article, ArticleMeta } from './types'
 
 const BASE_URL = 'http://localhost:3000'
 
@@ -37,12 +37,7 @@ async function getArticle(id: string): Promise<Article> {
     return get(`/api/blog/${id}`)
 }
 
-async function getSignedFileUrls(urls: UnsignedUrl[]): Promise<SignedFileUrls> {
-    return post('/api/notion/getSignedFileUrls', { urls })
-}
-
 export default {
     getArticleMetaList,
     getArticle,
-    getSignedFileUrls,
 }

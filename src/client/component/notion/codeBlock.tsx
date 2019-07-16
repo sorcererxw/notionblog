@@ -1,7 +1,7 @@
 import React from 'react'
-import SyntaxHighlighter, {} from 'react-syntax-highlighter'
+import SyntaxHighlighter from 'react-syntax-highlighter'
 import styled from 'styled-components'
-import { BlockValue } from '../../api/types'
+import { CodeBlockValue } from 'notink/dist/types/types'
 
 const Container = styled.div`
     width: 100%;
@@ -39,7 +39,7 @@ const LanguageLabel = styled.code`
 `
 
 interface IProps {
-    value: BlockValue
+    value: CodeBlockValue
 }
 
 interface IState {

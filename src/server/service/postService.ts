@@ -1,6 +1,6 @@
-import { Article, ArticleMeta } from '../../api/types'
+import { Article, ArticleMeta } from '../../client/api/types'
 import notionService from './notionService'
-import config from '../../config'
+import config from 'config'
 
 // import nodeSchedule from 'node-schedule'
 
@@ -12,8 +12,8 @@ import config from '../../config'
 //     blogList = await getPosts()
 // })
 
-const pageId = config.blogTablePageId
-const viewId = config.blogTableViewId
+const pageId = config.get<string>('blogTablePageId')
+const viewId = config.get<string>('blogTableViewId')
 
 async function getPostList(): Promise<ArticleMeta[]> {
     return notionService.getArticleMetaList(pageId, viewId)
