@@ -12,22 +12,24 @@ const Caption = styled.figcaption`
 `
 
 interface IProps {
-    caption: any[]
+  caption: any[]
 }
 
-class FigureCaption extends React.Component<IProps> {
-    constructor(props: any) {
-        super(props)
-    }
+class FigureCaption extends React.Component<IProps, {}> {
+  constructor(props: any) {
+    super(props)
+  }
 
-    public render(): React.ReactNode {
-        return <Caption>
-            {this.props.caption.map((it, idx) => {
-                const styleText = StyleText.fromRichText(it)
-                return <WrapComponent key={idx}>{styleText}</WrapComponent>
-            })}
-        </Caption>
-    }
+  public render(): React.ReactNode {
+    return (
+      <Caption>
+        {this.props.caption.map((it, idx) => {
+          const styleText = StyleText.fromRichText(it)
+          return <WrapComponent key={idx}>{styleText}</WrapComponent>
+        })}
+      </Caption>
+    )
+  }
 }
 
 export default FigureCaption

@@ -13,15 +13,18 @@ const Footer = styled.div`
 `
 
 export default class AppFooter extends React.Component {
-    public render(): React.ReactNode {
-        return (
-            <Footer>
-                <div>©2013 - 2019 By <a href={'https://sorcererxw.com'}>SorcererXW</a></div>
-                <div>Power by <a href={'https://www.notion.so/?r=33c8cb454ee348d98b891834c309f0d4'}>
-                    Notion
-                </a> and <a href={'https://github.com/sorcererxw/blog'}>SorcererXW Blog</a>
-                </div>
-            </Footer>
-        )
-    }
+  public render(): React.ReactNode {
+    return (
+      <Footer>
+        <div>
+          ©2013 - 2019 By <a href={'https://sorcererxw.com'}>SorcererXW</a>
+        </div>
+        <div>
+          Power by <a
+          href={'https://www.notion.so/?r=33c8cb454ee348d98b891834c309f0d4'}>Notion</a>{' '}
+          and <a href={'https://github.com/sorcererxw/blog'}>SorcererXW Blog</a>
+        </div>
+      </Footer>
+    )
+  }
 }

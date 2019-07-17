@@ -1,8 +1,5 @@
 {
-  "presets": [
-    "next/babel",
-    "@zeit/next-typescript/babel"
-  ],
+  "presets": ["next/babel", "@zeit/next-typescript/babel"],
   "plugins": [
     [
       "styled-components",
@@ -13,9 +10,7 @@
   ],
   "env": {
     "production": {
-      "plugins": [
-        "transform-remove-console"
-      ]
+      "plugins": ["transform-remove-console"]
     }
   }
 }

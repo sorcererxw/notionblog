@@ -4,30 +4,30 @@ import Router from 'next/router'
 import { initGA, logPageView } from '../utils/analytics'
 
 export default class MyApp extends App {
-    static async getInitialProps({ Component, ctx }: NextAppContext) {
-        let pageProps = {}
+  static async getInitialProps({ Component, ctx }: NextAppContext) {
+    let pageProps = {}
 
-        if (Component.getInitialProps) {
-            pageProps = await Component.getInitialProps(ctx)
-        }
-
-        return { pageProps }
+    if (Component.getInitialProps) {
+      pageProps = await Component.getInitialProps(ctx)
     }
 
-    componentDidMount() {
-        initGA()
-        logPageView()
-        if (Router.router !== null) {
-            Router.router.events.on('routeChangeComplete', logPageView)
-        }
-    }
+    return { pageProps }
+  }
 
-    render() {
-        const { Component, pageProps } = this.props
-        return (
-            <Container>
-                <Component {...pageProps} />
-            </Container>
-        )
+  componentDidMount() {
+    initGA()
+    logPageView()
+    if (Router.router !== null) {
+      Router.router.events.on('routeChangeComplete', logPageView)
     }
+  }
+
+  render() {
+    const { Component, pageProps } = this.props
+    return (
+      <Container>
+        <Component {...pageProps} />
+      </Container>
+    )
+  }
 }

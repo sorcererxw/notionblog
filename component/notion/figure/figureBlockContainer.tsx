@@ -12,10 +12,7 @@ const Container = styled.div`
 `
 
 export default class FigureBlockContainer extends React.Component {
-    public render(): React.ReactNode {
-        return <Container>
-            {this.props.children}
-        </Container>
-    }
-
+  public render(): React.ReactNode {
+    return <Container>{this.props.children}</Container>
+  }
 }

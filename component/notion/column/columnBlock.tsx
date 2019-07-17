@@ -12,19 +12,21 @@ const Container = styled.div`
 `
 
 interface Props {
-    block: BlockNode
+  block: BlockNode
 }
 
-class ColumnBlock extends React.Component<Props> {
-    constructor(props: any) {
-        super(props)
-    }
+class ColumnBlock extends React.Component<Props, {}> {
+  constructor(props: any) {
+    super(props)
+  }
 
-    public render(): React.ReactNode {
-        return <Container>
-            <NotionBlockList blocks={this.props.block.children}/>
-        </Container>
-    }
+  public render(): React.ReactNode {
+    return (
+      <Container>
+        <NotionBlockList blocks={this.props.block.children} />
+      </Container>
+    )
+  }
 }
 
 export default ColumnBlock

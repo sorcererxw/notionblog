@@ -22,58 +22,72 @@ const Logo = styled.div`
   font-size: 24px;
   font-weight: bold;
 
-  >a{
+  > a {
     color: var(--head-color);
     text-decoration: none;
   }
 `
 
 interface State {
-    expandMenu: boolean
+  expandMenu: boolean
 }
 
 export default class AppHeader extends React.Component<{}, State> {
-    constructor(props: any) {
-        super(props)
-        this.state = {
-            expandMenu: false,
-        }
+  constructor(props: {}) {
+    super(props)
+    this.state = {
+      expandMenu: false,
     }
+  }
 
-    public render(): React.ReactNode {
-        return <div>
-            <Desktop>{AppHeader.renderDesktop()}</Desktop>
-            <Mobile>{this.renderMobile()}</Mobile>
-        </div>
-    }
+  public render(): React.ReactNode {
+    return (
+      <div>
+        <Desktop>{this.renderDesktop()}</Desktop>
+        <Mobile>{this.renderMobile()}</Mobile>
+      </div>
+    )
+  }
 
-    private static renderDesktop(): React.ReactNode {
-        return <Container>
-            <Content>
-                <Logo><a href={'/blog'}>{config.blogName}</a></Logo>
-                <div style={{ flex: 1 }}/>
-                {/*<a>About</a>*/}
-            </Content>
-        </Container>
-    }
+  private renderDesktop(): React.ReactNode {
+    return (
+      <Container>
+        <Content>
+          <Logo>
+            <a href={'/blog'}>{config.blogName}</a>
+          </Logo>
+          <div style={{ flex: 1 }}/>
+          {/*<a>About</a>*/}
+        </Content>
+      </Container>
+    )
+  }
 
-    private renderMobile(): React.ReactNode {
-        const menu = !this.state.expandMenu ? null : <div>
-            <a>About</a>
-        </div>
+  private renderMobile(): React.ReactNode {
+    const menu = !this.state.expandMenu ? null : (
+      <div>
+        <a>About</a>
+      </div>
+    )
 
-        return <Container>
-            <Content style={{
-                marginLeft: 24,
-                marginRight: 24,
-            }}>
-                <Logo><a href={'/blog'}>{config.blogName}</a></Logo>
-                <div style={{ flex: 1 }}/>
-                {/*<button onClick={() => this.setState({expandMenu: !this.state.expandMenu})}>*/}
-                {/*menu*/}
-                {/*</button>*/}
-            </Content>
-            {menu}
-        </Container>
-    }
+    return (
+      <Container>
+        <Content
+          style={{
+            marginLeft: 24,
+            marginRight: 24,
+          }}
+        >
+          <Logo>
+            <a href={'/blog'}>{config.blogName}</a>
+          </Logo>
+          <div style={{ flex: 1 }}/>
+          {/*<button onClick={() => this.setState({expandMenu: !this.state.expandMenu})}>*/}
+          {/*menu*/}
+          {/*</button>*/}
+        </Content>
+        {menu}
+      </Container>
+    )
+  }
 }

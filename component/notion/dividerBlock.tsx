@@ -17,16 +17,18 @@ const Divider = styled.div`
   width: 100%;
 `
 
-class DividerBlock extends React.Component {
-    constructor(props: any) {
-        super(props)
-    }
+class DividerBlock extends React.Component<{}, {}> {
+  constructor(props: any) {
+    super(props)
+  }
 
-    public render(): React.ReactNode {
-        return <Container>
-            <Divider/>
-        </Container>
-    }
+  public render(): React.ReactNode {
+    return (
+      <Container>
+        <Divider />
+      </Container>
+    )
+  }
 }
 
 export default DividerBlock
