@@ -11,13 +11,13 @@ const Symbol = styled.div`
 `
 
 interface IProps {
-    value: BlockNode
+  value: BlockNode
 }
 
-class BulletedListBlock extends React.Component<IProps> {
-    public render(): React.ReactNode {
-        return <HierarchyListBlock value={this.props.value} symbol={<Symbol/>}/>
-    }
+class BulletedListBlock extends React.Component<IProps, {}> {
+  public render(): React.ReactNode {
+    return <HierarchyListBlock value={this.props.value} symbol={<Symbol />} />
+  }
 }
 
 export default BulletedListBlock

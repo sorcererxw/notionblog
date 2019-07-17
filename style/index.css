@@ -1,31 +1,46 @@
-:root {
-    --background-color: #fefefe;
-    --font-color: #424242;
-    --head-color: #212121;
-    --caption-color: #9c9c9c;
-}
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+SC:100,300,400,500,700,900|Noto+Sans+TC:100,300,400,500,700,900|Noto+Serif+SC:200,300,400,500,600,700,900|Noto+Serif+TC:200,300,400,500,600,700,900&display=swap&subset=chinese-simplified,chinese-traditional,cyrillic,vietnamese');
 
-h1, h2, h3, h4, h5, h6 {
-    color: var(--head-color)
+:root {
+  --background-color: #fefefe;
+  --font-color: #424242;
+  --head-color: #212121;
+  --caption-color: #9c9c9c;
+  --mono-font: 'Source Code Pro', Consolas, Courier, -apple-system, 'Microsoft YaHei', monospace;
+  --sans-serif-font: 'Noto Sans SC', 'Noto Sans TC', 'Classic Grotesque W01', 'Avenir Next',
+    'Segoe UI', 'Helvetica Neue', Arial, 'Hiragino Sans GB', 'PingFang SC', 'Heiti SC',
+    'Microsoft YaHei UI', 'Microsoft YaHei', 'Source Han Sans', sans-serif;
+  --serif-font: 'Noto Serif SC', 'Noto Serif TC', serif;
 }
 
 body {
-    background-color: var(--background-color);
-    margin: 0;
-    padding: 0;
-    color: var(--font-color);
-    font-family: "Classic Grotesque W01", "Avenir Next", "Segoe UI", "Helvetica Neue", Arial, "Hiragino Sans GB", "PingFang SC", "Heiti SC", "Microsoft YaHei UI", "Microsoft YaHei", "Source Han Sans", sans-serif
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-color);
+  font-weight: 500;
+  color: var(--font-color);
+  font-family: var(--serif-font);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--head-color);
+  font-family: var(--sans-serif-font);
+  font-weight: 700;
 }
 
 code {
-    font-family: "Source Code Pro", Consolas, Courier, -apple-system, "Microsoft YaHei", monospace;
+  font-family: var(--mono-font);
 }
 
 a {
-    color: inherit;
+  color: inherit;
 }
 
 .VideoFrame {
-    width: 100%;
-    max-width: 100%;
+  width: 100%;
+  max-width: 100%;
 }

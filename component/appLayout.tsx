@@ -11,21 +11,19 @@ const Container = styled.div`
 `
 
 const Content = styled.div`
-  flex:1;
+  flex: 1;
 `
 
 class AppLayout extends React.Component {
-    public render(): React.ReactNode {
-        return (
-            <Container>
-                <AppHeader/>
-                <Content>
-                    {this.props.children}
-                </Content>
-                <AppFooter/>
-            </Container>
-        )
-    }
+  public render(): React.ReactNode {
+    return (
+      <Container>
+        <AppHeader/>
+        <Content>{this.props.children}</Content>
+        <AppFooter/>
+      </Container>
+    )
+  }
 }
 
 export default AppLayout
