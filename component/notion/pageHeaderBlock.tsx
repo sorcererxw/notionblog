@@ -24,22 +24,24 @@ const PubDate = styled.div`
 `
 
 interface IProps {
-    title: string,
-    pubDate: number
+  title: string
+  pubDate: number
 }
 
 export default class PageHeaderBlock extends React.Component<IProps, {}> {
-    constructor(props: any) {
-        super(props)
-    }
+  constructor(props: any) {
+    super(props)
+  }
 
-    public render(): React.ReactNode {
-        const pubData = moment.unix(this.props.pubDate).format('MMM DD, YYYY')
-        return <Container>
-            <Title>{this.props.title}</Title>
-            <MetaContainer>
-                <PubDate>{pubData}</PubDate>
-            </MetaContainer>
-        </Container>
-    }
+  public render(): React.ReactNode {
+    const pubData = moment.unix(this.props.pubDate).format('MMM DD, YYYY')
+    return (
+      <Container>
+        <Title>{this.props.title}</Title>
+        <MetaContainer>
+          <PubDate>{pubData}</PubDate>
+        </MetaContainer>
+      </Container>
+    )
+  }
 }

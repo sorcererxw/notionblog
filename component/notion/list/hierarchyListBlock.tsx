@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import { BlockNode } from '../../../api/types'
-import NotionBlockList from '../base/NotionBlockList'
-import TextBlock from '../TextBlock'
+import NotionBlockList from '../base/notionBlockList'
+import TextBlock from '../textBlock'
 
 const Container = styled.div`
   display: flex;
@@ -40,52 +40,56 @@ const ListItem = styled.div`
 `
 
 const ChildrenContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    max-width: 100%;
-    box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  box-sizing: border-box;
 `
 
 interface IProps {
-    value: BlockNode,
-    symbol: React.ReactNode
+  value: BlockNode
+  symbol: React.ReactNode
 }
 
 class HierarchyListBlock extends React.Component<IProps, {}> {
-    constructor(props: any) {
-        super(props)
-        this.state = {
-            data: [],
-        }
+  constructor(props: any) {
+    super(props)
+    this.state = {
+      data: [],
     }
+  }
 
-    public render(): React.ReactNode {
-        return <Container>
-            <SymbolContainer>
-                {this.props.symbol}
-            </SymbolContainer>
-            <Content>
-                {this.renderItself()}
-                {this.renderChildren()}
-            </Content>
-        </Container>
-    }
+  public render(): React.ReactNode {
+    return (
+      <Container>
+        <SymbolContainer>{this.props.symbol}</SymbolContainer>
+        <Content>
+          {this.renderItself()}
+          {this.renderChildren()}
+        </Content>
+      </Container>
+    )
+  }
 
-    private renderItself(): React.ReactNode {
-        return <ListItem>
-            <TextBlock value={this.props.value}/>
-        </ListItem>
-    }
+  private renderItself(): React.ReactNode {
+    return (
+      <ListItem>
+        <TextBlock value={this.props.value} />
+      </ListItem>
+    )
+  }
 
-    private renderChildren(): React.ReactNode {
-        const blockChildren = this.props.value.children
-        if (blockChildren.length === 0) {
-            return null
-        }
-        return <ChildrenContainer>
-            <NotionBlockList blocks={blockChildren}/>
-        </ChildrenContainer>
+  private renderChildren(): React.ReactNode {
+    const blockChildren = this.props.value.children
+    if (blockChildren.length === 0) {
+      return null
     }
+    return (
+      <ChildrenContainer>
+        <NotionBlockList blocks={blockChildren} />
+      </ChildrenContainer>
+    )
+  }
 }
 
 export default HierarchyListBlock

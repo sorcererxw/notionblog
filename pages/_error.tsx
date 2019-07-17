@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import '../style/index.css'
-import MetaHead from '../component/MetaHead'
-import { Desktop, Mobile } from '../component/Responsive'
+import MetaHead from '../component/metaHead'
+import { Desktop, Mobile } from '../component/responsive'
 
 const Container = styled.div`
   width: 768px;
@@ -40,10 +40,14 @@ const RedirectButton = styled.a`
 `
 
 export default () => (
-    <Container>
-        <MetaHead title={'Page Not Found'}/>
-        <Desktop><StatsCode>4🌚4</StatsCode></Desktop>
-        <Mobile><StatsCode style={{ fontSize: '30vw' }}>4🌚4</StatsCode></Mobile>
-        <RedirectButton href={'/'}>Go to Homepage</RedirectButton>
-    </Container>
+  <Container>
+    <MetaHead title={'Page Not Found'} />
+    <Desktop>
+      <StatsCode>4🌚4</StatsCode>
+    </Desktop>
+    <Mobile>
+      <StatsCode style={{ fontSize: '30vw' }}>4🌚4</StatsCode>
+    </Mobile>
+    <RedirectButton href={'/'}>Go to Homepage</RedirectButton>
+  </Container>
 )

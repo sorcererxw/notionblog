@@ -8,21 +8,21 @@ const Header = styled.h2`
 `
 
 interface Props {
-    value: BlockNode
+  value: BlockNode
 }
 
 class HeaderBlock extends React.Component<Props, {}> {
-    constructor(props: any) {
-        super(props)
-    }
+  constructor(props: any) {
+    super(props)
+  }
 
-    public render(): React.ReactNode {
-        const properties = this.props.value.value.properties
-        if (properties === undefined) {
-            return null
-        }
-        return <Header>{properties.title}</Header>
+  public render(): React.ReactNode {
+    const properties = this.props.value.value.properties
+    if (properties === undefined) {
+      return null
     }
+    return <Header>{properties.title}</Header>
+  }
 }
 
 export default HeaderBlock
