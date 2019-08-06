@@ -2,62 +2,67 @@ import fetch from 'node-fetch'
 import { Collection, PageChunk, RecordValue, UnsignedUrl } from '../../api/types'
 
 async function post<T>(url: string, data: any): Promise<T> {
-    return fetch(`https://www.notion.so/api/v3${url}`,
-        {
-            body: JSON.stringify(data),
-            headers: { 'content-type': 'application/json;charset=UTF-8' },
-            method: 'POST',
-        },
-    ).then(async res => res.json())
+  return fetch(`https://www.notion.so/api/v3${url}`, {
+    body: JSON.stringify(data),
+    headers: { 'content-type': 'application/json;charset=UTF-8' },
+    method: 'POST',
+  }).then(async res => res.json())
 }
 
 export const getFullBlockId = (blockId: string): string => {
-    if (blockId.match('^[a-zA-Z0-9]+$')) {
-        return [blockId.substr(0, 8),
-            blockId.substr(8, 4),
-            blockId.substr(12, 4),
-            blockId.substr(16, 4),
-            blockId.substr(20, 32)].join('-')
-    }
-    return blockId
+  if (blockId.match('^[a-zA-Z0-9]+$')) {
+    return [
+      blockId.substr(0, 8),
+      blockId.substr(8, 4),
+      blockId.substr(12, 4),
+      blockId.substr(16, 4),
+      blockId.substr(20, 32),
+    ].join('-')
+  }
+  return blockId
 }
 
 export async function loadPageChunk(
-    chunkNumber: number, pageId: string, count = 50, cursor = { stack: [] },
+  chunkNumber: number,
+  pageId: string,
+  count = 50,
+  cursor = { stack: [] },
 ): Promise<PageChunk> {
-    const data = {
-        chunkNumber,
-        cursor,
-        limit: count,
-        pageId: getFullBlockId(pageId),
-        verticalColumns: false,
-    }
-    return post<PageChunk>('/loadPageChunk', data)
+  const data = {
+    chunkNumber,
+    cursor,
+    limit: count,
+    pageId: getFullBlockId(pageId),
+    verticalColumns: false,
+  }
+  return post<PageChunk>('/loadPageChunk', data)
 }
 
 export const queryCollection = async (
-    collectionId: string, collectionViewId: string, query: any,
+  collectionId: string,
+  collectionViewId: string,
+  query: any,
 ): Promise<Collection> => {
-    const data = {
-        collectionId: getFullBlockId(collectionId),
-        collectionViewId: getFullBlockId(collectionViewId),
-        loader: {
-            type: 'table',
-        },
-        query: undefined,
-    }
-    if (query !== null) {
-        data.query = query
-    }
-    return post('/queryCollection', data)
+  const data = {
+    collectionId: getFullBlockId(collectionId),
+    collectionViewId: getFullBlockId(collectionViewId),
+    loader: {
+      type: 'table',
+    },
+    query: undefined,
+  }
+  if (query !== null) {
+    data.query = query
+  }
+  return post('/queryCollection', data)
 }
 
 export const getSignedFileUrls = async (data: UnsignedUrl) => {
-    return post('/getSignedFileUrls', data)
+  return post('/getSignedFileUrls', data)
 }
 
 export async function getReordValues(
-    requests: { table: string, id: string }[],
+  requests: { table: string; id: string }[],
 ): Promise<{ results: RecordValue[] }> {
-    return post('/getRecordValues', { requests })
+  return post('/getRecordValues', { requests })
 }

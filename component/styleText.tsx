@@ -1,7 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Color } from 'csstype'
-import { RichText } from '../api/types'
+import {
+  BACKGROUND_COLORS,
+  COLORS,
+  HighlightStyleType,
+  LinkStyleType,
+  RichText,
+  TextStyleType,
+} from 'notink'
 
 const Bold = styled.strong``
 
@@ -57,54 +64,48 @@ class StyleText extends React.Component<IProps> {
     let link: string | undefined
     const highlight: HighlightInfo = { type: 'none', color: 'default' }
 
-    if (styles !== undefined) {
-      for (const p of styles) {
-        if (p[0] === 'b') {
-          bold = true
-        } else if (p[0] === 'i') {
-          italic = true
-        } else if (p[0] === 'c') {
-          code = true
-        } else if (p[0] === 'a') {
-          link = p[1]
-        } else if (p[0] === 's') {
-          deleted = true
-        } else if (p[0] === 'h') {
-          if (p[1] === undefined || p[1].length === 0) {
-            continue
-          }
-          const colors: { name: string, color: Color }[] = [
-            { name: 'grey', color: 'grey' },
-            { name: 'brown', color: 'brown' },
-            { name: 'orange', color: 'orange' },
-            { name: 'yellow', color: 'yellow' },
-            { name: 'green', color: 'green' },
-            { name: 'blue', color: 'blue' },
-            { name: 'purple', color: 'purple' },
-            { name: 'pink', color: 'pink' },
-            { name: 'red', color: 'red' },
-          ]
-          const splits = p[1].toLowerCase().split('_')
-          for (const c of colors) {
-            if (c.name !== splits[0]) {
-              continue
-            }
-            highlight.color = splits[0]
-            highlight.type = splits[1] === 'background' ? 'background' : 'text'
-            break
-          }
+    if (styles === undefined) {
+      return <StyleText text={value}/>
+    }
+    for (const p of styles) {
+      if (!p || p.length <= 0) {
+        continue
+      }
+
+      if (p[0] === TextStyleType.BOLD) {
+        bold = true
+      } else if (p[0] === TextStyleType.ITALIC) {
+        italic = true
+      } else if (p[0] === TextStyleType.CODE) {
+        code = true
+      } else if (p[0] === TextStyleType.LINK && p[1] !== undefined) {
+        const style = p as LinkStyleType
+        link = style[1]
+      } else if (p[0] === TextStyleType.DELETED) {
+        deleted = true
+      } else if (p[0] === TextStyleType.HIGH_LIGHT && p[1] !== undefined) {
+        const style = p as HighlightStyleType
+        if (COLORS.some((it: string) => it === style[1])) {
+          highlight.color = style[1]
+          highlight.type = 'text'
+        } else if (BACKGROUND_COLORS.some((it: string) => it === style[1])) {
+          highlight.color = style[1].split('_')[0]
+          highlight.type = 'background'
         }
       }
     }
 
-    return <StyleText
-      bold={bold}
-      deleted={deleted}
-      code={code}
-      italic={italic}
-      link={link}
-      highlight={highlight}
-      text={value}/>
+    return (
+      <StyleText
+        bold={bold}
+        deleted={deleted}
+        code={code}
+        italic={italic}
+        link={link}
+        highlight={highlight}
+        text={value}
+      />
+    )
   }
 
   constructor(props: any) {

@@ -56,7 +56,7 @@ export default class AppHeader extends React.Component<{}, State> {
           <Logo>
             <a href={'/blog'}>{config.blogName}</a>
           </Logo>
-          <div style={{ flex: 1 }}/>
+          <div style={{ flex: 1 }} />
           {/*<a>About</a>*/}
         </Content>
       </Container>
@@ -81,7 +81,7 @@ export default class AppHeader extends React.Component<{}, State> {
           <Logo>
             <a href={'/blog'}>{config.blogName}</a>
           </Logo>
-          <div style={{ flex: 1 }}/>
+          <div style={{ flex: 1 }} />
           {/*<button onClick={() => this.setState({expandMenu: !this.state.expandMenu})}>*/}
           {/*menu*/}
           {/*</button>*/}

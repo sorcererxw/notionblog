@@ -18,9 +18,9 @@ class AppLayout extends React.Component {
   public render(): React.ReactNode {
     return (
       <Container>
-        <AppHeader/>
+        <AppHeader />
         <Content>{this.props.children}</Content>
-        <AppFooter/>
+        <AppFooter />
       </Container>
     )
   }

@@ -1,9 +1,8 @@
 import fetch from 'node-fetch'
 import { Article, ArticleMeta, SignedFileUrls, UnsignedUrl } from './types'
 
-const BASE_URL = process.env.NODE_ENV === 'production'
-  ? 'https://sorcererxw.com'
-  : 'http://localhost:3000'
+const BASE_URL =
+  process.env.NODE_ENV === 'production' ? 'https://sorcererxw.com' : 'http://localhost:3000'
 
 async function post<T>(url: string, data: any): Promise<T> {
   return fetch(`${BASE_URL}${url}`, {

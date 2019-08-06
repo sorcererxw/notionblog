@@ -16,14 +16,14 @@ const pageId = config.blogTablePageId
 const viewId = config.blogTableViewId
 
 async function getPostList(): Promise<ArticleMeta[]> {
-    return notionService.getArticleMetaList(pageId, viewId)
+  return notionService.getArticleMetaList(pageId, viewId)
 }
 
 async function getPost(id: string): Promise<Article> {
-    return notionService.getArticle(id)
+  return notionService.getArticle(id)
 }
 
 export default {
-    getPostList,
-    getPost,
+  getPostList,
+  getPost,
 }

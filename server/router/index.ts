@@ -10,7 +10,7 @@ router.use('', seo.routes(), seo.allowedMethods())
 router.use('', fe.routes(), fe.allowedMethods())
 
 router.get('*', async ctx => {
-    await ctx.handle(ctx.req, ctx.res)
+  await ctx.handle(ctx.req, ctx.res)
 })
 
 export default router
