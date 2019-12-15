@@ -8,5 +8,10 @@
       false,
       "camel-case"
     ]
+  },
+  "linterOptions": {
+    "exclude": [
+      "node_modules"
+    ]
   }
 }

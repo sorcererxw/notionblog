@@ -1,30 +1,45 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "jsx": "preserve",
+    "target": "es2016",
+    "jsx": "react",
     "lib": [
-      "dom",
-      "es2017"
+      "es6",
+      "es2015",
+      "es2017",
+      "dom"
     ],
-    "moduleResolution": "node",
-    "strict": true,
+    "typeRoots": [
+      "src/typing",
+      "node_modules/@types"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "*": [
+        "src/typing/*"
+      ]
+    },
     "allowJs": true,
-    "noEmit": true,
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
     "skipLibCheck": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
     "isolatedModules": true,
-    "removeComments": false,
-    "preserveConstEnums": true,
-    "sourceMap": true
+    "noEmit": true,
+    "outDir": "dist",
+    "rootDir": "./"
   },
   "exclude": [
-    "dist",
-    ".next",
-    "out",
-    "next.config.js"
+    "node_modules",
+    "build",
+    "scripts",
+    "acceptance-tests",
+    "webpack",
+    "jest",
+    "razzle.config.js",
+    "dist"
   ]
 }
