@@ -6,7 +6,7 @@
     "clean": "rm -r node_modules & rm package-lock.json & rm .next & rm dist",
     "dev": "nodemon",
     "prettier": "prettier --check \"**/*.{ts,tsx,css}\" --write",
-    "start": "cross-env NODE_ENV=production node dist/index.js"
+    "start": "cross-env NODE_ENV=production node dist/server/index.js"
   },
   "dependencies": {
     "@zeit/next-css": "^1.0.1",
