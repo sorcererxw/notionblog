@@ -14,14 +14,14 @@ export default class LoomBlock extends React.Component<Props, {}> {
       this.props.value.properties === undefined ||
       this.props.value.properties.source === undefined
     ) {
-      return <div />
+      return <div/>
     }
     const properties = this.props.value.properties
 
     let captionNode: React.ReactNode | null = null
 
     if (properties !== undefined && properties.caption !== undefined) {
-      captionNode = <FigureCaption caption={properties.caption} />
+      captionNode = <FigureCaption caption={properties.caption}/>
     }
 
     return (

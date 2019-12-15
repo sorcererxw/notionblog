@@ -27,7 +27,7 @@ const Comment = styled.div`
 
 function renderCover(article: Article): React.ReactNode {
   const format = article.meta.cover
-  if (format === undefined || format.page_cover.length === 0) {
+  if (!format?.page_cover?.length) {
     return null
   }
   const getRealImageUrl = (url: string): string => {
@@ -49,25 +49,25 @@ function renderCover(article: Article): React.ReactNode {
       />
     )
   }
-  return <CoverImage src={coverUrl} />
+  return <CoverImage src={coverUrl}/>
 }
 
 function renderTitle(article: Article): React.ReactNode {
-  return <PageHeaderBlock title={article.meta.title} pubDate={article.meta.date} />
+  return <PageHeaderBlock title={article.meta.title} pubDate={article.meta.date}/>
 }
 
 function renderPage(article: Article): React.ReactNode {
   const blockData = article.blocks
   return (
     <div>
-      <NotionBlockList blocks={blockData} />
+      <NotionBlockList blocks={blockData}/>
     </div>
   )
 }
 
 function renderComment(article: Article): React.ReactNode {
   if (!blogConfig.disqusConfig.enable) {
-    return <div />
+    return <div/>
   }
 
   const name = article.meta.name
@@ -84,7 +84,7 @@ function renderComment(article: Article): React.ReactNode {
 
   return (
     <Comment>
-      <DiscussionEmbed shortname={shortName} config={disqusConfig} />
+      <DiscussionEmbed shortname={shortName} config={disqusConfig}/>
     </Comment>
   )
 }

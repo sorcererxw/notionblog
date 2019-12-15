@@ -61,15 +61,15 @@ class ImageBlock extends React.Component<Props, State> {
       return null
     }
     if (width >= 0) {
-      return <Image width={width} src={source} />
+      return <Image width={width} src={source}/>
     }
-    return <Image src={source} />
+    return <Image src={source}/>
   }
 
   private renderCaption = (): React.ReactNode | null => {
     const properties = this.props.value.properties
     if (properties !== undefined && properties.caption !== undefined) {
-      return <FigureCaption caption={properties.caption} />
+      return <FigureCaption caption={properties.caption}/>
     }
     return null
   }

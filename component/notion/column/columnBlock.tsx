@@ -23,7 +23,7 @@ class ColumnBlock extends React.Component<Props, {}> {
   public render(): React.ReactNode {
     return (
       <Container>
-        <NotionBlockList blocks={this.props.block.children} />
+        <NotionBlockList blocks={this.props.block.children}/>
       </Container>
     )
   }

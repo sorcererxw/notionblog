@@ -1,17 +1,14 @@
-// import http from 'http'
-// import next from 'next'
-import createApp from './app'
+import koa from 'koa'
+import router from './routers'
 
-const PORT = process.env.PORT || 3000
+const port = parseInt(process.env.PORT || '3000', 10)
 
-const env = process.env.NODE_ENV
-const dev = env !== 'production'
+new koa()
+  .use(router.middleware())
+  .use(router.allowedMethods())
+  .listen(port)
 
-const ROOT_URL = dev ? `http://localhost:${PORT}` : 'https://sorcererxw.com'
-
-console.log(`dev: ${dev}`)
-
-createApp()
-    .then(app => app.listen(3000))
-    .then(() => console.log(`> Ready on ${ROOT_URL} [${env}]`))
-    .catch(err => console.error(err))
+// tslint:disable-next-line:no-console
+console.log(
+  `> Server listening at http://localhost:${port}`,
+)

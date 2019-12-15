@@ -89,7 +89,7 @@ class Index extends Component<{}, {}> {
     )
     return (
       <div>
-        <MetaHead />
+        <MetaHead/>
         {content}
       </div>
     )

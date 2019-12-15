@@ -1,10 +1,14 @@
 import React from 'react'
-import App, { Container, NextAppContext } from 'next/app'
+import App, { AppContext } from 'next/app'
 import Router from 'next/router'
 import { initGA, logPageView } from '../utils/analytics'
 
 export default class MyApp extends App {
-  static async getInitialProps({ Component, ctx }: NextAppContext) {
+  static async getInitialProps(context: AppContext) {
+    const {
+      Component,
+      ctx,
+    } = context
     let pageProps = {}
 
     if (Component.getInitialProps) {
@@ -25,9 +29,7 @@ export default class MyApp extends App {
   render() {
     const { Component, pageProps } = this.props
     return (
-      <Container>
-        <Component {...pageProps} />
-      </Container>
+      <Component {...pageProps} />
     )
   }
 }

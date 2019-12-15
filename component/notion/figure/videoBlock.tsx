@@ -86,10 +86,10 @@ class VideoBlock extends React.Component<IProps, IState> {
       )
     } else {
       const Player = require('video-react').Player
-      videoNode = <Player playsInline src={state.source} />
+      videoNode = <Player playsInline src={state.source}/>
     }
     if (properties !== undefined && properties.caption !== undefined) {
-      captionNode = <FigureCaption caption={properties.caption} />
+      captionNode = <FigureCaption caption={properties.caption}/>
     }
     return (
       <FigureBlockContainer>

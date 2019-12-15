@@ -56,12 +56,12 @@ class ColumnListBlock extends React.Component<Props, {}> {
     this.props.block.children.forEach((v, k) => {
       if (v.value.type === 'column') {
         if (k > 0) {
-          content.push(<Gap key={k * 2 - 1} />)
+          content.push(<Gap key={k * 2 - 1}/>)
         }
         const ratio: number | undefined = v.value.format ? v.value.format.column_ratio : undefined
         content.push(
           <ColumnContainer ratio={ratio} key={k * 2}>
-            <ColumnBlock block={v} />
+            <ColumnBlock block={v}/>
           </ColumnContainer>,
         )
       }
@@ -79,11 +79,11 @@ class ColumnListBlock extends React.Component<Props, {}> {
     this.props.block.children.forEach((v, k) => {
       if (v.value.type === 'column') {
         if (k > 0) {
-          content.push(<Gap key={k * 2 - 1} />)
+          content.push(<Gap key={k * 2 - 1}/>)
         }
         content.push(
           <div key={k * 2}>
-            <ColumnBlock block={v} />
+            <ColumnBlock block={v}/>
           </div>,
         )
       }

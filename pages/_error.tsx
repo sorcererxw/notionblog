@@ -41,7 +41,7 @@ const RedirectButton = styled.a`
 
 export default () => (
   <Container>
-    <MetaHead title={'Page Not Found'} />
+    <MetaHead title={'Page Not Found'}/>
     <Desktop>
       <StatsCode>4🌚4</StatsCode>
     </Desktop>

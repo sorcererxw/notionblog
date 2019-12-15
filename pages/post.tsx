@@ -4,8 +4,8 @@ import { Article } from '../api/types'
 import AppLayout from '../component/appLayout'
 import MetaHead from '../component/metaHead'
 import api from '../api'
-import { NextContext } from 'next'
 import ArticleComponent from '../component/articleComponent'
+import { NextPageContext } from 'next'
 
 const CardBox = styled.article`
   width: 768px;
@@ -34,7 +34,8 @@ interface State {
 }
 
 export default class Post extends React.Component<Props, State> {
-  static async getInitialProps({ query }: NextContext) {
+  static async getInitialProps(context: NextPageContext) {
+    const query = context.query
     const pageId = query.pageId
     const ssr = query.ssr
     if (ssr && typeof pageId === 'string') {
@@ -69,10 +70,10 @@ export default class Post extends React.Component<Props, State> {
 
     return (
       <div>
-        <MetaHead title={article ? article.meta.title : 'loading'} />
+        <MetaHead title={article ? article.meta.title : 'loading'}/>
         <AppLayout>
           <CardBox>
-            <ArticleComponent article={article} />
+            <ArticleComponent article={article}/>
           </CardBox>
         </AppLayout>
       </div>

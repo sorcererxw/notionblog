@@ -1,4 +1,4 @@
-import fetch from 'node-fetch'
+import axios from 'axios'
 import moment from 'moment'
 import {
   Article,
@@ -12,11 +12,8 @@ import {
 } from '../api/types'
 
 async function post<T>(url: string, data: any): Promise<T> {
-  return fetch(`https://www.notion.so/api/v3${url}`, {
-    body: JSON.stringify(data),
-    headers: { 'content-type': 'application/json;charset=UTF-8' },
-    method: 'POST',
-  }).then(res => res.json())
+  return axios.post(`https://www.notion.so/api/v3${url}`, data)
+    .then(res => res.data)
 }
 
 const propertiesMap = {

@@ -24,7 +24,7 @@ class QuoteBlock extends React.Component<IProps, {}> {
     return (
       <Container>
         <Quote>
-          <TextBlock value={this.props.value} />
+          <TextBlock value={this.props.value}/>
         </Quote>
       </Container>
     )

@@ -32,7 +32,7 @@ class NotionBlockList extends React.Component<IProps, {}> {
         sameTypeCnt = 1
         lastType = block.value.type
       }
-      result.push(<NotionBlock block={block} indexOfSameType={sameTypeCnt} key={i} />)
+      result.push(<NotionBlock block={block} indexOfSameType={sameTypeCnt} key={i}/>)
     }
     return <Container>{result}</Container>
   }

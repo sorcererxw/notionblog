@@ -52,7 +52,7 @@ class Blog extends React.Component<Props, State> {
   public render(): React.ReactNode {
     return (
       <div>
-        <MetaHead />
+        <MetaHead/>
         <AppLayout>
           <Content>{this.renderList()}</Content>
         </AppLayout>
@@ -71,7 +71,7 @@ class Blog extends React.Component<Props, State> {
         list.push(<YearHeader key={key++}>{year}</YearHeader>)
         lastYear = year
       }
-      list.push(<ArchiveItem meta={it} key={key++} />)
+      list.push(<ArchiveItem meta={it} key={key++}/>)
     })
 
     return <div>{list}</div>

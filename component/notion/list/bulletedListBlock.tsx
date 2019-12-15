@@ -16,7 +16,7 @@ interface IProps {
 
 class BulletedListBlock extends React.Component<IProps, {}> {
   public render(): React.ReactNode {
-    return <HierarchyListBlock value={this.props.value} symbol={<Symbol />} />
+    return <HierarchyListBlock value={this.props.value} symbol={<Symbol/>}/>
   }
 }
 

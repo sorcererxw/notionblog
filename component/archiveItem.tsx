@@ -83,7 +83,7 @@ export default class ArchiveItem extends React.Component<Props> {
       )
     }
 
-    const title = <PostLink page={it.name} title={it.title} />
+    const title = <PostLink page={it.name} title={it.title}/>
 
     const dateView = <PubDate>{moment.unix(it.date).format('MMM DD')}</PubDate>
 
@@ -95,7 +95,7 @@ export default class ArchiveItem extends React.Component<Props> {
               {title}
               {tagBar}
             </div>
-            <div style={{ flex: 1 }} />
+            <div style={{ flex: 1 }}/>
             {dateView}
           </ItemTitleBar>
         </PostItem>

@@ -25,7 +25,7 @@ class DividerBlock extends React.Component<{}, {}> {
   public render(): React.ReactNode {
     return (
       <Container>
-        <Divider />
+        <Divider/>
       </Container>
     )
   }

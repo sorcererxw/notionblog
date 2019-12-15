@@ -74,7 +74,7 @@ class HierarchyListBlock extends React.Component<IProps, {}> {
   private renderItself(): React.ReactNode {
     return (
       <ListItem>
-        <TextBlock value={this.props.value} />
+        <TextBlock value={this.props.value}/>
       </ListItem>
     )
   }
@@ -86,7 +86,7 @@ class HierarchyListBlock extends React.Component<IProps, {}> {
     }
     return (
       <ChildrenContainer>
-        <NotionBlockList blocks={blockChildren} />
+        <NotionBlockList blocks={blockChildren}/>
       </ChildrenContainer>
     )
   }

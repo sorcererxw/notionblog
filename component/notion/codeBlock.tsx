@@ -61,7 +61,7 @@ class CodeBlock extends React.Component<IProps, IState> {
     if (language === 'HTML' && codeText.startsWith('<!--render-->')) {
       // TODO: Safe alternative to dangerouslySetInnerHTML
       // tslint:disable-next-line:react-no-dangerous-html
-      return <div dangerouslySetInnerHTML={{ __html: codeText }} />
+      return <div dangerouslySetInnerHTML={{ __html: codeText }}/>
     }
     return (
       <Container>
