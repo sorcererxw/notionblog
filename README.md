@@ -1,3 +1,5 @@
+# DEPRECATED: https://github.com/transitive-bullshit/nextjs-notion-starter-kit is better.
+
 The blog is built with [notion.so](https://notion.so) API.
 
 ![](https://i.loli.net/2019/01/17/5c408f31777f5.gif)
