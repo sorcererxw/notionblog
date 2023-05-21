@@ -15,7 +15,7 @@
     "compression": "^1.7.4",
     "csstype": "^2.6.7",
     "disqus-react": "^1.0.7",
-    "dompurify": "^2.0.7",
+    "dompurify": "^2.0.17",
     "han-css": "^3.3.0",
     "http-proxy-middleware": "^0.20.0",
     "koa": "^2.11.0",
